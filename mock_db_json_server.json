@@ -1,0 +1,47 @@
+{
+  "users": [
+    {
+      "firstName": "Israel",
+      "lastName": "Heiblum",
+      "email": "ih5938133@gmail.com",
+      "password": "123456",
+      "id": 9,
+      "details": {
+        "eventName": "Wedding Srul & Inbal",
+        "eventType": "Private Event",
+        "eventTimeAndDate": "2022-05-27T20:00",
+        "location": {
+          "locationName": "Kibbutz Givat Brener2",
+          "locationLink": "fsdfdfsdfds465"
+        },
+        "eventOwners": {
+          "eventOwnersTypes": [],
+          "eventOwnersList": [
+            {
+              "name": "None",
+              "type": "none",
+              "isSelectable": false,
+              "isAdmin": false,
+              "id": 0
+            },
+            {
+              "name": "Israel Heiblum",
+              "type": "groom",
+              "isSelectable": false,
+              "isAdmin": true,
+              "id": 1
+            }
+          ]
+        },
+        "shuttleList": [
+          {
+            "id": 1,
+            "name": "General",
+            "location": ""
+          }
+        ],
+        "tableDefaultSize": 10
+      }
+    }
+  ]
+}
