@@ -1,5 +1,6 @@
 import React from "react";
 import {useSelector} from "react-redux";
+import AppBarDefault from "./app-bar-default/AppBarDefault";
 // import useWindowDimensionsService from '../../../services/useWindowDimensionsService';
 
 
@@ -10,14 +11,12 @@ const Header: React.FC = () => {
     // const isLoggedIn = useSelector((state) => {
     //     return state.userReducer.login;
     // });
-    const isLoggedIn: boolean = false
+    const isLoggedIn: boolean = false;
     return <>
         {(() => {
             if (!isLoggedIn) {
                 return (
-                    <div>
-                        out
-                    </div>
+                    <AppBarDefault/>
                 )
             } else {
                 if (width > 350) {

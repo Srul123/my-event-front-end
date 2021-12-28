@@ -8,8 +8,6 @@ import Button from "@mui/material/Button";
 
 
 export const Home: React.FC = () => {
-
-
     return (
         <React.Fragment>
             <CssBaseline/>
@@ -59,4 +57,5 @@ export const Home: React.FC = () => {
     );
 }
 
+export default Home;
 

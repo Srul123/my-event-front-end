@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useEffect} from "react";
 import {Route, useLocation, Routes} from "react-router-dom";
 import {useSelector} from "react-redux";
 
@@ -6,27 +6,30 @@ import Container from "@mui/material/Container";
 import {useNavigate} from "react-router-dom";
 import Header from "../components/layouts/header/Header";
 import Footer from "../components/layouts/footer/Footer";
+import Home from "./index";
+import NotFound_404 from "./404";
+
+interface Routes {
+    home: string,
+    signup: string,
+    login: string,
+}
+
+const routes: Routes = {
+    home: "/",
+    signup: "signup",
+    login: "login",
+};
 
 
-const CustomApp: React.FC = () => {
-    // const location  = useLocation();
-    // let navigate = useNavigate();
-    // const isLoggedIn = useSelector((state) => {
-    //     return state.userReducer.login;
-    // });
+const AppViews: React.FC = () => {
+    const location = useLocation();
+    let navigate = useNavigate();
+
 
     const isLoggedIn: boolean = true;
 
-    // React.useEffect(()=>{
-    //     if (!isLoggedIn &&
-    //         location.pathname==='/myprofile' ||
-    //         location.pathname==='/event-details' ||
-    //         location.pathname==='/invite-management' ||
-    //         location.pathname==='/seating-arrangement'
-    //     ) {
-    //         navigate("/signin", { replace: true });
-    //     }
-    // }, []);
+
 
 
     return (
@@ -47,9 +50,13 @@ const CustomApp: React.FC = () => {
                 {/*</>*/}
                 {/*}*/}
                 {/*</Routes>*/}
+                <Routes>
+                    <Route path='*' element={<NotFound_404 />} />
+                    <Route path={routes.home} element={<Home/>}/>
+                </Routes>
             </Container>
             <Footer/>
         </div>
     );
 };
-export default CustomApp
+export default AppViews
