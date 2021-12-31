@@ -7,9 +7,13 @@ import Grid from "@mui/material/Grid";
 import Button from "@mui/material/Button";
 import {routes} from "./_app-views";
 import colors from "../styles/colors.module.scss";
-
+import {useTranslation} from "react-i18next";
+import LoginIcon from '@mui/icons-material/Login';
+import LockOpenIcon from '@mui/icons-material/LockOpen';
 
 export const Home: React.FC = () => {
+    const {t} = useTranslation();
+
     return (
         <React.Fragment>
             <CssBaseline/>
@@ -23,7 +27,7 @@ export const Home: React.FC = () => {
                             gutterBottom
                             style={{color: colors.textBlack}}
                         >
-                            My-Event
+                            {t('home.title_prime')}
                         </Typography>
                         <Typography
                             variant="h5"
@@ -31,23 +35,31 @@ export const Home: React.FC = () => {
                             style={{color: colors.textSecondary}}
                             paragraph
                         >
-                            Build your event any time any where
+                            {t('home.title_secondary')}
                         </Typography>
-                        <div style={{display:"flex",justifyContent:"space-evenly"}}>
+                        <div style={{display: "flex", justifyContent: "space-evenly"}}>
                             <Grid item>
                                 <Button variant="contained" style={{backgroundColor: colors.backgroundPrimary}}>
                                     <Link
-                                        to={routes.signup}
-                                        style={{color: colors.textWhite, textDecoration: "none"}}
+                                        to={routes.register}
+                                        style={{color: colors.textWhite,
+                                            textDecoration: "none",
+                                            display: "flex"
+                                        }}
                                     >
-                                        Click to sign up
+                                        {t('home.register')}
+                                        <span><LockOpenIcon/></span>
                                     </Link>
                                 </Button>
                             </Grid>
                             <Grid item>
-                                <Button variant="outlined" style={{color: colors.textWhite}}>
-                                    <Link to={routes.signup} style={{textDecoration: "none"}}>
-                                        Click to sign in
+                                <Button variant="outlined">
+                                    <Link to={routes.login}
+                                          style={{color: colors.textBlack,
+                                              display: "flex",
+                                              textDecoration: "none"}}
+                                    >
+                                        {t('home.login')} <span><LoginIcon/></span>
                                     </Link>
                                 </Button>
                             </Grid>

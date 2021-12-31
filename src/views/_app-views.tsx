@@ -11,13 +11,13 @@ import NotFound_404 from "./404";
 
 interface RouteViews {
     home: string,
-    signup: string,
+    register: string,
     login: string,
 }
 
 export const routes: RouteViews = {
     home: "/",
-    signup: "signup",
+    register: "register",
     login: "login",
 };
 
@@ -26,16 +26,12 @@ const AppViews: React.FC = () => {
     const location = useLocation();
     let navigate = useNavigate();
 
-
     const isLoggedIn: boolean = true;
-
-
-
 
     return (
         <div style={{position: "relative", minHeight: "100vh"}}>
             <Header/>
-            <Container fixed style={{paddingLeft: "5%"}}>
+            <Container fixed>
                 {/*<Routes>*/}
                 {/*<Route path={"/signup"} element={<SignUp/>}/>*/}
                 {/*<Route path={"/signin"} element={<SignIn/>}/>*/}

@@ -1,0 +1,30 @@
+{
+  "app_title": "My Event",
+  "language": "שפה",
+  "welcome_message": "ברוך הבא",
+  "days_since_release": "עברו {{number_of_days}} מאז פרסום הפוסט הזה",
+  "header": {
+    "title": "My Event",
+    "change_language": "שפה",
+    "main": {
+      "register": "הרשמה",
+      "login": "כניסה"
+    },
+    "profile": {
+
+    }
+  },
+  "footer": {
+    "copyright": "כל הזכויות שמורות"
+  },
+  "page_404": {
+    "not_found": "העמוד שחיפשת לא קיים",
+    "goto_home": "חזור לדף הבית"
+  },
+  "home": {
+    "title_prime": "My Event",
+    "title_secondary": "תכנן את האירוע שלך מכל מקום ובכל זמן",
+    "register": "לחץ להרשמה",
+    "login": "כניסה לחשבון"
+  }
+}

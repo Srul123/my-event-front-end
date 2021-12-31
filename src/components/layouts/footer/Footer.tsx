@@ -3,6 +3,7 @@ import Typography from "@mui/material/Typography";
 import {Link} from "react-router-dom";
 import {routes} from "../../../views/_app-views";
 import colors from "../../../styles/colors.module.scss";
+import {useTranslation} from "react-i18next";
 
 
 const footerStyle: React.CSSProperties = {
@@ -15,10 +16,12 @@ const footerStyle: React.CSSProperties = {
 }
 
 const Footer: React.FC = () => {
+    const { t } = useTranslation();
+
     return (
         <footer style={footerStyle}>
             <Typography variant="body2" align="center">
-                {'Copyright © '}
+                {`${t('footer.copyright')} © `}
                 <Link color="inherit" to={routes.home} style={{color: colors.textWhite}}>
                     My-Event
                 </Link>{' '}

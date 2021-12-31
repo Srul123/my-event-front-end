@@ -1,0 +1,29 @@
+{
+  "app_title": "My Event",
+  "language": "Language",
+  "welcome_message": "Welcome",
+  "days_since_release": "it's been {{number_of_days}} days since this video was released",
+  "header": {
+    "title": "My Event",
+    "change_language": "Language",
+    "main": {
+      "register": "Register",
+      "login": "Login"
+    },
+    "profile": {
+    }
+  },
+  "footer": {
+    "copyright": "Copyright"
+  },
+  "page_404": {
+    "not_found": "Page not found",
+    "goto_home": "Go to home page"
+  },
+  "home": {
+    "title_prime": "My Event",
+    "title_secondary": "Build your event any time any where",
+    "register": "Register now",
+    "login": "Click to login"
+  }
+}
