@@ -5,6 +5,8 @@ import Container from "@mui/material/Container";
 import Typography from "@mui/material/Typography";
 import Grid from "@mui/material/Grid";
 import Button from "@mui/material/Button";
+import {routes} from "./_app-views";
+import colors from "../styles/colors.module.scss";
 
 
 export const Home: React.FC = () => {
@@ -18,33 +20,33 @@ export const Home: React.FC = () => {
                             component="h1"
                             variant="h2"
                             align="center"
-                            color="textPrimary"
                             gutterBottom
+                            style={{color: colors.textBlack}}
                         >
                             My-Event
                         </Typography>
                         <Typography
                             variant="h5"
                             align="center"
-                            color="textSecondary"
+                            style={{color: colors.textSecondary}}
                             paragraph
                         >
                             Build your event any time any where
                         </Typography>
-                        <div style={{display:"flex", justifyContent:"space-evenly"}}>
+                        <div style={{display:"flex",justifyContent:"space-evenly"}}>
                             <Grid item>
-                                <Button variant="contained" color="primary">
+                                <Button variant="contained" style={{backgroundColor: colors.backgroundPrimary}}>
                                     <Link
-                                        to="/signup"
-                                        style={{color: "white", textDecoration: "none"}}
+                                        to={routes.signup}
+                                        style={{color: colors.textWhite, textDecoration: "none"}}
                                     >
                                         Click to sign up
                                     </Link>
                                 </Button>
                             </Grid>
                             <Grid item>
-                                <Button variant="outlined" color="primary">
-                                    <Link to="/signin" style={{textDecoration: "none"}}>
+                                <Button variant="outlined" style={{color: colors.textWhite}}>
+                                    <Link to={routes.signup} style={{textDecoration: "none"}}>
                                         Click to sign in
                                     </Link>
                                 </Button>

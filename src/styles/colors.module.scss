@@ -1,0 +1,27 @@
+// Text colors
+$textWhite: white;
+$textBlack: black;
+$textPrimary: #1976D2;
+$textSecondary: #676767;
+
+
+// Background colors
+$backgroundPrimary: #1976D2;
+$backgroundSecondary: #676767;
+$backgroundSuccess: forestgreen;
+$backgroundError: red;
+
+:export {
+  // Text colors
+  textWhite: $textWhite;
+  textBlack: $textBlack;
+  textPrimary: $textPrimary;
+  textSecondary: $textSecondary;
+
+  // Background colors
+  backgroundPrimary: $backgroundPrimary;
+  backgroundSecondary: $backgroundSecondary;
+  backgroundSuccess: $backgroundSuccess;
+  backgroundError: $backgroundError;
+}
+

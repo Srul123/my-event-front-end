@@ -9,13 +9,13 @@ import Footer from "../components/layouts/footer/Footer";
 import Home from "./index";
 import NotFound_404 from "./404";
 
-interface Routes {
+interface RouteViews {
     home: string,
     signup: string,
     login: string,
 }
 
-const routes: Routes = {
+export const routes: RouteViews = {
     home: "/",
     signup: "signup",
     login: "login",
