@@ -8,6 +8,8 @@ import Header from "../components/layouts/header/Header";
 import Footer from "../components/layouts/footer/Footer";
 import Home from "./index";
 import NotFound_404 from "./404";
+import Registration from "./registration";
+import {CssBaseline} from "@mui/material";
 
 interface RouteViews {
     home: string,
@@ -29,7 +31,8 @@ const AppViews: React.FC = () => {
     const isLoggedIn: boolean = true;
 
     return (
-        <div style={{position: "relative", minHeight: "100vh"}}>
+        <div style={{position: "relative", minHeight: "95vh"}}>
+            <CssBaseline/>
             <Header/>
             <Container fixed>
                 {/*<Routes>*/}
@@ -49,6 +52,7 @@ const AppViews: React.FC = () => {
                 <Routes>
                     <Route path='*' element={<NotFound_404 />} />
                     <Route path={routes.home} element={<Home/>}/>
+                    <Route path={routes.register} element={<Registration />}/>
                 </Routes>
             </Container>
             <Footer/>
