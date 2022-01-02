@@ -31,7 +31,7 @@ const AppViews: React.FC = () => {
     const isLoggedIn: boolean = true;
 
     return (
-        <div style={{position: "relative", minHeight: "95vh"}}>
+        <div style={{position: "relative"}}>
             <CssBaseline/>
             <Header/>
             <Container fixed>
@@ -50,9 +50,9 @@ const AppViews: React.FC = () => {
                 {/*}*/}
                 {/*</Routes>*/}
                 <Routes>
-                    <Route path='*' element={<NotFound_404 />} />
+                    <Route path='*' element={<NotFound_404/>}/>
                     <Route path={routes.home} element={<Home/>}/>
-                    <Route path={routes.register} element={<Registration />}/>
+                    <Route path={routes.register} element={<Registration/>}/>
                 </Routes>
             </Container>
             <Footer/>

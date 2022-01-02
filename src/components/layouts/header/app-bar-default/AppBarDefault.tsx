@@ -4,7 +4,6 @@ import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
-import LoginIcon from '@mui/icons-material/Login';
 import LockOpenIcon from '@mui/icons-material/LockOpen';
 import {Link} from "react-router-dom";
 import {routes} from "../../../../views/_app-views";
@@ -12,6 +11,7 @@ import colors from "../../../../styles/colors.module.scss";
 import {FormControl} from "@mui/material";
 import ChangeLanguageSelector from "../../../change-language-selector/ChangeLanguageSelector";
 import {useTranslation} from "react-i18next";
+import AppRegistrationIcon from '@mui/icons-material/AppRegistration';
 
 const AppBarDefault: React.FC = () => {
     const {t} = useTranslation();
@@ -36,7 +36,7 @@ const AppBarDefault: React.FC = () => {
                               }}
                         >
                             {t('header.main.register')}
-                            <LockOpenIcon style={{color: colors.textWhite}}/>
+                            <AppRegistrationIcon style={{color: colors.textWhite}}/>
                         </Link>
                     </Button>
                     <Button>
@@ -47,7 +47,7 @@ const AppBarDefault: React.FC = () => {
                                   textDecoration: "none"
                               }}>
                             {t('header.main.login')}
-                            <LoginIcon style={{color: colors.textWhite}}/>
+                            <LockOpenIcon style={{color: colors.textWhite}}/>
                         </Link>
                     </Button>
                 </Toolbar>

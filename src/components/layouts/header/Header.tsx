@@ -12,7 +12,7 @@ const Header: React.FC = () => {
     //     return state.userReducer.login;
     // });
     const isLoggedIn: boolean = false;
-    return <>
+    return <header>
         {(() => {
             if (!isLoggedIn) {
                 return (
@@ -32,7 +32,7 @@ const Header: React.FC = () => {
                 }
             }
         })()}
-    </>;
+    </header>;
 }
 
 export default Header;

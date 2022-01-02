@@ -1,12 +1,26 @@
 import React, {useState} from 'react';
-import {Avatar, Button, createTheme, CssBaseline, Grid, TextField, ThemeProvider, Typography} from "@mui/material";
+import {
+    Avatar,
+    Button,
+    FormControl,
+    Grid,
+    TextField, Tooltip,
+    Typography
+} from "@mui/material";
 import {Link} from "react-router-dom";
 import AlertIndicator, {AlertPopup} from "../components/layouts/alert-indicators/AlertIndicator";
 import {routes} from "./_app-views";
 import LockIcon from '@mui/icons-material/Lock';
 import colors from "../styles/colors.module.scss";
+import {useTranslation} from "react-i18next";
+import ExitToAppIcon from '@mui/icons-material/ExitToApp';
+import {isValidName} from '../utils/validationFunctionsCollection';
+import EventTypeSelector from "../components/event-type-selector/EventTypeSelector";
+import AppRegistrationIcon from '@mui/icons-material/AppRegistration';
+
 
 const Registration: React.FC = () => {
+    const {t} = useTranslation();
     const [firstName, setFirstName] = useState("");
     const [lastName, setLastName] = useState("");
     const [email, setEmail] = useState("");
@@ -44,28 +58,40 @@ const Registration: React.FC = () => {
         setAlertPopup({...alertPopup, open: false});
     };
 
-    const handleSubmit = async (event: React.MouseEvent<HTMLAnchorElement> | React.MouseEvent<HTMLButtonElement>) => {
+    const handleSubmit: any = async (event: React.MouseEvent<HTMLAnchorElement> | React.MouseEvent<HTMLButtonElement>) => {
         event.preventDefault();
+        let formData = {
+            firstName,
+            lastName,
+            email,
+            password
+        };
 
+        if (!await isValidName(firstName)) {
+            console.log("error firstName");
+            return;
+        }
+        if (!await isValidName(lastName)) {
+            console.log("error lastname");
+            return;
+        } else {
+            console.log("passed");
+        }
     }
-
-    const theme = createTheme({
-        direction: 'rtl', // Both here and <body dir="rtl">
-    });
 
     return (
         <>
-            <div style={{position: "relative", top: "10vh"}}>
-                <div style={{display: "flex", justifyContent: "center"}}>
-                    <Avatar>
-                        <LockIcon/>
+            <form onSubmit={handleSubmit} style={{position: "relative", top: "10vh"}}>
+                <Grid style={{display: "flex", justifyContent: "center"}}>
+                    <Avatar style={{fontSize: "5em"}}>
+                        <AppRegistrationIcon />
                     </Avatar>
-                </div>
-                <div style={{display: "flex", justifyContent: "center", marginBottom: "1vh"}}>
+                </Grid>
+                <Grid style={{display: "flex", justifyContent: "center", marginBottom: "1vh"}}>
                     <Typography component="h1" variant="h5">
-                        Sign up
+                       {t('registration.register')}
                     </Typography>
-                </div>
+                </Grid>
                 <Grid container spacing={2}>
                     <Grid item xs={12} sm={6}>
                         <TextField
@@ -76,7 +102,7 @@ const Registration: React.FC = () => {
                             variant="standard"
                             fullWidth
                             id="firstName"
-                            placeholder="First Name"
+                            placeholder={`* ${t('registration.first_name')}`}
                             autoFocus
                             onChange={(event) => {
                                 setFirstName(event.target.value);
@@ -90,21 +116,22 @@ const Registration: React.FC = () => {
                             value={lastName}
                             fullWidth
                             id="lastName"
-                            placeholder="Last Name"
+                            placeholder={`* ${t('registration.last_name')}`}
                             name="lastName"
                             onChange={(event) => {
                                 setLastName(event.target.value);
                             }}
                         />
                     </Grid>
-                    <Grid item xs={12}>
+
+                    <Grid item xs={12} sm={6}>
                         <TextField
                             variant="standard"
                             required
                             value={email}
                             fullWidth
                             id="email"
-                            placeholder="Email Address"
+                            placeholder={t('registration.email')}
                             type="email"
                             name="email"
                             onChange={(event) => {
@@ -112,14 +139,31 @@ const Registration: React.FC = () => {
                             }}
                         />
                     </Grid>
-                    <Grid item xs={12}>
+                    <Grid item xs={12} sm={6}>
+
+                        <TextField
+                            variant="standard"
+                            required
+                            value={email}
+                            fullWidth
+                            id="phone"
+                            placeholder={`Phone number`}
+                            type="text"
+                            name="phone"
+                            onChange={(event) => {
+                                setEmail(event.target.value);
+                            }}
+                        />
+
+                    </Grid>
+                    <Grid item xs={12} sm={6}>
                         <TextField
                             variant="standard"
                             required
                             value={password}
                             fullWidth
                             name="password"
-                            placeholder="Password"
+                            placeholder={`* ${t('registration.password')}`}
                             type="password"
                             id="password"
                             autoComplete="current-password"
@@ -128,27 +172,65 @@ const Registration: React.FC = () => {
                             }}
                         />
                     </Grid>
+                    <Grid item xs={12} sm={6}>
+                        <TextField
+                            variant="standard"
+                            required
+                            value={password}
+                            fullWidth
+                            name="repeat-password"
+                            placeholder={`* Repeat password`}
+                            type="password"
+                            id="repeat-password"
+                            autoComplete="current-password"
+                            onChange={(event: any) => {
+                                setPassword(event.target.value);
+                            }}
+                        />
+                    </Grid>
+                    <Grid item xs={12}>
+                     <EventTypeSelector />
+                    </Grid>
+                    <Grid item xs={12} >
+                        <FormControl fullWidth sx={{minWidth: 120}}>
+                            <Tooltip title={"Click on the icon to open calendar"}>
+                                <TextField
+                                    style={{width:"100%"}}
+                                    id="datetime-local"
+                                    label="Event Date (optional)"
+                                    type="datetime-local"
+                                    // defaultValue="2017-05-24T10:30"
+                                    defaultValue=""
+                                    sx={{width: 250}}
+                                    InputLabelProps={{
+                                        shrink: true,
+                                    }}
+                                />
+                            </Tooltip>
+                        </FormControl>
+                    </Grid>
                 </Grid>
+
                 <Button
                     style={{marginTop: "2vh"}}
                     type="submit"
-                    fullWidth
                     variant="contained"
                     color="primary"
                     onClick={(event: any) => {
                         handleSubmit(event);
                     }}
                 >
-                    Sign Up
+                    {t('registration.signup')}
+                    <ExitToAppIcon style={{margin: "0 0.5vw"}}/>
                 </Button>
-                <Grid item style={{marginTop: "1vh"}}>
+                <Grid item style={{marginTop: "2vh"}}>
                     <Link to={routes.login}
-                          style={{textDecoration:"none", color: colors.textSecondary}}
+                          style={{textDecoration: "underline", color: colors.textSecondary}}
                     >
-                        Already have an account? Sign in
+                        {t('registration.already_registered')}
                     </Link>
                 </Grid>
-            </div>
+            </form>
             <AlertIndicator
                 alertPopup={alertPopup}
                 closeAlert={closeAlert}

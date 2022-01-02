@@ -26,5 +26,14 @@
     "title_secondary": "תכנן את האירוע שלך מכל מקום ובכל זמן",
     "register": "לחץ להרשמה",
     "login": "כניסה לחשבון"
+  },
+  "registration": {
+    "register": "הרשמה",
+    "first_name": "שם פרטי",
+    "last_name": "שם משפחה",
+    "email": "אימייל",
+    "password": "סיסמה",
+    "signup": "לחץ להרשמה",
+    "already_registered": "יש לך כבר חשבון? לחץ לכניסה"
   }
 }

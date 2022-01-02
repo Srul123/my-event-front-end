@@ -25,5 +25,14 @@
     "title_secondary": "Build your event any time any where",
     "register": "Register now",
     "login": "Click to login"
+  },
+  "registration": {
+    "register": "Sign up",
+    "first_name": "First Name",
+    "last_name": "Last Name",
+    "email": "Email",
+    "password": "Password",
+    "signup": "Sign Up Now",
+    "already_registered": "Already have an account? Sign in"
   }
 }

@@ -8,7 +8,7 @@ import Button from "@mui/material/Button";
 import {routes} from "./_app-views";
 import colors from "../styles/colors.module.scss";
 import {useTranslation} from "react-i18next";
-import LoginIcon from '@mui/icons-material/Login';
+import AppRegistrationIcon from '@mui/icons-material/AppRegistration';
 import LockOpenIcon from '@mui/icons-material/LockOpen';
 
 export const Home: React.FC = () => {
@@ -48,7 +48,7 @@ export const Home: React.FC = () => {
                                         }}
                                     >
                                         {t('home.register')}
-                                        <span><LockOpenIcon/></span>
+                                        <span><AppRegistrationIcon/></span>
                                     </Link>
                                 </Button>
                             </Grid>
@@ -59,7 +59,7 @@ export const Home: React.FC = () => {
                                               display: "flex",
                                               textDecoration: "none"}}
                                     >
-                                        {t('home.login')} <span><LoginIcon/></span>
+                                        {t('home.login')} <span><LockOpenIcon/></span>
                                     </Link>
                                 </Button>
                             </Grid>

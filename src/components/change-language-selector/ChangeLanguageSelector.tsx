@@ -37,7 +37,9 @@ const ChangeLanguageSelector: React.FC = () => {
     return (
         <>
             <IconButton onClick={handleOpenUserMenu} sx={{p: 0}}>
-                <LanguageIcon style={{color: colors.textWhite}}/>
+                <Tooltip title={"Select language"}>
+                    <LanguageIcon style={{color: colors.textWhite}}/>
+                </Tooltip>
             </IconButton>
             <Menu
                 sx={{mt: '45px'}}
