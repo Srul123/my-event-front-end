@@ -5,7 +5,7 @@ import Container from "@mui/material/Container";
 import Typography from "@mui/material/Typography";
 import Grid from "@mui/material/Grid";
 import Button from "@mui/material/Button";
-import {routes} from "./_app-views";
+import {routes} from "./AppViews";
 import colors from "../styles/colors.module.scss";
 import {useTranslation} from "react-i18next";
 import AppRegistrationIcon from '@mui/icons-material/AppRegistration';
@@ -41,7 +41,7 @@ export const Home: React.FC = () => {
                             <Grid item>
                                 <Button variant="contained" style={{backgroundColor: colors.backgroundPrimary}}>
                                     <Link
-                                        to={routes.register}
+                                        to={routes.registration}
                                         style={{color: colors.textWhite,
                                             textDecoration: "none",
                                             display: "flex"

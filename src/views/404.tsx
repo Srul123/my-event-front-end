@@ -1,7 +1,7 @@
 import React from 'react';
 import Typography from "@mui/material/Typography";
 import {Link} from "react-router-dom";
-import {routes} from "./_app-views";
+import {routes} from "./AppViews";
 import colors from "../styles/colors.module.scss";
 import {useTranslation} from "react-i18next";
 

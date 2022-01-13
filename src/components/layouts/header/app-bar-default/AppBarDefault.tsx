@@ -6,7 +6,7 @@ import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import LockOpenIcon from '@mui/icons-material/LockOpen';
 import {Link} from "react-router-dom";
-import {routes} from "../../../../views/_app-views";
+import {routes} from "../../../../views/AppViews";
 import colors from "../../../../styles/colors.module.scss";
 import {FormControl} from "@mui/material";
 import ChangeLanguageSelector from "../../../change-language-selector/ChangeLanguageSelector";
@@ -28,7 +28,7 @@ const AppBarDefault: React.FC = () => {
                         <ChangeLanguageSelector/>
                     </FormControl>
                     <Button>
-                        <Link to={routes.register}
+                        <Link to={routes.registration}
                               style={{
                                   color: colors.textWhite,
                                   textDecoration: "none",

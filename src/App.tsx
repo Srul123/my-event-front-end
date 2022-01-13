@@ -1,12 +1,12 @@
 import React, {Suspense} from 'react';
 import {Provider} from "react-redux";
 // import store from "./redux/store";
-import AppViews from "./views/_app-views";
+import AppViews from "./views/AppViews";
 import i18n from "i18next";
 import {initReactI18next} from "react-i18next";
 import LanguageDetector from 'i18next-browser-languagedetector';
 import HttpApi from 'i18next-http-backend';
-import Spinner from "./components/layouts/spinner/Spinner";
+import Spinner from "./components/spinner/Spinner";
 import {createTheme, ThemeProvider} from '@mui/material/styles';
 import cookies from "js-cookie";
 import {defaultLanguage, supportedLanguages} from "./types/Locales";

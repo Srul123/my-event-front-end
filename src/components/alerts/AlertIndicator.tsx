@@ -5,20 +5,21 @@ import Alert, {AlertColor} from "@mui/material/Alert";
 export interface AlertPopup {
     open: boolean,
     vertical: "top" | "bottom",
-    horizontal:  "left" | "center" | "right",
+    horizontal: "left" | "center" | "right",
     severityInfo?: AlertColor | undefined,
     messageInfo?: string
+    time?: number
 }
 
 interface Props {
     alertPopup: AlertPopup,
-    closeAlert:   React.SyntheticEvent<any> | Event | any
+    closeAlert: React.SyntheticEvent<any> | Event | any
 }
 
 
 const AlertIndicator: React.FC<Props> = ({alertPopup, closeAlert}) => {
 
-    const {open, vertical, horizontal, severityInfo, messageInfo} = alertPopup;
+    const {open, vertical, horizontal, severityInfo, messageInfo, time} = alertPopup;
 
 
     return (
@@ -27,10 +28,10 @@ const AlertIndicator: React.FC<Props> = ({alertPopup, closeAlert}) => {
             open={open}
             onClose={closeAlert}
             key={vertical + horizontal}
-            autoHideDuration={4000}
+            autoHideDuration={time ? time : 4000}
         >
             <Alert onClose={closeAlert} severity={severityInfo}>
-                {messageInfo}
+                <span style={{margin:"0 1em"}}> {messageInfo}</span>
             </Alert>
         </Snackbar>
     );

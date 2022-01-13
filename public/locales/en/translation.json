@@ -31,8 +31,43 @@
     "first_name": "First Name",
     "last_name": "Last Name",
     "email": "Email",
+    "phone": "Phone number",
     "password": "Password",
+    "repeat_password": "Repeat password",
     "signup": "Sign Up Now",
-    "already_registered": "Already have an account? Sign in"
+    "already_registered": "Already have an account? Sign in",
+    "date_label": "Event Date (optional)",
+    "date_explain": "Click on the icon to open calendar",
+    "accept_conditions": "Accept term and conditions",
+    "registration_completed": "Your registration is completed successfully",
+    "redirect_login": "Please login to your account",
+    "error_occurred": "Can't active registration at this moment, please try later",
+    "wedding": "Wedding",
+    "validation": {
+      "general": "Please insert valid field!",
+      "firstname": "Please insert valid first name",
+      "lastname": "Please insert valid last name",
+      "email": "Please insert valid email",
+      "phone": "Please insert valid Israeli phone mobile number with 10 digits",
+      "password": "Please insert valid password (minimum 4 and maximum 10 characters)",
+      "repeat_password": "Password do not match!!!",
+      "event_type": "Please select event type",
+      "owner_name": "Please insert valid first owner name",
+      "bride_name": "Please insert valid bride name",
+      "groom_name": "Please insert valid groom name",
+      "event_date": "Please insert valid event date",
+      "terms": "Please agree to our term and conditions"
+    },
+    "event_selector": {
+      "bride_name": "Bride Name",
+      "groom_name": "Groom Name",
+      "event_purpose": "What is the event for?",
+      "event_celebrate": "What we celebrate?",
+      "type_wedding": "Wedding",
+      "type_conference_company": "Conference/Company Event",
+      "private_event": "Private Event",
+      "event_type": "Event type"
+    },
+    "ok": "OK"
   }
 }

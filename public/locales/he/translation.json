@@ -32,8 +32,43 @@
     "first_name": "שם פרטי",
     "last_name": "שם משפחה",
     "email": "אימייל",
+    "phone": "מספר טלפון",
     "password": "סיסמה",
+    "repeat_password": "חזרה על הסיסמה",
     "signup": "לחץ להרשמה",
-    "already_registered": "יש לך כבר חשבון? לחץ לכניסה"
+    "already_registered": "יש לך כבר חשבון? לחץ לכניסה",
+    "date_label": "תאריך האירוע (שדה רשות)",
+    "date_explain": "לחץ על האייקון בכדי לפתוח את היומן",
+    "accept_conditions": "מסכים לתנאי השירות",
+    "registration_completed": "ההרשמה שלך הושלמה בהצלחה",
+    "redirect_login": "אנא כנס לחשבונך",
+    "error_occurred": "לא ניתן להירשם לשירות כעת, אנא נסה יותר מאוחר",
+    "wedding": "חתונה",
+    "validation": {
+      "general": "אנא הכנס קלט חוקי",
+      "firstname": "אנא הזן שם פרטי חוקי",
+      "lastname": "אנא הזן שם משפחה חוקי",
+      "email": "אנא הזן כתובת אימייל חוקית",
+      "phone": "אנא הזן מספר טלפון נייד חוקי בעל 10 ספרות",
+      "password": "אנא הזן סיסמה חוקית בעלת 4 תווים לפחות ולא יותר מ-10 תווים",
+      "repeat_password": "הסיסמאות אינן זהות",
+      "event_type": "אנא בחר את סוג האירוע",
+      "owner_name": "אנא הזן שם חוקי למזמין האירוע",
+      "bride_name": "אנא הזן שם חוקי לכלה",
+      "groom_name": "אנא הזן שם חוקי לחתן",
+      "event_date": "אנא הזן תאריך אירוע חוקי",
+      "terms": "עליך להסכים לתנאי השירות שלנו"
+    },
+    "event_selector": {
+      "bride_name": "שם הכלה",
+      "groom_name": "שם החתן",
+      "event_purpose": "מה מטרת האירוע?",
+      "event_celebrate": "מה אנו חוגגים?",
+      "type_wedding": "חתונה",
+      "type_conference_company": "כנס/אירוע חברה",
+      "private_event": "אירוע פרטי",
+      "event_type": "סוג האירוע"
+    },
+    "ok": "בסדר"
   }
 }

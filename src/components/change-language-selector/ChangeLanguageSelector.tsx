@@ -6,12 +6,12 @@ import i18next from "i18next";
 import colors from "../../styles/colors.module.scss";
 import "flag-icon-css/css/flag-icons.min.css";
 import cookies from "js-cookie";
-import {defaultDirection, defaultLanguage, Language, languages} from "../../types/Locales";
+import {defaultDirection, defaultLanguage, LanguageInterface, languages} from "../../types/Locales";
 
 const ChangeLanguageSelector: React.FC = () => {
 
     const currentLanguageCode = cookies.get('i18next') || defaultLanguage;
-    const currentLanguage: Language = languages.find(l => l.code === currentLanguageCode) || languages[0];
+    const currentLanguage: LanguageInterface = languages.find(l => l.code === currentLanguageCode) || languages[0];
     const {t} = useTranslation();
 
     const [anchorElUser, setAnchorElUser] = React.useState<null | HTMLElement>(null);

@@ -13,13 +13,13 @@ import {CssBaseline} from "@mui/material";
 
 interface RouteViews {
     home: string,
-    register: string,
+    registration: string,
     login: string,
 }
 
 export const routes: RouteViews = {
     home: "/",
-    register: "register",
+    registration: "registration",
     login: "login",
 };
 
@@ -52,7 +52,7 @@ const AppViews: React.FC = () => {
                 <Routes>
                     <Route path='*' element={<NotFound_404/>}/>
                     <Route path={routes.home} element={<Home/>}/>
-                    <Route path={routes.register} element={<Registration/>}/>
+                    <Route path={routes.registration} element={<Registration/>}/>
                 </Routes>
             </Container>
             <Footer/>
