@@ -1,5 +1,79 @@
 {
   "users": [
-
+    {
+      "userDetails": {
+        "firstName": "ישראל",
+        "lastName": "הייבלום",
+        "email": "ih5938133@gmail.com",
+        "password": "123456",
+        "phone": ""
+      },
+      "data": {
+        "eventDetails": {
+          "eventName": "חתונה ענבל & שרול",
+          "eventType": "wedding",
+          "eventDate": "",
+          "eventLocation": {
+            "locationName": "",
+            "locationLink": ""
+          }
+        },
+        "eventInvitedManagement": {
+          "invitedList": [],
+          "eventOwnerList": [
+            {
+              "id": 1,
+              "isAdmin": true,
+              "name": "ענבל",
+              "type": "bride"
+            },
+            {
+              "id": 2,
+              "isAdmin": true,
+              "name": "שרול",
+              "type": "groom"
+            }
+          ],
+          "groupList": [],
+          "eventTagList": []
+        },
+        "eventSeatingArrangement": {
+          "tableDefaultSize": 12,
+          "tableList": []
+        }
+      },
+      "id": 1
+    },
+    {
+      "userDetails": {
+        "firstName": "Israel",
+        "lastName": "Heiblum",
+        "email": "ih5938133@gmail.com",
+        "password": "123456",
+        "phone": ""
+      },
+      "data": {
+        "eventDetails": {
+          "eventName": "ענבל",
+          "eventType": "conference",
+          "eventDate": "",
+          "eventLocation": {
+            "locationName": "",
+            "locationLink": ""
+          }
+        },
+        "eventInvitedManagement": {
+          "invitedList": [],
+          "eventOwnerList": [],
+          "groupList": [],
+          "eventTagList": []
+        },
+        "eventSeatingArrangement": {
+          "tableDefaultSize": 12,
+          "tableList": []
+        }
+      },
+      "id": 2
+    }
   ]
 }

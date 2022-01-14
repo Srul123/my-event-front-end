@@ -31,6 +31,7 @@ import Spinner from "../components/spinner/Spinner";
 import axios from "axios";
 import {API_URLS} from "../api/api";
 import DoneIcon from '@mui/icons-material/Done';
+import Container from "@mui/material/Container";
 
 const Registration: React.FC = () => {
     let navigate = useNavigate();
@@ -66,6 +67,9 @@ const Registration: React.FC = () => {
         });
     };
 
+    const redirectToLogin = () => {
+        navigate(routes.login, {replace: true});
+    }
     const closeAlert = () => {
         setAlertPopup({...alertPopup, open: false});
     };
@@ -137,9 +141,7 @@ const Registration: React.FC = () => {
         return true;
     };
 
-    const redirectToLogin = () => {
-        navigate(routes.login, {replace: true});
-    }
+
 
     const handleSubmit: any = async (event: React.MouseEvent<HTMLAnchorElement> | React.MouseEvent<HTMLButtonElement>) => {
         event.preventDefault();
@@ -166,7 +168,7 @@ const Registration: React.FC = () => {
             eventDate: eventDate,
             eventLocation: {locationName: "", locationLink: ""}
         };
-
+        // todo: Change to server data transfer object instead mock server object
         const user: UserInterface = new User(userDetails, eventDetails);
 
         if (eventType === EventTypes.WEDDING) {
@@ -208,7 +210,7 @@ const Registration: React.FC = () => {
     }
 
     return (
-        <div>
+        <Container fixed>
             <form onSubmit={handleSubmit} style={{position: "relative", top: "10vh"}}>
                 <Grid style={{display: "flex", justifyContent: "center"}}>
                     <Avatar style={{fontSize: "5em"}}>
@@ -246,7 +248,7 @@ const Registration: React.FC = () => {
                                 value={lastName}
                                 fullWidth
                                 id="lastName"
-                                placeholder={`${t('registration.last_name')}`}
+                                placeholder={t('registration.last_name')}
                                 name="lastName"
                                 onChange={(event) => {
                                     setLastName(event.target.value);
@@ -264,7 +266,7 @@ const Registration: React.FC = () => {
                                 value={email}
                                 fullWidth
                                 id="email"
-                                placeholder={`${t('registration.email')}`}
+                                placeholder={t('registration.email')}
                                 type="email"
                                 name="email"
                                 onChange={(event) => {
@@ -281,14 +283,14 @@ const Registration: React.FC = () => {
                                 value={phone}
                                 fullWidth
                                 id="phone"
-                                placeholder={`${t('registration.phone')}`}
+                                placeholder={t('registration.phone')}
                                 type="text"
                                 name="phone"
                                 onChange={(event) => {
                                     setPhone(event.target.value);
                                 }}
                             />
-                            <FormHelperText>{`${t('registration.phone')}`}</FormHelperText>
+                            <FormHelperText>{t('registration.phone')}</FormHelperText>
                         </FormControl>
                     </Grid>
                     <Grid item xs={12} sm={6}>
@@ -318,7 +320,7 @@ const Registration: React.FC = () => {
                                 value={repeatPassword}
                                 fullWidth
                                 name="repeat-password"
-                                placeholder={`${t('registration.repeat_password')}`}
+                                placeholder={t('registration.repeat_password')}
                                 type="password"
                                 id="repeat-password"
                                 autoComplete="current-password"
@@ -408,7 +410,7 @@ const Registration: React.FC = () => {
                 closeAlert={closeAlert}
 
             />
-        </div>
+        </Container>
     );
 };
 

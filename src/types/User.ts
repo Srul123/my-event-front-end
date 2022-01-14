@@ -7,9 +7,9 @@ import {UserEventDetails} from "./UserEventDetails";
 
 export interface UserInterface {
     id?: number,
-    userDetails: UserDetailsInterface,
+    userDetails?: UserDetailsInterface,
     auth?: UserAuthInterface,
-    data: {
+    data?: {
         eventDetails: UserEventDetails,
         eventInvitedManagement: UserEventInvitedManagementInterface,
         eventSeatingArrangement: {
@@ -17,8 +17,7 @@ export interface UserInterface {
             tableList: EventTableInterface[]
         }
     }
-
-    setEventOwnerList(param: any[]): void;
+    setEventOwnerList?: any
 }
 
 export interface UserDetailsInterface {
@@ -32,7 +31,7 @@ export interface UserDetailsInterface {
 
 interface UserAuthInterface {
     isLoggedIn: boolean,
-    token: string
+    token?: string
 }
 
 
@@ -49,7 +48,7 @@ export interface UserEventSeatingArrangementInterface {
 }
 
 
-export class User implements UserInterface {
+export class User {
     userDetails: UserDetailsInterface;
     data: {
         eventDetails: UserEventDetails;

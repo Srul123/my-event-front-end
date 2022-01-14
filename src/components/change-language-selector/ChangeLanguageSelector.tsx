@@ -32,6 +32,7 @@ const ChangeLanguageSelector: React.FC = () => {
     React.useEffect(() => {
         document.body.dir = (String)(currentLanguage.dir) || defaultDirection;
         document.title = t('app_title');
+        document.documentElement.lang = currentLanguage.code;
     }, [currentLanguage, t])
 
     return (
