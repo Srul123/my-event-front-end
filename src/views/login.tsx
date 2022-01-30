@@ -16,9 +16,16 @@ import LockIcon from '@mui/icons-material/Lock';
 import {useNavigate} from "react-router-dom";
 import AlertIndicator, {AlertPopup} from "../components/alerts/AlertIndicator";
 import Spinner from "../components/spinner/Spinner";
+import {isValidEmail, isValidPassword} from "../utils/validationFunctionsCollection";
+import {useTranslation} from "react-i18next";
+import {UserInterface} from "../types/User";
+import {routes} from "./AppViews";
+import {API_URLS} from "../api/api";
+import {loginUser} from "../redux-modules/actions/userActions";
 
 
 export default function Login() {
+    const {t} = useTranslation();
     let navigate = useNavigate();
     const dispatch = useDispatch();
     const [email, setEmail] = React.useState("");
@@ -30,23 +37,15 @@ export default function Login() {
         horizontal: "center",
     });
 
-    // const setLoginUser = (user) =>
-    //     dispatch(allActions.userActions.loginUser(user));
-    // const getInvitersList = () =>
-    //     dispatch(allActions.invitersActions.getInvitersList());
-    // const getGroupList = () =>
-    //     dispatch(allActions.groupsActions.getGroupList());
-    // const getTableList = () =>
-    //     dispatch(allActions.tableActions.getTablesList());
-
     const riseExceptionAlert = (message: string) => {
         setAlertPopup({
-            open: true, ...{
-                vertical: "top",
-                horizontal: "center",
-                severityInfo: "error",
-                messageInfo: message ? message : "Please insert valid email and password"
-            }
+            ...alertPopup,
+            open: true,
+            vertical: "top",
+            horizontal: "center",
+            severityInfo: "error",
+            messageInfo: message ? message : `${t('registration.validation.general')}`,
+            time: 6000
         });
     };
 
@@ -57,32 +56,42 @@ export default function Login() {
     const handleSubmit = async (event: React.MouseEvent<HTMLAnchorElement> | React.MouseEvent<HTMLButtonElement>) => {
         event.preventDefault();
         setLoading(true);
-        // const errorMessage = validateInputsSignIn(email, password);
-        const errorMessage = '';
-        if (errorMessage !== '') {
-            riseExceptionAlert(errorMessage);
+        if (!await isValidEmail(email)) {
+            console.log("error email");
+            riseExceptionAlert(t('registration.validation.email'));
             setLoading(false);
             return;
         }
+        if (!await isValidPassword(password)) {
+            console.log("error password");
+            riseExceptionAlert(t('registration.validation.password'));
+            setLoading(false);
+            return;
+        }
+        // todo: change to auth from real server
         try {
-            const response = await axios.get(`http://localhost:5000/users/`);
+            const url = `${API_URLS.BASE_URL_MOCK_SERVER}/${API_URLS.USERS}`;
+            const response = await axios.get(url);
             const data = response.data;
-            // let isAuthenticated = isAuthenticatedUser(email, password, data);
-            let isAuthenticated = false;
-            if (!isAuthenticated) {
-                const errorMessage = "Your details are wrong, please provide an authorized email and password!";
-                riseExceptionAlert(errorMessage);
+            const foundUser = data.find((user: UserInterface) => {
+                return (
+                    user.userDetails?.password === password
+                    &&
+                    user.userDetails.email === email
+                );
+            });
+            if (!foundUser) {
+                console.log("error password");
+                riseExceptionAlert(t("login.valid.wrong_details"));
                 setLoading(false);
-            } else if (isAuthenticated) {
-                // setLoginUser(isAuthenticated);
-                // getInvitersList();
-                // getGroupList();
-                // getTableList();
-                setLoading(false);
-                navigate("/myprofile", {replace: true});
+                return;
             }
+            dispatch(loginUser(foundUser));
+            setLoading(false);
+            navigate(routes.myProfile, {replace: true});
         } catch (error) {
-            console.log("Error in SignIn component");
+            riseExceptionAlert(t("login.valid.wrong_server"));
+            console.log("Error from server while try to login");
             console.log(error);
         }
     };
@@ -92,8 +101,8 @@ export default function Login() {
     }
 
     return (
-        <Container  maxWidth={"sm"}>
-            <div style={{position: "relative", top: "10vh"}}>
+        <Container maxWidth={"sm"}>
+            <div style={{position: "relative", top: "1em"}}>
                 <div style={{display: "flex", justifyContent: "center"}}>
                     <Avatar>
                         <LockIcon/>
@@ -101,7 +110,7 @@ export default function Login() {
                 </div>
                 <div style={{display: "flex", justifyContent: "center", marginBottom: "1vh"}}>
                     <Typography component="h1" variant="h5">
-                        Sign in
+                        {t("login.sign_in")}
                     </Typography>
                 </div>
 
@@ -112,7 +121,7 @@ export default function Login() {
                         required
                         fullWidth
                         id="email"
-                        label="Email Address"
+                        label= {t("login.email")}
                         name="email"
                         autoComplete="email"
                         autoFocus
@@ -126,7 +135,7 @@ export default function Login() {
                         required
                         fullWidth
                         name="password"
-                        label="Password"
+                        label={t("login.password")}
                         type="password"
                         id="password"
                         autoComplete="current-password"
@@ -136,7 +145,7 @@ export default function Login() {
                     />
                     <FormControlLabel
                         control={<Checkbox value="remember" color="primary"/>}
-                        label="Remember me"
+                        label={`${t("login.remember")}`}
                     />
                     <Button
                         type="submit"
@@ -145,14 +154,14 @@ export default function Login() {
                         color="primary"
                         onClick={handleSubmit}
                     >
-                        Sign In
+                        {t("login.sign_in")}
                     </Button>
-                    <Grid style={{marginTop:"2vh"}}>
+                    <Grid style={{marginTop: "2vh"}}>
                         <Grid item xs>
-                            <NavLink to="/">Forgot password?</NavLink>
+                            <NavLink to="/"> {t("login.forgot")}</NavLink>
                         </Grid>
                         <Grid item>
-                            <NavLink to="/signup">{"Don't have an account? Sign Up"}</NavLink>
+                            <NavLink to="/signup">{t("login.account")}</NavLink>
                         </Grid>
                     </Grid>
                 </form>

@@ -5,18 +5,11 @@ const initialState: UserInterface = {
     auth: {isLoggedIn: false},
 };
 
-const userReducer = (state = initialState, action: { type: any; payload: any; }) => {
+const invitedReducer = (state = initialState, action: { type: any; payload: any; }) => {
     switch (action.type) {
         case UserActionTypes.LOGIN:
             debugger;
             return action.payload;
-        case UserActionTypes.LOGOUT:
-            return initialState;
-        case UserActionTypes.UPDATE_USER:
-            return {
-                ...state,
-                user: action.payload
-            };
         case UserActionTypes.ERROR:
             console.error("Error from UserReducer: " + action.payload);
             return {
@@ -27,4 +20,4 @@ const userReducer = (state = initialState, action: { type: any; payload: any; })
             return state;
     }
 };
-export default userReducer;
+export default invitedReducer;

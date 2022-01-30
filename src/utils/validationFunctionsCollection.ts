@@ -30,7 +30,7 @@ export async function isValidEmail(email: string): Promise<boolean> {
 
 export async function isValidPassword(password: string): Promise<boolean> {
     let schema = Yup.object().shape({
-        password: Yup.string().min(4).max(10).required()
+        password: Yup.string().min(6).max(10).required()
     });
     let isValid: boolean;
     try {

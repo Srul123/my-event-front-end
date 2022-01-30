@@ -169,7 +169,7 @@ const Registration: React.FC = () => {
             eventLocation: {locationName: "", locationLink: ""}
         };
         // todo: Change to server data transfer object instead mock server object
-        const user: UserInterface = new User(userDetails, eventDetails);
+        const user = new User(userDetails, eventDetails);
 
         if (eventType === EventTypes.WEDDING) {
             const bride: EventOwnerInterface = {
@@ -187,12 +187,9 @@ const Registration: React.FC = () => {
             user.setEventOwnerList([bride, groom]);
 
         }
-        delete user.id;
-        delete user.auth;
         try {
             const url = `${API_URLS.BASE_URL_MOCK_SERVER}/${API_URLS.USERS}`;
             const response = await axios.post(url, user);
-            const data = response.data;
             setIsLoading(false);
             setOpenAlertConfirm(true);
         } catch (error) {
@@ -211,7 +208,7 @@ const Registration: React.FC = () => {
 
     return (
         <Container fixed>
-            <form onSubmit={handleSubmit} style={{position: "relative", top: "10vh"}}>
+            <form onSubmit={handleSubmit} style={{position: "relative", top: "1em"}}>
                 <Grid style={{display: "flex", justifyContent: "center"}}>
                     <Avatar style={{fontSize: "5em"}}>
                         <AppRegistrationIcon/>

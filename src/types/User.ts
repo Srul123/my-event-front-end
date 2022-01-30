@@ -6,9 +6,9 @@ import {EventTableInterface, tableDefaultSize} from "./EventTable";
 import {UserEventDetails} from "./UserEventDetails";
 
 export interface UserInterface {
-    id?: number,
-    userDetails?: UserDetailsInterface,
-    auth?: UserAuthInterface,
+    id?: number;
+    userDetails?: UserDetailsInterface;
+    auth?: UserAuthInterface;
     data?: {
         eventDetails: UserEventDetails,
         eventInvitedManagement: UserEventInvitedManagementInterface,
@@ -16,8 +16,7 @@ export interface UserInterface {
             tableDefaultSize: number,
             tableList: EventTableInterface[]
         }
-    }
-    setEventOwnerList?: any
+    };
 }
 
 export interface UserDetailsInterface {

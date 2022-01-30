@@ -33,6 +33,7 @@ const AppViews: React.FC = () => {
     let navigate = useNavigate();
 
     const isLoggedIn = useSelector(UserState.getAuthUser);
+    debugger;
 
     React.useEffect(() => {
         if (!isLoggedIn &&
@@ -42,12 +43,13 @@ const AppViews: React.FC = () => {
             navigate(routes.login, {replace: true});
         }
     }, []);
-
+    console.log('isLoggedIn');
+    console.log(isLoggedIn);
     return (
-        <div style={{position: "relative"}}>
+        <>
             <CssBaseline/>
             <Header/>
-            <Container maxWidth="md">
+            <Container maxWidth="md" style={{display:"flex", minHeight:"90vh", flexDirection:"column"}}>
                 <Routes>
                     <Route path={routes.home} element={<Home/>}/>
                     <Route path={routes.registration} element={<Registration/>}/>
@@ -62,7 +64,7 @@ const AppViews: React.FC = () => {
                 </Routes>
             </Container>
             <Footer/>
-        </div>
+        </>
     );
 };
 export default AppViews

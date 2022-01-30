@@ -2,5 +2,7 @@ import {ModuleReducers} from "../reducers";
 
 
 export namespace UserState {
-    export const getAuthUser = (state: ModuleReducers) => state.user.auth?.isLoggedIn;
+    export const getAuthUser = (state: ModuleReducers) => {
+        return state.user.auth?.isLoggedIn;
+    }
 }

@@ -49,7 +49,7 @@
       "lastname": "Please insert valid last name",
       "email": "Please insert valid email",
       "phone": "Please insert valid Israeli phone mobile number with 10 digits",
-      "password": "Please insert valid password (minimum 4 and maximum 10 characters)",
+      "password": "Please insert valid password (minimum 6 and maximum 10 characters)",
       "repeat_password": "Password do not match!!!",
       "event_type": "Please select event type",
       "owner_name": "Please insert valid first owner name",
@@ -69,5 +69,18 @@
       "event_type": "Event type"
     },
     "ok": "OK"
+  },
+  "login": {
+    "sign_in":"Sign in",
+    "email":"Email",
+    "password": "Password",
+    "remember": "Remember me",
+    "forgot": "Forgot password?",
+    "account": "Don't have an account? Sign Up",
+    "sign_in_now":"כניסה לחשבוך",
+    "valid": {
+      "wrong_details": "Your details are wrong, please provide an authorized email and password!",
+      "wrong_server": "Error occurred while try to login, please try again later"
+    }
   }
 }

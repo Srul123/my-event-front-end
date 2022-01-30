@@ -43,37 +43,6 @@
         }
       },
       "id": 1
-    },
-    {
-      "userDetails": {
-        "firstName": "Israel",
-        "lastName": "Heiblum",
-        "email": "ih5938133@gmail.com",
-        "password": "123456",
-        "phone": ""
-      },
-      "data": {
-        "eventDetails": {
-          "eventName": "ענבל",
-          "eventType": "conference",
-          "eventDate": "",
-          "eventLocation": {
-            "locationName": "",
-            "locationLink": ""
-          }
-        },
-        "eventInvitedManagement": {
-          "invitedList": [],
-          "eventOwnerList": [],
-          "groupList": [],
-          "eventTagList": []
-        },
-        "eventSeatingArrangement": {
-          "tableDefaultSize": 12,
-          "tableList": []
-        }
-      },
-      "id": 2
     }
   ]
 }
