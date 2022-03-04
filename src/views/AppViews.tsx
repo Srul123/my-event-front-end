@@ -11,7 +11,7 @@ import Registration from "./registration";
 import {CssBaseline} from "@mui/material";
 import Login from "./login";
 import MyProfile from "./my-profile";
-import {UserState} from "../redux-modules/selectores/userSelectores";
+import {UserState} from "../redux-modules/selectores/stateSelectores";
 
 interface RouteViews {
     home: string,

@@ -1,8 +1,11 @@
+import {DrawerProps} from "@mui/material/Drawer/Drawer";
+
 export interface LanguageInterface {
     code: string,
     name: string,
     countryCode: string,
-    dir?: string
+    dir?: string,
+    side:  "bottom" | "left" | "right" | "top" | undefined
 }
 
 interface SupportedLanguagesInterface {
@@ -18,17 +21,21 @@ export const supportedLanguages: SupportedLanguagesInterface = {
 export const defaultLanguage: string = supportedLanguages.he;
 export const defaultDirection: string = 'rtl';
 
+
+
 export const languages: LanguageInterface[] = [
     {
         code: supportedLanguages.he,
         name: 'עברית',
         countryCode: 'il',
-        dir: 'rtl'
+        dir: 'rtl',
+        side: "right"
     },
     {
         code: supportedLanguages.en,
         name: 'English',
         countryCode: 'gb',
-        dir: "ltr"
+        dir: "ltr",
+        side: "left"
     },
 ];

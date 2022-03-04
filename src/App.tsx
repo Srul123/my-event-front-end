@@ -1,6 +1,4 @@
 import React, {Suspense} from 'react';
-import {Provider} from "react-redux";
-// import store from "./redux/store";
 import AppViews from "./views/AppViews";
 import i18n from "i18next";
 import {initReactI18next} from "react-i18next";
@@ -9,7 +7,9 @@ import HttpApi from 'i18next-http-backend';
 import Spinner from "./components/spinner/Spinner";
 import {createTheme, ThemeProvider} from '@mui/material/styles';
 import cookies from "js-cookie";
-import {defaultLanguage, supportedLanguages} from "./types/Locales";
+import {defaultLanguage, LanguageInterface, languages, supportedLanguages} from "./types/Locales";
+import {useDispatch} from "react-redux";
+import {setLocalLanguage} from "./redux-modules/actions/localActions";
 
 
 i18n
@@ -33,8 +33,12 @@ i18n
 
 
 function App() {
+    const dispatch = useDispatch();
     const currentLanguageCode = cookies.get('i18next') || defaultLanguage;
-
+    console.log("currentLanguageCode");
+    console.log(currentLanguageCode);
+    const currentLanguage: LanguageInterface = languages.find(l => l.code === currentLanguageCode) || languages[0];
+    dispatch(setLocalLanguage(currentLanguage));
     const themeLTR = createTheme({
         direction: 'ltr',
     });
@@ -43,7 +47,7 @@ function App() {
         direction: 'rtl',
     });
 
-    console.log(currentLanguageCode);
+
     return (
         <Suspense fallback={<Spinner/>}>
             <ThemeProvider theme={currentLanguageCode === defaultLanguage ? themeRTL : themeLTR}>

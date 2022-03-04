@@ -7,6 +7,7 @@ import invitedReducer from "./invitedReducer";
 import shuttleReducer from "./shuttleReducer";
 import tagReducer from "./tagReducer";
 import filterReducer from "./filterReducer";
+import LocalesReducer from "./localReducer";
 
 
 export default combineReducers({
@@ -17,6 +18,7 @@ export default combineReducers({
     owner: ownerReducer,
     tag: tagReducer,
     shuttle: shuttleReducer,
-    filter: filterReducer
+    filter: filterReducer,
+    local: LocalesReducer
 });
 
