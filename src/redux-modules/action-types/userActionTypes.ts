@@ -3,4 +3,5 @@ export namespace UserActionTypes {
     export const ERROR = "ERROR";
     export const LOGOUT = "LOGOUT";
     export const UPDATE_USER = "UPDATE_USER";
+    export const SET_USER = "SET_USER";
 }

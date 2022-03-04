@@ -33,7 +33,6 @@ const AppViews: React.FC = () => {
     let navigate = useNavigate();
 
     const isLoggedIn = useSelector(UserState.getAuthUser);
-    debugger;
 
     React.useEffect(() => {
         if (!isLoggedIn &&

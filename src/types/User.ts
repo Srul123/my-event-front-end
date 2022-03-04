@@ -1,9 +1,10 @@
 import {EventOwnerInterface} from "./EventOwner";
 import {InvitedInterface} from "./Invited";
 import {GroupInterface} from "./Group";
-import {EventTagInterface as EventTag} from "./EventTagClassify";
+import {EventTagInterface} from "./EventTagClassify";
 import {EventTableInterface, tableDefaultSize} from "./EventTable";
 import {UserEventDetails} from "./UserEventDetails";
+import {ShuttleInterface} from "./Shuttle";
 
 export interface UserInterface {
     id?: number;
@@ -38,7 +39,8 @@ export interface UserEventInvitedManagementInterface {
     invitedList: InvitedInterface[],
     eventOwnerList: EventOwnerInterface[],
     groupList: GroupInterface[],
-    eventTagList: EventTag[]
+    shuttleList: ShuttleInterface[],
+    eventTagList: EventTagInterface[],
 }
 
 export interface UserEventSeatingArrangementInterface {
@@ -63,6 +65,7 @@ export class User {
                 invitedList: [],
                 eventOwnerList: [],
                 groupList: [],
+                shuttleList: [],
                 eventTagList: []
             },
             eventSeatingArrangement: {

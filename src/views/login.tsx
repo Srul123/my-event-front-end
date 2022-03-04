@@ -4,7 +4,6 @@ import axios from "axios";
 import {useDispatch} from "react-redux";
 
 import Container from "@mui/material/Container";
-import CssBaseline from "@mui/material/CssBaseline";
 import Avatar from "@mui/material/Avatar";
 import Typography from "@mui/material/Typography";
 import TextField from "@mui/material/TextField";
@@ -22,6 +21,11 @@ import {UserInterface} from "../types/User";
 import {routes} from "./AppViews";
 import {API_URLS} from "../api/api";
 import {loginUser} from "../redux-modules/actions/userActions";
+import {setInvitedList} from "../redux-modules/actions/invitedActions";
+import {setGroupList} from "../redux-modules/actions/groupActions";
+import {setOwnerList} from "../redux-modules/actions/ownerActions";
+import {setShuttleList} from "../redux-modules/actions/shuttleActions";
+import {setTagList} from "../redux-modules/actions/tagActions";
 
 
 export default function Login() {
@@ -72,7 +76,7 @@ export default function Login() {
         try {
             const url = `${API_URLS.BASE_URL_MOCK_SERVER}/${API_URLS.USERS}`;
             const response = await axios.get(url);
-            const data = response.data;
+            const data:UserInterface[] = response.data;
             const foundUser = data.find((user: UserInterface) => {
                 return (
                     user.userDetails?.password === password
@@ -86,7 +90,26 @@ export default function Login() {
                 setLoading(false);
                 return;
             }
-            dispatch(loginUser(foundUser));
+
+            const userDetails  = foundUser.userDetails;
+            const userEventDetails = foundUser.data?.eventDetails;
+            const userData = {
+                userDetails: userDetails,
+                eventDetails: userEventDetails
+            };
+
+            dispatch(loginUser(userData));
+            const invitedList  = foundUser.data?.eventInvitedManagement.invitedList;
+            dispatch(setInvitedList(invitedList));
+            const groupList  = foundUser.data?.eventInvitedManagement.groupList;
+            dispatch(setGroupList(groupList));
+            const eventOwnerList  = foundUser.data?.eventInvitedManagement.eventOwnerList;
+            dispatch(setOwnerList(eventOwnerList));
+            const shuttleList  = foundUser.data?.eventInvitedManagement.shuttleList;
+            dispatch(setShuttleList(shuttleList));
+            debugger;
+            const tagList  = foundUser.data?.eventInvitedManagement.eventTagList;
+            dispatch(setTagList(tagList));
             setLoading(false);
             navigate(routes.myProfile, {replace: true});
         } catch (error) {

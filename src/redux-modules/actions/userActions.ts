@@ -1,14 +1,14 @@
 import axios from "axios";
 import {UserActionTypes} from "../action-types/userActionTypes";
 import {API_URLS} from "../../api/api";
-import {UserInterface} from "../../types/User";
+import {UserData} from "../reducers/userReducer";
 
-export const loginUser = (user: UserInterface) => {
-    debugger;
-    user.auth = {isLoggedIn: true, token: "%$#312313$$$%#^6554gdfg" };
+
+
+export const loginUser = (userData: UserData) => {
     return {
         type: UserActionTypes.LOGIN,
-        payload: user,
+        payload: userData,
     };
 };
 

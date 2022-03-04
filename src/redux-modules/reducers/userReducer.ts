@@ -1,22 +1,30 @@
 import {UserActionTypes} from "../action-types/userActionTypes";
-import {UserInterface} from "../../types/User";
 
-const initialState: UserInterface = {
+const initialState: {} = {
     auth: {isLoggedIn: false},
+    userDetails: {},
+    eventDetails: {}
 };
+
+export interface UserData {
+    userDetails: any,
+    eventDetails: any
+}
 
 const userReducer = (state = initialState, action: { type: any; payload: any; }) => {
     switch (action.type) {
         case UserActionTypes.LOGIN:
-            debugger;
-            return action.payload;
-        case UserActionTypes.LOGOUT:
-            return initialState;
-        case UserActionTypes.UPDATE_USER:
+            const userData: UserData = action.payload;
             return {
                 ...state,
-                user: action.payload
+                auth: {isLoggedIn: true},
+                userDetails: userData.eventDetails,
+                eventDetails: userData.eventDetails
             };
+
+        case UserActionTypes.LOGOUT:
+            return initialState;
+
         case UserActionTypes.ERROR:
             console.error("Error from UserReducer: " + action.payload);
             return {

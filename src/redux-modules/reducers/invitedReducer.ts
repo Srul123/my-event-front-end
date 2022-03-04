@@ -1,20 +1,15 @@
-import {UserActionTypes} from "../action-types/userActionTypes";
-import {UserInterface} from "../../types/User";
+import {InvitedActionTypes} from "../action-types/invitedActionTypes";
 
-const initialState: UserInterface = {
-    auth: {isLoggedIn: false},
+const initialState = {
+    invitedList: [],
 };
 
 const invitedReducer = (state = initialState, action: { type: any; payload: any; }) => {
     switch (action.type) {
-        case UserActionTypes.LOGIN:
-            debugger;
-            return action.payload;
-        case UserActionTypes.ERROR:
-            console.error("Error from UserReducer: " + action.payload);
+        case InvitedActionTypes.SET_INVITED_LIST:
             return {
                 ...state,
-                error: action.payload
+                invitedList: action.payload
             };
         default:
             return state;

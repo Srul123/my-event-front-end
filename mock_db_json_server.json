@@ -34,8 +34,22 @@
               "type": "groom"
             }
           ],
-          "groupList": [],
-          "eventTagList": []
+          "groupList": [
+            {
+              "id": 0,
+              "userId": 9,
+              "name": "None",
+              "dateCreated": "14.09.2020"
+            }
+          ],
+          "eventTagList": [
+            {
+              "id": 0,
+              "userId": 9,
+              "name": "tagtest",
+              "dateCreated": "12.02.2022"
+            }
+          ]
         },
         "eventSeatingArrangement": {
           "tableDefaultSize": 12,

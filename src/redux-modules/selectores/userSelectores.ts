@@ -1,8 +1,7 @@
-import {ModuleReducers} from "../reducers";
 
 
 export namespace UserState {
-    export const getAuthUser = (state: ModuleReducers) => {
+    export const getAuthUser = (state: any) => {
         return state.user.auth?.isLoggedIn;
     }
 }
