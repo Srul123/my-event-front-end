@@ -26,6 +26,7 @@ import {setGroupList} from "../redux-modules/actions/groupActions";
 import {setOwnerList} from "../redux-modules/actions/ownerActions";
 import {setShuttleList} from "../redux-modules/actions/shuttleActions";
 import {setTagList} from "../redux-modules/actions/tagActions";
+import {setEventDetails} from "../redux-modules/actions/eventDetailsActions";
 
 
 export default function Login() {
@@ -57,6 +58,23 @@ export default function Login() {
         setAlertPopup({...alertPopup, open: false});
     };
 
+    const loadDataToReduxState = (userData: UserInterface) => {
+        const personalDetails = userData.personalDetails;
+        dispatch(loginUser(personalDetails));
+        const eventDetails = userData.data?.eventDetails;
+        dispatch(setEventDetails(eventDetails));
+        const invitedList = userData.data?.invitedList;
+        dispatch(setInvitedList(invitedList));
+        const groupList = userData.data?.groupList;
+        dispatch(setGroupList(groupList));
+        const eventOwnerList = userData.data?.eventOwnerList;
+        dispatch(setOwnerList(eventOwnerList));
+        const shuttleList = userData.data?.shuttleList;
+        dispatch(setShuttleList(shuttleList));
+        const tagList = userData.data?.eventTagList;
+        dispatch(setTagList(tagList));
+    };
+
     const handleSubmit = async (event: React.MouseEvent<HTMLAnchorElement> | React.MouseEvent<HTMLButtonElement>) => {
         event.preventDefault();
         setLoading(true);
@@ -73,15 +91,17 @@ export default function Login() {
             return;
         }
         // todo: change to auth from real server
+
+
         try {
             const url = `${API_URLS.BASE_URL_MOCK_SERVER}/${API_URLS.USERS}`;
             const response = await axios.get(url);
-            const data:UserInterface[] = response.data;
+            const data: UserInterface[] = response.data;
             const foundUser = data.find((user: UserInterface) => {
                 return (
-                    user.userDetails?.password === password
+                    user.personalDetails?.password === password
                     &&
-                    user.userDetails.email === email
+                    user.personalDetails.email === email
                 );
             });
             if (!foundUser) {
@@ -90,26 +110,7 @@ export default function Login() {
                 setLoading(false);
                 return;
             }
-
-            const userDetails  = foundUser.userDetails;
-            const userEventDetails = foundUser.data?.eventDetails;
-            const userData = {
-                userDetails: userDetails,
-                eventDetails: userEventDetails
-            };
-
-            dispatch(loginUser(userData));
-            const invitedList  = foundUser.data?.eventInvitedManagement.invitedList;
-            dispatch(setInvitedList(invitedList));
-            const groupList  = foundUser.data?.eventInvitedManagement.groupList;
-            dispatch(setGroupList(groupList));
-            const eventOwnerList  = foundUser.data?.eventInvitedManagement.eventOwnerList;
-            dispatch(setOwnerList(eventOwnerList));
-            const shuttleList  = foundUser.data?.eventInvitedManagement.shuttleList;
-            dispatch(setShuttleList(shuttleList));
-            debugger;
-            const tagList  = foundUser.data?.eventInvitedManagement.eventTagList;
-            dispatch(setTagList(tagList));
+            loadDataToReduxState(foundUser);
             setLoading(false);
             navigate(routes.myProfile, {replace: true});
         } catch (error) {
@@ -144,7 +145,7 @@ export default function Login() {
                         required
                         fullWidth
                         id="email"
-                        label= {t("login.email")}
+                        label={t("login.email")}
                         name="email"
                         autoComplete="email"
                         autoFocus

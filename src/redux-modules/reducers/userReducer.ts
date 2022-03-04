@@ -2,24 +2,19 @@ import {UserActionTypes} from "../action-types/userActionTypes";
 
 const initialState: {} = {
     auth: {isLoggedIn: false},
-    userDetails: {},
-    eventDetails: {}
+    personalDetails: {},
 };
 
-export interface UserData {
-    userDetails: any,
-    eventDetails: any
-}
+
 
 const userReducer = (state = initialState, action: { type: any; payload: any; }) => {
     switch (action.type) {
         case UserActionTypes.LOGIN:
-            const userData: UserData = action.payload;
+            const userData = action.payload;
             return {
                 ...state,
                 auth: {isLoggedIn: true},
-                userDetails: userData.eventDetails,
-                eventDetails: userData.eventDetails
+                personalDetails: action.payload
             };
 
         case UserActionTypes.LOGOUT:

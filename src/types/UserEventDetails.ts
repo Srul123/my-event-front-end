@@ -4,9 +4,3 @@ export enum EventTypes {
     PRIVATE_EVENT = "privateEvent"
 }
 
-export interface UserEventDetails {
-    eventName: string,
-    eventType: string,
-    eventDate: string,
-    eventLocation: { locationName: string, locationLink: string }
-}

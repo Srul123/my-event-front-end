@@ -22,9 +22,7 @@ import {
 } from '../utils/validationFunctionsCollection';
 import EventTypeSelector from "../components/event-type-selector/EventTypeSelector";
 import AppRegistrationIcon from '@mui/icons-material/AppRegistration';
-import {User, UserDetailsInterface, UserInterface} from "../types/User";
 import {toUpperCaseCleanName} from "../utils/stringFunctionsCollection";
-import {EventTypes, UserEventDetails} from "../types/UserEventDetails";
 import {EventOwnerInterface} from "../types/EventOwner";
 import AlertWithConfirmation from "../components/alerts/AlertWithConfirmation";
 import Spinner from "../components/spinner/Spinner";
@@ -32,6 +30,9 @@ import axios from "axios";
 import {API_URLS} from "../api/api";
 import DoneIcon from '@mui/icons-material/Done';
 import Container from "@mui/material/Container";
+import {User, UserPersonalDetailsInterface} from "../types/User";
+import {EventTypes} from "../types/UserEventDetails";
+import {EventDetailsInterface} from "../types/EventDetails";
 
 const Registration: React.FC = () => {
     let navigate = useNavigate();
@@ -154,7 +155,7 @@ const Registration: React.FC = () => {
         }
         // todo: add validation from the server
 
-        const userDetails: UserDetailsInterface = {
+        const personalDetails: UserPersonalDetailsInterface = {
             firstName: toUpperCaseCleanName(firstName),
             lastName: toUpperCaseCleanName(lastName),
             email: email,
@@ -162,14 +163,14 @@ const Registration: React.FC = () => {
             phone: phone
         };
 
-        const eventDetails: UserEventDetails = {
+        const eventDetails: EventDetailsInterface = {
             eventName: eventType === EventTypes.WEDDING ? `${t('registration.wedding')} ${eventOwner1} & ${eventOwner2}` : eventOwner1,
             eventType: eventType,
             eventDate: eventDate,
             eventLocation: {locationName: "", locationLink: ""}
         };
         // todo: Change to server data transfer object instead mock server object
-        const user = new User(userDetails, eventDetails);
+        const user = new User(personalDetails, eventDetails);
 
         if (eventType === EventTypes.WEDDING) {
             const bride: EventOwnerInterface = {

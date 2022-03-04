@@ -1,14 +1,14 @@
 import axios from "axios";
 import {UserActionTypes} from "../action-types/userActionTypes";
 import {API_URLS} from "../../api/api";
-import {UserData} from "../reducers/userReducer";
+import {UserPersonalDetailsInterface} from "../../types/User";
 
 
 
-export const loginUser = (userData: UserData) => {
+export const loginUser = (personalDetails: UserPersonalDetailsInterface | undefined) => {
     return {
         type: UserActionTypes.LOGIN,
-        payload: userData,
+        payload: personalDetails,
     };
 };
 

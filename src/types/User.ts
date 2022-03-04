@@ -2,25 +2,24 @@ import {EventOwnerInterface} from "./EventOwner";
 import {InvitedInterface} from "./Invited";
 import {GroupInterface} from "./Group";
 import {EventTagInterface} from "./EventTagClassify";
-import {EventTableInterface, tableDefaultSize} from "./EventTable";
-import {UserEventDetails} from "./UserEventDetails";
 import {ShuttleInterface} from "./Shuttle";
+import {EventDetailsInterface} from "./EventDetails";
 
 export interface UserInterface {
     id?: number;
-    userDetails?: UserDetailsInterface;
+    personalDetails?: UserPersonalDetailsInterface;
     auth?: UserAuthInterface;
     data?: {
-        eventDetails: UserEventDetails,
-        eventInvitedManagement: UserEventInvitedManagementInterface,
-        eventSeatingArrangement: {
-            tableDefaultSize: number,
-            tableList: EventTableInterface[]
-        }
+        eventDetails: EventDetailsInterface,
+        invitedList: InvitedInterface[],
+        eventOwnerList: EventOwnerInterface[],
+        groupList: GroupInterface[],
+        shuttleList: ShuttleInterface[],
+        eventTagList: EventTagInterface[],
     };
 }
 
-export interface UserDetailsInterface {
+export interface UserPersonalDetailsInterface {
     firstName: string,
     lastName: string,
     email: string,
@@ -34,8 +33,8 @@ interface UserAuthInterface {
     token?: string
 }
 
-
-export interface UserEventInvitedManagementInterface {
+interface UserDataInterface {
+    eventDetails: EventDetailsInterface,
     invitedList: InvitedInterface[],
     eventOwnerList: EventOwnerInterface[],
     groupList: GroupInterface[],
@@ -43,43 +42,27 @@ export interface UserEventInvitedManagementInterface {
     eventTagList: EventTagInterface[],
 }
 
-export interface UserEventSeatingArrangementInterface {
-    tableDefaultSize: number,
-    tableList: EventTableInterface[]
-}
-
 
 export class User {
-    userDetails: UserDetailsInterface;
-    data: {
-        eventDetails: UserEventDetails;
-        eventInvitedManagement: UserEventInvitedManagementInterface;
-        eventSeatingArrangement: UserEventSeatingArrangementInterface;
-    };
+    id?: number | undefined;
+    auth?: UserAuthInterface | undefined;
+    personalDetails: UserPersonalDetailsInterface;
+    data: UserDataInterface;
 
-    constructor(userDetails: UserDetailsInterface, eventDetails: UserEventDetails) {
-        this.userDetails = userDetails;
+    constructor(personalDetails: UserPersonalDetailsInterface, eventDetails: EventDetailsInterface) {
+        this.personalDetails = personalDetails;
         this.data = {
             eventDetails: eventDetails,
-            eventInvitedManagement: {
-                invitedList: [],
-                eventOwnerList: [],
-                groupList: [],
-                shuttleList: [],
-                eventTagList: []
-            },
-            eventSeatingArrangement: {
-                tableDefaultSize: tableDefaultSize,
-                tableList: []
-            }
+            invitedList: [],
+            eventOwnerList: [],
+            groupList: [],
+            shuttleList: [],
+            eventTagList: [],
         }
     }
 
-    id?: number | undefined;
-    auth?: UserAuthInterface | undefined;
-
     setEventOwnerList(list: EventOwnerInterface[]): void {
-        this.data.eventInvitedManagement.eventOwnerList = list;
+        this.data.eventOwnerList = list;
     }
 }
 

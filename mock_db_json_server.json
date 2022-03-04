@@ -1,8 +1,8 @@
 {
   "users": [
     {
-      "userDetails": {
-        "firstName": "ישראל",
+      "personalDetails": {
+        "firstName": "ענבל",
         "lastName": "הייבלום",
         "email": "ih5938133@gmail.com",
         "password": "123456",
@@ -12,51 +12,32 @@
         "eventDetails": {
           "eventName": "חתונה ענבל & שרול",
           "eventType": "wedding",
-          "eventDate": "",
+          "eventDate": "2022-08-24T19:30",
           "eventLocation": {
             "locationName": "",
             "locationLink": ""
           }
         },
-        "eventInvitedManagement": {
-          "invitedList": [],
-          "eventOwnerList": [
-            {
-              "id": 1,
-              "isAdmin": true,
-              "name": "ענבל",
-              "type": "bride"
-            },
-            {
-              "id": 2,
-              "isAdmin": true,
-              "name": "שרול",
-              "type": "groom"
-            }
-          ],
-          "groupList": [
-            {
-              "id": 0,
-              "userId": 9,
-              "name": "None",
-              "dateCreated": "14.09.2020"
-            }
-          ],
-          "eventTagList": [
-            {
-              "id": 0,
-              "userId": 9,
-              "name": "tagtest",
-              "dateCreated": "12.02.2022"
-            }
-          ]
-        },
-        "eventSeatingArrangement": {
-          "tableDefaultSize": 12,
-          "tableList": []
-        }
+        "invitedList": [],
+        "eventOwnerList": [
+          {
+            "id": 1,
+            "isAdmin": true,
+            "name": "ענבל",
+            "type": "bride"
+          },
+          {
+            "id": 2,
+            "isAdmin": true,
+            "name": "שרול",
+            "type": "groom"
+          }
+        ],
+        "groupList": [],
+        "shuttleList": [],
+        "eventTagList": []
       },
-      "id": 1
+      "id": 2
     }
   ]
 }
