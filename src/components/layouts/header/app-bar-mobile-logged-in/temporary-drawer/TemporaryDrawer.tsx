@@ -1,6 +1,5 @@
 import {anchorSides, LocalInterface, Side} from "../../../../../types/Locales";
 import * as React from "react";
-import {useSelector} from "react-redux";
 import {useTranslation} from "react-i18next";
 import List from "@mui/material/List";
 import {optionRoutes} from "../../../../../views/AppViews";
@@ -12,7 +11,6 @@ import ListItemIcon from "@mui/material/ListItemIcon";
 import Drawer from "@mui/material/Drawer";
 import colors from "../../../../../styles/colors.module.scss";
 import "./TemporaryDrawer.scss";
-import {LocalesState} from "../../../../../redux-modules/selectores/stateSelectores";
 
 
 interface Props {

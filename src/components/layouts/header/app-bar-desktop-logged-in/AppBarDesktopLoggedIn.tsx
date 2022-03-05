@@ -34,9 +34,7 @@ export default function AppBarDesktopLoggedIn() {
     return (
         <Box id={"AppBarLoginDesktop"} sx={{display: 'flex'}}>
             <CssBaseline/>
-            <AppBar position="fixed" sx={{zIndex: (theme) => theme.zIndex.drawer + 1}}
-                    style={{position: "initial"}}
-            >
+            <AppBar position="fixed" sx={{zIndex: (theme) => theme.zIndex.drawer + 1}}>
                 <Toolbar style={{display: "flex", justifyContent: "space-between"}}>
                     <Typography variant="h6" noWrap component="div">
                         My Event

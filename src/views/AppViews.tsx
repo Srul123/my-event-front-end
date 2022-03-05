@@ -11,7 +11,7 @@ import Registration from "./registration";
 import {CssBaseline} from "@mui/material";
 import Login from "./login";
 import MyProfile from "./my-profile";
-import { UserState} from "../redux-modules/selectores/stateSelectores";
+import {LocalesState, UserState} from "../redux-modules/selectores/stateSelectores";
 import PlaylistAddCheckIcon from "@mui/icons-material/PlaylistAddCheck";
 import EventNoteIcon from "@mui/icons-material/EventNote";
 import PeopleOutlineIcon from "@mui/icons-material/PeopleOutline";
@@ -19,6 +19,7 @@ import MarkunreadMailboxIcon from "@mui/icons-material/MarkunreadMailbox";
 import BorderVerticalIcon from "@mui/icons-material/BorderVertical";
 import AttachMoneyIcon from "@mui/icons-material/AttachMoney";
 import SettingsIcon from "@mui/icons-material/Settings";
+import {devicesModes, LocalInterface} from "../types/Locales";
 
 
 interface RouteViews {
@@ -48,11 +49,11 @@ export const optionRoutes = [
     },
     {
         title: 'header.menu.event_details',
-        icon: <EventNoteIcon className={"my-icons"} />,
+        icon: <EventNoteIcon className={"my-icons"}/>,
         route: routes.eventDetails,
     },
     {
-        title:'header.menu.invited_management',
+        title: 'header.menu.invited_management',
         icon: <PeopleOutlineIcon className={"my-icons"}/>,
         route: routes.invitedManagement,
     },
@@ -81,9 +82,8 @@ export const optionRoutes = [
 const AppViews: React.FC = () => {
     const location = useLocation();
     const navigate = useNavigate();
-
+    const local: LocalInterface = useSelector(LocalesState.getCurrentLocal);
     const isLoggedIn = useSelector(UserState.getAuthUser);
-    let offsetScreenSideStyle = {};
 
     React.useEffect(() => {
         if (!isLoggedIn &&
@@ -93,20 +93,24 @@ const AppViews: React.FC = () => {
         }
     }, []);
 
-    // const local: LocalInterface = useSelector(LocalesState.getCurrentLocal);
-    // if (local.device !== devicesModes.mobile) {
-    //     if (local.side === "right") {
-    //         offsetScreenSideStyle = {
-    //             paddingRight: "5em"
-    //         }
-    //     } else {
-    //         offsetScreenSideStyle = {
-    //             paddingLeft: "5em"
-    //         }
-    //     }
-    // } else {
-    //     offsetScreenSideStyle = {};
-    // }
+    let offsetScreenSideStyle = {paddingTop: "", paddingRight: "", paddingLeft: ""};
+    if (local.device !== devicesModes.mobile) {
+        if (local.side === "right" ) {
+            offsetScreenSideStyle = {
+                ...offsetScreenSideStyle,
+                paddingTop: "5em",
+                paddingLeft: "",
+                paddingRight: "5em"
+            }
+        } else {
+            offsetScreenSideStyle = {
+                ...offsetScreenSideStyle,
+                paddingTop: "5em",
+                paddingLeft: "5em",
+                paddingRight: ""
+            }
+        }
+    }
 
     console.log('isLoggedIn');
     console.log(isLoggedIn);
