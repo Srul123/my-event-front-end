@@ -10,8 +10,17 @@
       "register": "Register",
       "login": "Login"
     },
-    "profile": {
-    }
+    "menu": {
+      "overall_status": "Overall Status",
+      "event_details": "Event Details",
+      "invited_management": "Invited Management",
+      "rsvp": "RSVP",
+      "seating_arrangement": "Seating Arrangement",
+      "expenses_summary": "Expenses summary",
+      "account_settings": "Account Settings"
+    },
+    "logout": "Logout",
+    "select_language": "Select language"
   },
   "footer": {
     "copyright": "Copyright"

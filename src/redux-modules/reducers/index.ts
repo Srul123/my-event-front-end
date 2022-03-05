@@ -16,9 +16,9 @@ export default combineReducers({
     invited: invitedReducer,
     group: groupReducer,
     owner: ownerReducer,
-    tag: tagReducer,
+    tags: tagReducer,
     shuttle: shuttleReducer,
-    filter: filterReducer,
+    filters: filterReducer,
     local: LocalesReducer
 });
 

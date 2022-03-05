@@ -10,9 +10,17 @@
       "register": "הרשמה",
       "login": "כניסה"
     },
-    "profile": {
-
-    }
+    "menu": {
+      "overall_status": "סטאטוס כללי",
+      "event_details": "פרטי האירוע",
+      "invited_management": "ניהול מוזמנים",
+      "rsvp": "אישורי הגעה",
+      "seating_arrangement": "סידורי הושבה",
+      "expenses_summary": "הוצאות/הכנסות",
+      "account_settings": "חשבון משתמש"
+    },
+    "logout": "התנתק",
+    "select_language": "בחר שפה"
   },
   "footer": {
     "copyright": "כל הזכויות שמורות"
@@ -72,7 +80,7 @@
     "ok": "בסדר"
   },
   "login": {
-    "sign_in":"כניסה לחשבוך",
+    "sign_in":"כניסה לחשבונך",
     "email":"אימייל",
     "password": "סיסמה",
     "remember": "זכור אותי",

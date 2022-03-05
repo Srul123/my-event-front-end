@@ -1,5 +1,3 @@
-import {DrawerProps} from "@mui/material/Drawer/Drawer";
-
 export interface LanguageInterface {
     code: string,
     name: string,
