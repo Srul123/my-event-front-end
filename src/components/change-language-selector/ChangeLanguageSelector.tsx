@@ -6,14 +6,14 @@ import i18next from "i18next";
 import colors from "../../styles/colors.module.scss";
 import "flag-icon-css/css/flag-icons.min.css";
 import cookies from "js-cookie";
-import {defaultDirection, defaultLanguage, LanguageInterface, languages, supportedLanguages} from "../../types/Locales";
+import {defaultDirection, defaultLanguage, LocalInterface, languages, supportedLanguages} from "../../types/Locales";
 import {setLocalLanguage} from "../../redux-modules/actions/localActions";
 import {useDispatch} from "react-redux";
 
 const ChangeLanguageSelector: React.FC = () => {
     const dispatch = useDispatch();
     const currentLanguageCode = cookies.get('i18next') || defaultLanguage;
-    const currentLanguage: LanguageInterface = languages.find(l => l.code === currentLanguageCode) || languages[0];
+    const currentLanguage: LocalInterface = languages.find(l => l.code === currentLanguageCode) || languages[0];
     const {t} = useTranslation();
 
     const [anchorElUser, setAnchorElUser] = React.useState<null | HTMLElement>(null);
@@ -25,7 +25,7 @@ const ChangeLanguageSelector: React.FC = () => {
     const handleChangeLanguage = (langCode: string) => {
         i18next.changeLanguage(langCode);
         setAnchorElUser(null);
-        const currentLanguage: LanguageInterface = languages.find(l => l.code === langCode) || languages[0];
+        const currentLanguage: LocalInterface = languages.find(l => l.code === langCode) || languages[0];
         dispatch(setLocalLanguage(currentLanguage));
     };
 

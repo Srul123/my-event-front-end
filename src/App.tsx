@@ -7,9 +7,10 @@ import HttpApi from 'i18next-http-backend';
 import Spinner from "./components/spinner/Spinner";
 import {createTheme, ThemeProvider} from '@mui/material/styles';
 import cookies from "js-cookie";
-import {defaultLanguage, LanguageInterface, languages, supportedLanguages} from "./types/Locales";
+import {defaultLanguage, LocalInterface, languages, supportedLanguages} from "./types/Locales";
 import {useDispatch} from "react-redux";
 import {setLocalLanguage} from "./redux-modules/actions/localActions";
+import useWindowDimensionsService from "./services/windowScreenDimensions.service";
 
 
 i18n
@@ -35,17 +36,23 @@ i18n
 function App() {
     const dispatch = useDispatch();
     const currentLanguageCode = cookies.get('i18next') || defaultLanguage;
-    console.log("currentLanguageCode");
-    console.log(currentLanguageCode);
-    const currentLanguage: LanguageInterface = languages.find(l => l.code === currentLanguageCode) || languages[0];
-    dispatch(setLocalLanguage(currentLanguage));
+    const {width} = useWindowDimensionsService();
+    const local: LocalInterface = languages.find(l => l.code === currentLanguageCode) || languages[0];
+    if (width <= 900) {
+        local.device = "mobile";
+    } else if (width > 900 && width < 1250) {
+        local.device = "tablet";
+    } else {
+        local.device = "desktop";
+    }
+    dispatch(setLocalLanguage(local));
     const themeLTR = createTheme({
         direction: 'ltr',
     });
-
     let themeRTL = createTheme({
         direction: 'rtl',
     });
+
 
 
     return (

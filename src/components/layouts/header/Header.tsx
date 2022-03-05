@@ -1,15 +1,14 @@
 import React from "react";
 import {useSelector} from "react-redux";
 import AppBarDefault from "./app-bar-default/AppBarDefault";
-import {UserState} from "../../../redux-modules/selectores/stateSelectores";
-import useWindowDimensionsService from "../../../services/windowScreenDimensions.service";
+import {LocalesState, UserState} from "../../../redux-modules/selectores/stateSelectores";
 import AppBarDesktopLoggedIn from "./app-bar-desktop-logged-in/AppBarDesktopLoggedIn";
 import AppBarMobileLoggedIn from "./app-bar-mobile-logged-in/AppBarMobileLoggedIn";
+import { devicesModes} from "../../../types/Locales";
 
 
 const Header: React.FC = () => {
-    const {width} = useWindowDimensionsService();
-    // const {width} = {width: 700};
+    const local = useSelector(LocalesState.getCurrentLocal);
     const isLoggedIn = useSelector(UserState.getAuthUser);
 
     return <header>
@@ -19,13 +18,13 @@ const Header: React.FC = () => {
                     <AppBarDefault/>
                 )
             } else {
-                if (width > 700) {
+                if (local.device === devicesModes.mobile) {
                     return (
-                            <AppBarDesktopLoggedIn/>
+                        <AppBarMobileLoggedIn/>
                     )
                 } else {
                     return (
-                        <AppBarMobileLoggedIn />
+                        <AppBarDesktopLoggedIn/>
                     )
                 }
             }

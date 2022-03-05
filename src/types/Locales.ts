@@ -1,14 +1,32 @@
-export interface LanguageInterface {
+export interface LocalInterface {
     code: string,
     name: string,
     countryCode: string,
     dir?: string,
-    side:  "bottom" | "left" | "right" | "top" | undefined
+    side: Side,
+    device?: DeviceModes
 }
 
+export type DeviceModes = "mobile" | "tablet" | "desktop" | undefined;
+
+export const devicesModes = {
+    mobile: "mobile",
+    tablet: "tablet",
+    desktop: "desktop"
+};
+
+export const anchorSides = {
+    left: "left",
+    right: "right",
+    bottom: "bottom",
+    top: "top"
+};
+
+export type Side = "bottom" | "left" | "right" | "top" | undefined;
+
 interface SupportedLanguagesInterface {
-  he: string,
-  en: string
+    he: string,
+    en: string
 };
 
 export const supportedLanguages: SupportedLanguagesInterface = {
@@ -20,8 +38,7 @@ export const defaultLanguage: string = supportedLanguages.he;
 export const defaultDirection: string = 'rtl';
 
 
-
-export const languages: LanguageInterface[] = [
+export const languages: LocalInterface[] = [
     {
         code: supportedLanguages.he,
         name: 'עברית',

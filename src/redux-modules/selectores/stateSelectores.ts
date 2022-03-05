@@ -1,3 +1,4 @@
+import {LocalInterface} from "../../types/Locales";
 
 export namespace UserState {
     export const getAuthUser = (state: any) => {
@@ -6,7 +7,7 @@ export namespace UserState {
 }
 
 export namespace LocalesState {
-    export const getCurrentLanguage = (state: any) => {
+    export const getCurrentLocal = (state: any) : LocalInterface => {
         return state.local;
     }
 }

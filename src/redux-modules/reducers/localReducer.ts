@@ -1,21 +1,27 @@
 import {LocalesActionTypes} from "../action-types/localActionTypes";
-import {LanguageInterface} from "../../types/Locales";
+import {LocalInterface} from "../../types/Locales";
 
-const initialState: LanguageInterface = {
+const initialState: LocalInterface = {
     code: "",
     name: "",
     countryCode: "",
     dir: "",
-    side: undefined
+    side: undefined,
+    device: undefined
 };
 
 
-const localReducer = (state = initialState, action: { type: any; payload: LanguageInterface; }) => {
+const localReducer = (state = initialState, action: { type: any, payload: any }) => {
     switch (action.type) {
         case LocalesActionTypes.SET_LOCAL_LANGUAGE:
             return {
                 ...state,
                 ...action.payload
+            };
+        case LocalesActionTypes.SET_DEVICE_MODE:
+            return {
+                ...state,
+                device: action.payload
             };
         default:
             return state;

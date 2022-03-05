@@ -11,44 +11,111 @@ import Registration from "./registration";
 import {CssBaseline} from "@mui/material";
 import Login from "./login";
 import MyProfile from "./my-profile";
-import {UserState} from "../redux-modules/selectores/stateSelectores";
+import { UserState} from "../redux-modules/selectores/stateSelectores";
+import PlaylistAddCheckIcon from "@mui/icons-material/PlaylistAddCheck";
+import EventNoteIcon from "@mui/icons-material/EventNote";
+import PeopleOutlineIcon from "@mui/icons-material/PeopleOutline";
+import MarkunreadMailboxIcon from "@mui/icons-material/MarkunreadMailbox";
+import BorderVerticalIcon from "@mui/icons-material/BorderVertical";
+import AttachMoneyIcon from "@mui/icons-material/AttachMoney";
+import SettingsIcon from "@mui/icons-material/Settings";
+
 
 interface RouteViews {
     home: string,
     registration: string,
     login: string,
     myProfile: string
+    eventDetails: string,
+    invitedManagement: string
 }
 
 export const routes: RouteViews = {
     home: "/",
     registration: "/registration",
     login: "/login",
-    myProfile: "/my-profile"
+    myProfile: "/my-profile",
+    eventDetails: "/event-details",
+    invitedManagement: "/invited-management"
 };
 
 
+export const optionRoutes = [
+    {
+        title: 'header.menu.overall_status',
+        icon: <PlaylistAddCheckIcon className={"my-icons"}/>,
+        route: routes.myProfile,
+    },
+    {
+        title: 'header.menu.event_details',
+        icon: <EventNoteIcon className={"my-icons"} />,
+        route: routes.eventDetails,
+    },
+    {
+        title:'header.menu.invited_management',
+        icon: <PeopleOutlineIcon className={"my-icons"}/>,
+        route: routes.invitedManagement,
+    },
+    {
+        title: 'header.menu.rsvp',
+        icon: <MarkunreadMailboxIcon className={"my-icons"}/>,
+        route: "/rsvp",
+    },
+    {
+        title: 'header.menu.seating_arrangement',
+        icon: <BorderVerticalIcon className={"my-icons"}/>,
+        route: "/seating-arrangement",
+    },
+    {
+        title: 'header.menu.expenses_summary',
+        icon: <AttachMoneyIcon className={"my-icons"}/>,
+        route: "/expenses-summary",
+    },
+    {
+        title: 'header.menu.account_settings',
+        icon: <SettingsIcon className={"my-icons"}/>,
+        route: "/account-settings",
+    }
+];
+
 const AppViews: React.FC = () => {
     const location = useLocation();
-    let navigate = useNavigate();
+    const navigate = useNavigate();
 
     const isLoggedIn = useSelector(UserState.getAuthUser);
+    let offsetScreenSideStyle = {};
 
     React.useEffect(() => {
         if (!isLoggedIn &&
             location.pathname === routes.myProfile
-            // location.pathname==='/event-details' ||
         ) {
             navigate(routes.login, {replace: true});
         }
     }, []);
+
+    // const local: LocalInterface = useSelector(LocalesState.getCurrentLocal);
+    // if (local.device !== devicesModes.mobile) {
+    //     if (local.side === "right") {
+    //         offsetScreenSideStyle = {
+    //             paddingRight: "5em"
+    //         }
+    //     } else {
+    //         offsetScreenSideStyle = {
+    //             paddingLeft: "5em"
+    //         }
+    //     }
+    // } else {
+    //     offsetScreenSideStyle = {};
+    // }
+
     console.log('isLoggedIn');
     console.log(isLoggedIn);
     return (
         <>
             <CssBaseline/>
             <Header/>
-            <Container maxWidth="md" style={{display:"flex", minHeight:"90vh", flexDirection:"column"}}>
+            <Container maxWidth="md"
+                       style={{display: "flex", minHeight: "90vh", flexDirection: "column", ...offsetScreenSideStyle}}>
                 <Routes>
                     <Route path={routes.home} element={<Home/>}/>
                     <Route path={routes.registration} element={<Registration/>}/>

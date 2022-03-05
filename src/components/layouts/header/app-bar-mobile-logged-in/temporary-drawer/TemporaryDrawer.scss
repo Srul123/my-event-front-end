@@ -1,7 +1,8 @@
-@import '../../../../styles/colors.module';
+@import '../../../../../styles/colors.module';
 
 
-#AppBarLoginDesktop {
+
+#TemporaryDrawer {
   .active {
     & > div {
       background: $backgroundPrimary;
@@ -13,14 +14,11 @@
       }
     }
   }
+
   a {
     text-decoration: none;
     color: $textBlack;
   }
-  #AppBarLoginDesktopDrawer {
-    svg.MuiSvgIcon-root {
-      font-size: 2em;
-    }
-  }
 }
+
 
