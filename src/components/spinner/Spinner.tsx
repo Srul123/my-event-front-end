@@ -6,7 +6,7 @@ const Spinner = () => {
         <Box sx={{ display: 'flex',
             justifyContent:"center",
             position: "relative",
-            top: "40vh"
+            top: "30vh"
         }}>
             <CircularProgress  size={"10em"} />
         </Box>

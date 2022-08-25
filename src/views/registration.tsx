@@ -81,7 +81,7 @@ const Registration: React.FC = () => {
             riseExceptionAlert(t('registration.validation.firstname'));
             return false;
         }
-        if (!await isValidName(lastName)) {
+        if (lastName !== "" && !await isValidName(lastName)) {
             console.log("error lastname");
             riseExceptionAlert(t('registration.validation.lastname'));
             return false;
@@ -111,13 +111,6 @@ const Registration: React.FC = () => {
             riseExceptionAlert(t('registration.validation.event_type'));
             return false;
         }
-        if (eventType !== EventTypes.WEDDING) {
-            if (!await isValidName(eventOwner1)) {
-                console.log("error eventOwner1");
-                riseExceptionAlert(t('registration.validation.owner_name'));
-                return false;
-            }
-        }
         if (eventType === EventTypes.WEDDING) {
             if (!await isValidName(eventOwner1)) {
                 console.log("error breed name");
@@ -143,7 +136,6 @@ const Registration: React.FC = () => {
     };
 
 
-
     const handleSubmit: any = async (event: React.MouseEvent<HTMLAnchorElement> | React.MouseEvent<HTMLButtonElement>) => {
         event.preventDefault();
         setIsLoading(true);
@@ -153,7 +145,6 @@ const Registration: React.FC = () => {
             return;
 
         }
-        // todo: add validation from the server
 
         const personalDetails: UserPersonalDetailsInterface = {
             firstName: toUpperCaseCleanName(firstName),
@@ -169,7 +160,6 @@ const Registration: React.FC = () => {
             eventDate: eventDate,
             eventLocation: {locationName: "", locationLink: ""}
         };
-        // todo: Change to server data transfer object instead mock server object
         const user = new User(personalDetails, eventDetails);
 
         if (eventType === EventTypes.WEDDING) {
@@ -177,22 +167,29 @@ const Registration: React.FC = () => {
                 id: 1,
                 isAdmin: true,
                 name: eventOwner1,
-                type: 'bride'
+                role: 'bride'
             };
             const groom: EventOwnerInterface = {
                 id: 2,
                 isAdmin: true,
                 name: eventOwner2,
-                type: 'groom'
+                role: 'groom'
             };
             user.setEventOwnerList([bride, groom]);
 
         }
+        debugger;
+
         try {
-            const url = `${API_URLS.BASE_URL_MOCK_SERVER}/${API_URLS.USERS}`;
+            const url = `${API_URLS.BASE_URL}/${API_URLS.USERS}`;
             const response = await axios.post(url, user);
-            setIsLoading(false);
-            setOpenAlertConfirm(true);
+            if (response.status == 200) {
+                setIsLoading(false);
+                setOpenAlertConfirm(true);
+            } else {
+                riseExceptionAlert(t('registration.error_occurred'));
+            }
+
         } catch (error) {
             console.log("Error occurred in server while try to register new user");
             riseExceptionAlert(t('registration.error_occurred'));

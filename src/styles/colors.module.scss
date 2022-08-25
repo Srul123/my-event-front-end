@@ -8,6 +8,7 @@ $textSecondary: #676767;
 // Background colors
 $backgroundPrimary: #1976D2;
 $backgroundSecondary: #676767;
+$backgroundFillPage: #F5F5F5;
 $backgroundSuccess: forestgreen;
 $backgroundError: red;
 
@@ -21,6 +22,7 @@ $backgroundError: red;
   // Background colors
   backgroundPrimary: $backgroundPrimary;
   backgroundSecondary: $backgroundSecondary;
+  backgroundFillPage: $backgroundFillPage;
   backgroundSuccess: $backgroundSuccess;
   backgroundError: $backgroundError;
 }

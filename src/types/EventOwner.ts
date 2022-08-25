@@ -1,20 +1,20 @@
 export interface EventOwnerInterface {
     id: number;
     name: string;
-    type: string;
     isAdmin: boolean;
+    role: string;
 }
 
 export class EventOwner implements EventOwnerInterface {
     id: number;
     name: string;
     isAdmin: boolean;
-    type: string;
+    role: string;
 
-    constructor(id: number, name: string, isAdmin: boolean, type: string) {
+    constructor(id: number, name: string, isAdmin: boolean, role: string) {
         this.id = id;
         this.name = name;
         this.isAdmin = isAdmin;
-        this.type = type;
+        this.role = role;
     }
 }

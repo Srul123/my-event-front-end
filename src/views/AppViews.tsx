@@ -20,6 +20,7 @@ import BorderVerticalIcon from "@mui/icons-material/BorderVertical";
 import AttachMoneyIcon from "@mui/icons-material/AttachMoney";
 import SettingsIcon from "@mui/icons-material/Settings";
 import {devicesModes, LocalInterface} from "../types/Locales";
+import EventDetails from "./event-details";
 
 
 interface RouteViews {
@@ -127,7 +128,8 @@ const AppViews: React.FC = () => {
                     {
                         isLoggedIn &&
                         <>
-                            <Route path={routes.myProfile} element={<MyProfile/>}/>
+                            <Route path={routes.myProfile} element={<MyProfile />}/>
+                            <Route path={routes.eventDetails} element={<EventDetails />}/>
                         </>
                     }
                     <Route path='*' element={<NotFound_404/>}/>

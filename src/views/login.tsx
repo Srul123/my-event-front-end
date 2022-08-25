@@ -94,7 +94,7 @@ export default function Login() {
 
 
         try {
-            const url = `${API_URLS.BASE_URL_MOCK_SERVER}/${API_URLS.USERS}`;
+            const url = `${API_URLS.BASE_URL}/${API_URLS.USERS}`;
             const response = await axios.get(url);
             const data: UserInterface[] = response.data;
             const foundUser = data.find((user: UserInterface) => {

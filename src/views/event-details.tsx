@@ -1,10 +1,10 @@
 import React from 'react';
-import {Typography} from "@mui/material";
-import Paper from "@mui/material/Paper";
-import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
+import Grid from "@mui/material/Grid";
+import Paper from "@mui/material/Paper";
+import {Typography} from "@mui/material";
 
-const MyProfile: React.FC = () => {
+const EventDetails = () => {
     return (
         <div>
             <Box sx={{flexGrow: 1}} style={{marginTop: "2em"}}>
@@ -61,4 +61,4 @@ const MyProfile: React.FC = () => {
     );
 };
 
-export default MyProfile;
+export default EventDetails;

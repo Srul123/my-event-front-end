@@ -21,7 +21,7 @@ export const logoutUser = () => {
 export const updateUserDetails = (user: any) => async (dispatch: (arg0: { type: any; payload: any; }) => void) => {
     let response;
     try {
-        const url = `${API_URLS.BASE_URL_MOCK_SERVER}/${API_URLS.USERS}/${user.id}`;
+        const url = `${API_URLS.BASE_URL}/${API_URLS.USERS}/${user.id}`;
         response = await axios.put(url, user);
         dispatch({
             type: UserActionTypes.UPDATE_USER,
