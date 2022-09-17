@@ -1,4 +1,4 @@
-import { GroupInterface } from "../../types/Group";
+import { GroupInterface } from "../../interfaces/Group";
 import {GroupActionTypes} from "../action-types/groupActionTypes";
 
 

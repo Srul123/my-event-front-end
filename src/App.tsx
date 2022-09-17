@@ -4,13 +4,13 @@ import i18n from "i18next";
 import {initReactI18next} from "react-i18next";
 import LanguageDetector from 'i18next-browser-languagedetector';
 import HttpApi from 'i18next-http-backend';
-import Spinner from "./components/spinner/Spinner";
+import Spinner from "./components/layouts/spinner/Spinner";
 import {createTheme, ThemeProvider} from '@mui/material/styles';
 import cookies from "js-cookie";
-import {defaultLanguage, LocalInterface, languages, supportedLanguages} from "./types/Locales";
+import {defaultLanguage, Local, languages, supportedLanguages} from "./interfaces/Locales";
 import {useDispatch} from "react-redux";
-import {setLocalLanguage} from "./redux-modules/actions/localActions";
 import useWindowDimensionsService from "./services/windowScreenDimensions.service";
+import {setLocalLanguage} from "./redux-modules/actions/appActions";
 
 
 i18n
@@ -37,7 +37,7 @@ function App() {
     const dispatch = useDispatch();
     const currentLanguageCode = cookies.get('i18next') || defaultLanguage;
     const {width} = useWindowDimensionsService();
-    const local: LocalInterface = languages.find(l => l.code === currentLanguageCode) || languages[0];
+    const local: Local = languages.find(l => l.code === currentLanguageCode) || languages[0];
     if (width <= 900) {
         local.device = "mobile";
     } else if (width > 900 && width < 1250) {

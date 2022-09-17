@@ -1,8 +1,8 @@
 import {EventDetailsActionTypes} from "../action-types/eventDetailsActionTypes";
-import {EventDetailsInterface} from "../../types/EventDetails";
+import {EventDetails} from "../../interfaces/EventDetails";
 
 
-export const setEventDetails = (eventDetails: EventDetailsInterface | undefined) => {
+export const setEventDetails = (eventDetails: EventDetails | undefined) => {
     return {
         type: EventDetailsActionTypes.SET_EVENT_DETAILS,
         payload: eventDetails

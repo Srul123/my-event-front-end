@@ -61,7 +61,8 @@
       "password": "Please insert valid password (minimum 6 and maximum 10 characters)",
       "repeat_password": "Password do not match!!!",
       "event_type": "Please select event type",
-      "owner_name": "Please insert valid first owner name",
+      "owner_name": "Please insert valid owner name",
+      "event_name": "Please insert valid event name",
       "bride_name": "Please insert valid bride name",
       "groom_name": "Please insert valid groom name",
       "event_date": "Please insert valid event date",
@@ -73,8 +74,7 @@
       "event_purpose": "What is the event for?",
       "event_celebrate": "What we celebrate?",
       "type_wedding": "Wedding",
-      "type_conference_company": "Conference/Company Event",
-      "private_event": "Private Event",
+      "private_event": "Private-Event/Conference/Company Event",
       "event_type": "Event type"
     },
     "ok": "OK"

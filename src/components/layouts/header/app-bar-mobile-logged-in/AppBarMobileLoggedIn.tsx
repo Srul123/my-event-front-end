@@ -8,14 +8,14 @@ import Toolbar from "@mui/material/Toolbar";
 import IconButton from "@mui/material/IconButton";
 import ChangeLanguageSelector from "../../../change-language-selector/ChangeLanguageSelector";
 import LogoutIcon from '@mui/icons-material/Logout';
-import {LocalInterface, Side} from "../../../../types/Locales";
-import {LocalesState} from "../../../../redux-modules/selectores/stateSelectores";
+import { Side} from "../../../../interfaces/Locales";
 import TemporaryDrawer from "./temporary-drawer/TemporaryDrawer";
 import {useTranslation} from "react-i18next";
+import {StateSelectors} from "../../../../redux-modules/selectores/stateSelectores";
 
 export default function AppBarMobileLoggedIn() {
     const {t} = useTranslation();
-    const local: LocalInterface = useSelector(LocalesState.getCurrentLocal);
+    const application = useSelector(StateSelectors.application);
     const [openDrawer, setOpenDrawer] = React.useState(false);
 
     const toggleDrawer = (anchor: Side, open: boolean) => (event: any) => {
@@ -62,7 +62,7 @@ export default function AppBarMobileLoggedIn() {
                 <TemporaryDrawer
                     openDrawer={openDrawer}
                     toggleDrawer={toggleDrawer}
-                    local={local}
+                    local={application.local}
                 />
             </div>
         </div>

@@ -1,19 +1,19 @@
 import React, {Dispatch, SetStateAction} from 'react';
 import {FormControl, FormHelperText, Grid, MenuItem, Select, SelectChangeEvent, TextField} from "@mui/material";
-import {EventTypes} from "../../types/UserEventDetails";
 import {useTranslation} from "react-i18next";
+import {EventTypes} from "../../interfaces/EventDetails";
 
 interface Props {
     eventType: string,
     setEventType: Dispatch<SetStateAction<string>>,
-    eventOwner1: string,
-    setEventOwner1: Dispatch<SetStateAction<string>>,
-    eventOwner2: string,
-    setEventOwner2: Dispatch<SetStateAction<string>>,
+    input1: string,
+    setInput1: Dispatch<SetStateAction<string>>,
+    input2: string,
+    setInput2: Dispatch<SetStateAction<string>>,
 }
 
 
-const EventTypeSelector: React.FC<Props> = ({eventType, setEventType, eventOwner1, setEventOwner1, eventOwner2, setEventOwner2}) => {
+const EventTypeSelector: React.FC<Props> = ({eventType, setEventType, input1, setInput1, input2, setInput2}) => {
     const {t} = useTranslation();
 
     const [textHelper1, setTextHelper1] = React.useState("");
@@ -30,20 +30,12 @@ const EventTypeSelector: React.FC<Props> = ({eventType, setEventType, eventOwner
         setIsDisableInput2(false);
     };
 
-    const handleCaseConference = () => {
-        setEventType(EventTypes.CONFERENCE);
-        setTextHelper1(`* ${t('registration.event_selector.event_purpose')}`);
-        setTextHelper2("");
-        setEventOwner2("");
-        setIsDisableInput1(false);
-        setIsDisableInput2(true);
-    };
 
     const handleCasePrivateEvent = () => {
         setEventType(EventTypes.PRIVATE_EVENT);
-        setTextHelper1(`* ${t('registration.event_selector.event_celebrate')}`);
+        setTextHelper1(`* ${t('registration.event_selector.event_name')}`);
         setTextHelper2("");
-        setEventOwner2("");
+        setInput2("");
         setIsDisableInput1(false);
         setIsDisableInput2(true);
     };
@@ -56,9 +48,6 @@ const EventTypeSelector: React.FC<Props> = ({eventType, setEventType, eventOwner
             case EventTypes.WEDDING:
                 handleCaseWedding();
                 break;
-            case EventTypes.CONFERENCE:
-                handleCaseConference();
-                break;
             case EventTypes.PRIVATE_EVENT:
                 handleCasePrivateEvent();
                 break;
@@ -70,9 +59,7 @@ const EventTypeSelector: React.FC<Props> = ({eventType, setEventType, eventOwner
     React.useEffect(() => {
         if (eventType === EventTypes.WEDDING) {
             handleCaseWedding();
-        } else if (eventType === EventTypes.CONFERENCE) {
-            handleCaseConference();
-        } else if (eventType === EventTypes.PRIVATE_EVENT) {
+        }  else if (eventType === EventTypes.PRIVATE_EVENT) {
             handleCasePrivateEvent();
         }
     }, []);
@@ -87,8 +74,7 @@ const EventTypeSelector: React.FC<Props> = ({eventType, setEventType, eventOwner
                         displayEmpty
                     >
                         <MenuItem value={EventTypes.WEDDING}>{t('registration.event_selector.type_wedding')}</MenuItem>
-                        <MenuItem
-                            value={EventTypes.CONFERENCE}>{t('registration.event_selector.type_conference_company')}</MenuItem>
+
                         <MenuItem
                             value={EventTypes.PRIVATE_EVENT}>{t('registration.event_selector.private_event')}</MenuItem>
                     </Select>
@@ -101,14 +87,14 @@ const EventTypeSelector: React.FC<Props> = ({eventType, setEventType, eventOwner
                         <TextField
                             variant="standard"
                             required
-                            value={eventOwner1}
+                            value={input1}
                             fullWidth
                             disabled={isDisableInput1}
                             id="owner_name1"
                             type="text"
                             name="owner_name1"
                             onChange={(event) => {
-                                setEventOwner1(event.target.value);
+                                setInput1(event.target.value);
                             }}
                         />
                         <FormHelperText>{textHelper1}</FormHelperText>
@@ -119,14 +105,14 @@ const EventTypeSelector: React.FC<Props> = ({eventType, setEventType, eventOwner
                         <TextField
                             variant="standard"
                             required
-                            value={eventOwner2}
+                            value={input2}
                             fullWidth
                             id="owner_name2"
                             disabled={isDisableInput2}
                             type="text"
                             name="owner_name1"
                             onChange={(event) => {
-                                setEventOwner2(event.target.value);
+                                setInput2(event.target.value);
                             }}
                         />
                         <FormHelperText>{textHelper2}</FormHelperText>

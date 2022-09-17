@@ -15,11 +15,10 @@ import {NavLink} from "react-router-dom";
 import {FormControl, Tooltip} from "@mui/material";
 import ChangeLanguageSelector from "../../../change-language-selector/ChangeLanguageSelector";
 import {useSelector, useDispatch} from "react-redux";
-import {LocalesState} from "../../../../redux-modules/selectores/stateSelectores";
-import {LocalInterface} from "../../../../types/Locales";
+import {StateSelectors} from "../../../../redux-modules/selectores/stateSelectores";
 import Button from "@mui/material/Button";
 import "./AppBarDesktopLoggedIn.scss";
-import {logoutUser} from "../../../../redux-modules/actions/userActions";
+import {logoutUser} from "../../../../redux-modules/actions/appActions";
 import {useTranslation} from "react-i18next";
 import {optionRoutes} from "../../../../views/AppViews";
 
@@ -28,7 +27,7 @@ export default function AppBarDesktopLoggedIn() {
     const {t} = useTranslation();
     const navigate = useNavigate();
     const dispatch = useDispatch();
-    const local: LocalInterface = useSelector(LocalesState.getCurrentLocal);
+    const application = useSelector(StateSelectors.application);
     const drawerWidth = 85;
 
     return (
@@ -61,7 +60,7 @@ export default function AppBarDesktopLoggedIn() {
                     flexShrink: 0,
                     [`& .MuiDrawer-paper`]: {width: drawerWidth, boxSizing: 'border-box'},
                 }}
-                anchor={local.side}
+                anchor={application.local.side}
             >
                 <Toolbar/>
                 <Box sx={{overflow: 'auto'}}>

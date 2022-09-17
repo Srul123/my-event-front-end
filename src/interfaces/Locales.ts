@@ -1,9 +1,9 @@
-export interface LocalInterface {
-    code: string,
-    name: string,
-    countryCode: string,
+export interface Local {
+    code?: string,
+    name?: string,
+    countryCode?: string,
     dir?: string,
-    side: Side,
+    side?: Side,
     device?: DeviceModes
 }
 
@@ -24,12 +24,12 @@ export const anchorSides = {
 
 export type Side = "bottom" | "left" | "right" | "top" | undefined;
 
-interface SupportedLanguagesInterface {
+interface SupportedLanguages {
     he: string,
     en: string
 };
 
-export const supportedLanguages: SupportedLanguagesInterface = {
+export const supportedLanguages: SupportedLanguages = {
     he: "he",
     en: "en"
 }
@@ -38,7 +38,7 @@ export const defaultLanguage: string = supportedLanguages.he;
 export const defaultDirection: string = 'rtl';
 
 
-export const languages: LocalInterface[] = [
+export const languages: Local[] = [
     {
         code: supportedLanguages.he,
         name: 'עברית',

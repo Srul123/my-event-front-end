@@ -1,19 +1,14 @@
-import {UserActionTypes} from "../action-types/userActionTypes";
 import {InvitedActionTypes} from "../action-types/invitedActionTypes";
-import { InvitedInterface } from "../../types/Invited";
+import {Invited} from "../../interfaces/Invited";
 
-export const setInvitedList = (invitedList: InvitedInterface[] | undefined) => {
+export const setInvitedList = (invitedList: Invited[] | undefined) => {
     return {
         type: InvitedActionTypes.SET_INVITED_LIST,
         payload: invitedList
     };
 };
 
-export const logoutUser = () => {
-    return {
-        type: UserActionTypes.LOGOUT
-    };
-};
+
 
 
 

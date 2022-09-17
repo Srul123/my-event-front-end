@@ -1,20 +1,21 @@
 import axios from "axios";
-import {UserActionTypes} from "../action-types/userActionTypes";
+import {AppActionTypes} from "../action-types/appActionTypes";
 import {API_URLS} from "../../api/api";
-import {UserPersonalDetailsInterface} from "../../types/User";
+import {User} from "../../interfaces/User";
+import {DeviceModes, Local} from "../../interfaces/Locales";
 
 
 
-export const loginUser = (personalDetails: UserPersonalDetailsInterface | undefined) => {
+export const loginUser = (personalDetails: User | undefined) => {
     return {
-        type: UserActionTypes.LOGIN,
+        type: AppActionTypes.LOGIN,
         payload: personalDetails,
     };
 };
 
 export const logoutUser = () => {
     return {
-        type: UserActionTypes.LOGOUT
+        type: AppActionTypes.LOGOUT
     };
 };
 
@@ -24,22 +25,37 @@ export const updateUserDetails = (user: any) => async (dispatch: (arg0: { type: 
         const url = `${API_URLS.BASE_URL}/${API_URLS.USERS}/${user.id}`;
         response = await axios.put(url, user);
         dispatch({
-            type: UserActionTypes.UPDATE_USER,
+            type: AppActionTypes.UPDATE_USER,
             payload: response.data
         });
     } catch (e) {
         console.log("Error from user action: updateUserDetails ");
         console.log(e);
         dispatch({
-            type: UserActionTypes.ERROR,
+            type: AppActionTypes.ERROR,
             payload: "Can't update user details",
         });
     }
 };
 
+export const setLocalLanguage = (localLanguage: Local) => {
+    return {
+        type: AppActionTypes.SET_LOCAL_LANGUAGE,
+        payload: localLanguage
+    };
+};
+
+export const setLocalDeviceMode = (deviceMode: DeviceModes) => {
+    return {
+        type: AppActionTypes.SET_LOCAL_LANGUAGE,
+        payload: deviceMode
+    };
+};
+
+
 const errorInLogin = () => {
     return {
-        type: UserActionTypes.ERROR,
+        type: AppActionTypes.ERROR,
         payload: "Error in from userActions (errorInLogin)",
     };
 };

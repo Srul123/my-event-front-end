@@ -1,4 +1,4 @@
-import {anchorSides, LocalInterface, Side} from "../../../../../types/Locales";
+import {anchorSides, Local} from "../../../../../interfaces/Locales";
 import * as React from "react";
 import {useTranslation} from "react-i18next";
 import List from "@mui/material/List";
@@ -16,7 +16,7 @@ import "./TemporaryDrawer.scss";
 interface Props {
     openDrawer: any;
     toggleDrawer: any;
-    local: LocalInterface;
+    local: Local;
 }
 
 const TemporaryDrawer: React.FC<Props> = ({openDrawer, toggleDrawer, local}) => {

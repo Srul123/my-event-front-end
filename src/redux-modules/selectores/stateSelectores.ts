@@ -1,13 +1,7 @@
-import {LocalInterface} from "../../types/Locales";
+import {RootState} from "../reducers";
 
-export namespace UserState {
-    export const getAuthUser = (state: any) => {
-        return state.user.auth?.isLoggedIn;
-    }
+export namespace StateSelectors {
+        export const application = (state: RootState) => state.application;
+        export const eventDetails = (state: RootState) => state.eventDetails;
 }
 
-export namespace LocalesState {
-    export const getCurrentLocal = (state: any) : LocalInterface => {
-        return state.local;
-    }
-}

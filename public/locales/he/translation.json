@@ -50,7 +50,7 @@
     "accept_conditions": "מסכים לתנאי השירות",
     "registration_completed": "ההרשמה שלך הושלמה בהצלחה",
     "redirect_login": "אנא כנס לחשבונך",
-    "error_occurred": "לא ניתן להירשם לשירות כעת, אנא נסה יותר מאוחר",
+    "error_occurred": "לא ניתן להירשם לשירות, אנא בדוק את הפרטים שהכנסת ונסה שנית",
     "wedding": "חתונה",
     "validation": {
       "general": "אנא הכנס קלט חוקי",
@@ -62,6 +62,7 @@
       "repeat_password": "הסיסמאות אינן זהות",
       "event_type": "אנא בחר את סוג האירוע",
       "owner_name": "אנא הזן שם חוקי למזמין האירוע",
+      "event_name": "אנא הזן שם חוקי לאירוע",
       "bride_name": "אנא הזן שם חוקי לכלה",
       "groom_name": "אנא הזן שם חוקי לחתן",
       "event_date": "אנא הזן תאריך אירוע חוקי",
@@ -70,11 +71,9 @@
     "event_selector": {
       "bride_name": "שם הכלה",
       "groom_name": "שם החתן",
-      "event_purpose": "מה מטרת האירוע?",
-      "event_celebrate": "מה אנו חוגגים?",
+      "event_name": "מה שם האירוע?",
       "type_wedding": "חתונה",
-      "type_conference_company": "כנס/אירוע חברה",
-      "private_event": "אירוע פרטי",
+      "private_event": "אירוע פרטי/כנס/אירוע חברה",
       "event_type": "סוג האירוע"
     },
     "ok": "בסדר"

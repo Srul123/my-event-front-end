@@ -14,13 +14,13 @@ import Grid from "@mui/material/Grid";
 import LockIcon from '@mui/icons-material/Lock';
 import {useNavigate} from "react-router-dom";
 import AlertIndicator, {AlertPopup} from "../components/alerts/AlertIndicator";
-import Spinner from "../components/spinner/Spinner";
+import Spinner from "../components/layouts/spinner/Spinner";
 import {isValidEmail, isValidPassword} from "../utils/validationFunctionsCollection";
 import {useTranslation} from "react-i18next";
-import {UserInterface} from "../types/User";
+import {User} from "../interfaces/User";
 import {routes} from "./AppViews";
 import {API_URLS} from "../api/api";
-import {loginUser} from "../redux-modules/actions/userActions";
+import {loginUser} from "../redux-modules/actions/appActions";
 import {setInvitedList} from "../redux-modules/actions/invitedActions";
 import {setGroupList} from "../redux-modules/actions/groupActions";
 import {setOwnerList} from "../redux-modules/actions/ownerActions";
@@ -58,21 +58,21 @@ export default function Login() {
         setAlertPopup({...alertPopup, open: false});
     };
 
-    const loadDataToReduxState = (userData: UserInterface) => {
-        const personalDetails = userData.personalDetails;
-        dispatch(loginUser(personalDetails));
-        const eventDetails = userData.data?.eventDetails;
-        dispatch(setEventDetails(eventDetails));
-        const invitedList = userData.data?.invitedList;
-        dispatch(setInvitedList(invitedList));
-        const groupList = userData.data?.groupList;
-        dispatch(setGroupList(groupList));
-        const eventOwnerList = userData.data?.eventOwnerList;
-        dispatch(setOwnerList(eventOwnerList));
-        const shuttleList = userData.data?.shuttleList;
-        dispatch(setShuttleList(shuttleList));
-        const tagList = userData.data?.eventTagList;
-        dispatch(setTagList(tagList));
+    const loadDataToReduxState = (userData: User) => {
+        // const personalDetails = userData.personalDetails;
+        // dispatch(loginUser(personalDetails));
+        // const eventDetails = userData.data?.eventDetails;
+        // dispatch(setEventDetails(eventDetails));
+        // const invitedList = userData.data?.invitedList;
+        // dispatch(setInvitedList(invitedList));
+        // const groupList = userData.data?.groupList;
+        // dispatch(setGroupList(groupList));
+        // const eventOwnerList = userData.data?.eventOwnerList;
+        // dispatch(setOwnerList(eventOwnerList));
+        // const shuttleList = userData.data?.shuttleList;
+        // dispatch(setShuttleList(shuttleList));
+        // const tagList = userData.data?.eventTagList;
+        // dispatch(setTagList(tagList));
     };
 
     const handleSubmit = async (event: React.MouseEvent<HTMLAnchorElement> | React.MouseEvent<HTMLButtonElement>) => {
@@ -90,19 +90,17 @@ export default function Login() {
             setLoading(false);
             return;
         }
-        // todo: change to auth from real server
-
 
         try {
             const url = `${API_URLS.BASE_URL}/${API_URLS.USERS}`;
             const response = await axios.get(url);
-            const data: UserInterface[] = response.data;
-            const foundUser = data.find((user: UserInterface) => {
-                return (
-                    user.personalDetails?.password === password
-                    &&
-                    user.personalDetails.email === email
-                );
+            const data: User[] = response.data;
+            const foundUser = data.find((user: User) => {
+                // return (
+                //     user.personalDetails?.password === password
+                //     &&
+                //     user.personalDetails.email === email
+                // );
             });
             if (!foundUser) {
                 console.log("error password");

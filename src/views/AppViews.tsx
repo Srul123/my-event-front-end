@@ -11,7 +11,7 @@ import Registration from "./registration";
 import {CssBaseline} from "@mui/material";
 import Login from "./login";
 import MyProfile from "./my-profile";
-import {LocalesState, UserState} from "../redux-modules/selectores/stateSelectores";
+import {StateSelectors} from "../redux-modules/selectores/stateSelectores";
 import PlaylistAddCheckIcon from "@mui/icons-material/PlaylistAddCheck";
 import EventNoteIcon from "@mui/icons-material/EventNote";
 import PeopleOutlineIcon from "@mui/icons-material/PeopleOutline";
@@ -19,8 +19,9 @@ import MarkunreadMailboxIcon from "@mui/icons-material/MarkunreadMailbox";
 import BorderVerticalIcon from "@mui/icons-material/BorderVertical";
 import AttachMoneyIcon from "@mui/icons-material/AttachMoney";
 import SettingsIcon from "@mui/icons-material/Settings";
-import {devicesModes, LocalInterface} from "../types/Locales";
+import {devicesModes, Local} from "../interfaces/Locales";
 import EventDetails from "./event-details";
+import Spinner from "../components/layouts/spinner/Spinner";
 
 
 interface RouteViews {
@@ -83,11 +84,11 @@ export const optionRoutes = [
 const AppViews: React.FC = () => {
     const location = useLocation();
     const navigate = useNavigate();
-    const local: LocalInterface = useSelector(LocalesState.getCurrentLocal);
-    const isLoggedIn = useSelector(UserState.getAuthUser);
+    const application = useSelector(StateSelectors.application);
+    const isLoading = true;
 
     React.useEffect(() => {
-        if (!isLoggedIn &&
+        if (!application.isLoggedIn &&
             location.pathname === routes.myProfile
         ) {
             navigate(routes.login, {replace: true});
@@ -95,8 +96,8 @@ const AppViews: React.FC = () => {
     }, []);
 
     let offsetScreenSideStyle = {paddingTop: "", paddingRight: "", paddingLeft: ""};
-    if (local.device !== devicesModes.mobile) {
-        if (local.side === "right" ) {
+    if (application.local.device !== devicesModes.mobile) {
+        if (application.local.side === "right") {
             offsetScreenSideStyle = {
                 ...offsetScreenSideStyle,
                 paddingTop: "5em",
@@ -113,23 +114,24 @@ const AppViews: React.FC = () => {
         }
     }
 
-    console.log('isLoggedIn');
-    console.log(isLoggedIn);
     return (
         <>
             <CssBaseline/>
             <Header/>
             <Container maxWidth="md"
                        style={{display: "flex", minHeight: "90vh", flexDirection: "column", ...offsetScreenSideStyle}}>
+                {isLoading &&
+                <Spinner/>
+                }
                 <Routes>
                     <Route path={routes.home} element={<Home/>}/>
                     <Route path={routes.registration} element={<Registration/>}/>
                     <Route path={routes.login} element={<Login/>}/>
                     {
-                        isLoggedIn &&
+                        application.isLoggedIn &&
                         <>
-                            <Route path={routes.myProfile} element={<MyProfile />}/>
-                            <Route path={routes.eventDetails} element={<EventDetails />}/>
+                            <Route path={routes.myProfile} element={<MyProfile/>}/>
+                            <Route path={routes.eventDetails} element={<EventDetails/>}/>
                         </>
                     }
                     <Route path='*' element={<NotFound_404/>}/>

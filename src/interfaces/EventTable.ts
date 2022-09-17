@@ -1,4 +1,4 @@
-export interface EventTableInterface {
+export interface EventTable {
     id: number
     name: string,
     size: number,

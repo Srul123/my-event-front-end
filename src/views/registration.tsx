@@ -23,16 +23,15 @@ import {
 import EventTypeSelector from "../components/event-type-selector/EventTypeSelector";
 import AppRegistrationIcon from '@mui/icons-material/AppRegistration';
 import {toUpperCaseCleanName} from "../utils/stringFunctionsCollection";
-import {EventOwnerInterface} from "../types/EventOwner";
 import AlertWithConfirmation from "../components/alerts/AlertWithConfirmation";
-import Spinner from "../components/spinner/Spinner";
+import Spinner from "../components/layouts/spinner/Spinner";
 import axios from "axios";
 import {API_URLS} from "../api/api";
 import DoneIcon from '@mui/icons-material/Done';
 import Container from "@mui/material/Container";
-import {User, UserPersonalDetailsInterface} from "../types/User";
-import {EventTypes} from "../types/UserEventDetails";
-import {EventDetailsInterface} from "../types/EventDetails";
+import {User, UserRequestDTO} from "../interfaces/User";
+import {EventDetails, EventTypes} from "../interfaces/EventDetails";
+import {EventOwner, EventOwnerRoles} from "../interfaces/EventOwner";
 
 const Registration: React.FC = () => {
     let navigate = useNavigate();
@@ -44,7 +43,7 @@ const Registration: React.FC = () => {
     const [password, setPassword] = useState("");
     const [repeatPassword, setRepeatPassword] = useState("");
     const [eventType, setEventType] = useState("");
-    const [eventOwner1, setEventOwner1] = useState("");
+    const [eventOwnerOrName, setEventOwnerOrName] = useState("");
     const [eventOwner2, setEventOwner2] = useState("");
     const [eventDate, setEventDate] = useState("");
     const [termAndConditions, setTermAndConditions] = useState(false);
@@ -111,8 +110,12 @@ const Registration: React.FC = () => {
             riseExceptionAlert(t('registration.validation.event_type'));
             return false;
         }
+        if (eventType !== EventTypes.WEDDING && eventOwnerOrName === '') {
+            riseExceptionAlert(t('registration.validation.event_name'));
+            return false;
+        }
         if (eventType === EventTypes.WEDDING) {
-            if (!await isValidName(eventOwner1)) {
+            if (!await isValidName(eventOwnerOrName)) {
                 console.log("error breed name");
                 riseExceptionAlert(t('registration.validation.bride_name'));
                 return false;
@@ -128,7 +131,6 @@ const Registration: React.FC = () => {
             return false;
         }
         if (!termAndConditions) {
-            console.log("error termAndConditions");
             riseExceptionAlert(t('registration.validation.terms'));
             return false;
         }
@@ -143,54 +145,57 @@ const Registration: React.FC = () => {
         if (!isValid) {
             setIsLoading(false);
             return;
-
         }
 
-        const personalDetails: UserPersonalDetailsInterface = {
+        const userDetails: User = {
             firstName: toUpperCaseCleanName(firstName),
             lastName: toUpperCaseCleanName(lastName),
             email: email,
-            password: password,
-            phone: phone
+            phone: phone,
+            password: password
         };
 
-        const eventDetails: EventDetailsInterface = {
-            eventName: eventType === EventTypes.WEDDING ? `${t('registration.wedding')} ${eventOwner1} & ${eventOwner2}` : eventOwner1,
-            eventType: eventType,
+        const eventDetails: EventDetails = {
+            eventName: eventType === EventTypes.WEDDING ? `${t('registration.wedding')} ${eventOwnerOrName} & ${eventOwner2}` : eventOwnerOrName,
+            eventType: eventType === EventTypes.WEDDING ? EventTypes.WEDDING: EventTypes.PRIVATE_EVENT,
             eventDate: eventDate,
             eventLocation: {locationName: "", locationLink: ""}
         };
-        const user = new User(personalDetails, eventDetails);
+        let newUser: UserRequestDTO = {
+            userDetails,
+            eventDetails,
+            eventOwnerList: []
+        };
 
         if (eventType === EventTypes.WEDDING) {
-            const bride: EventOwnerInterface = {
-                id: 1,
+            const bride: EventOwner = {
                 isAdmin: true,
-                name: eventOwner1,
-                role: 'bride'
+                name: eventOwnerOrName,
+                role: EventOwnerRoles.BRIDE
             };
-            const groom: EventOwnerInterface = {
-                id: 2,
+            const groom: EventOwner = {
                 isAdmin: true,
                 name: eventOwner2,
-                role: 'groom'
+                role: EventOwnerRoles.GROOM
             };
-            user.setEventOwnerList([bride, groom]);
+            newUser = {
+                ...newUser,
+                eventOwnerList: [bride, groom]
+            };
 
         }
-        debugger;
 
         try {
             const url = `${API_URLS.BASE_URL}/${API_URLS.USERS}`;
-            const response = await axios.post(url, user);
-            if (response.status == 200) {
+            const response = await axios.post(url, newUser);
+            if (response.status == 201) {
                 setIsLoading(false);
                 setOpenAlertConfirm(true);
             } else {
-                riseExceptionAlert(t('registration.error_occurred'));
+                throw 'In valid operation occurred while tried to signup';
             }
-
         } catch (error) {
+            debugger;
             console.log("Error occurred in server while try to register new user");
             riseExceptionAlert(t('registration.error_occurred'));
             console.error(error);
@@ -330,10 +335,10 @@ const Registration: React.FC = () => {
                         <EventTypeSelector
                             eventType={eventType}
                             setEventType={setEventType}
-                            eventOwner1={eventOwner1}
-                            setEventOwner1={setEventOwner1}
-                            eventOwner2={eventOwner2}
-                            setEventOwner2={setEventOwner2}
+                            input1={eventOwnerOrName}
+                            setInput1={setEventOwnerOrName}
+                            input2={eventOwner2}
+                            setInput2={setEventOwner2}
                         />
                     </Grid>
                     <Grid item xs={12}>
