@@ -19,13 +19,21 @@ export const logoutUser = () => {
     };
 };
 
+export const updateIsAppLoading = (value: boolean) => {
+    return {
+        type: AppActionTypes.LOADING,
+        payload: value,
+    };
+}
+
+
 export const updateUserDetails = (user: any) => async (dispatch: (arg0: { type: any; payload: any; }) => void) => {
     let response;
     try {
         const url = `${API_URLS.BASE_URL}/${API_URLS.USERS}/${user.id}`;
         response = await axios.put(url, user);
         dispatch({
-            type: AppActionTypes.UPDATE_USER,
+            type: AppActionTypes.USER,
             payload: response.data
         });
     } catch (e) {
@@ -40,24 +48,11 @@ export const updateUserDetails = (user: any) => async (dispatch: (arg0: { type: 
 
 export const setLocalLanguage = (localLanguage: Local) => {
     return {
-        type: AppActionTypes.SET_LOCAL_LANGUAGE,
+        type: AppActionTypes.LOCAL_LANGUAGE,
         payload: localLanguage
     };
 };
 
-export const setLocalDeviceMode = (deviceMode: DeviceModes) => {
-    return {
-        type: AppActionTypes.SET_LOCAL_LANGUAGE,
-        payload: deviceMode
-    };
-};
 
-
-const errorInLogin = () => {
-    return {
-        type: AppActionTypes.ERROR,
-        payload: "Error in from userActions (errorInLogin)",
-    };
-};
 
 

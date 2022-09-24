@@ -1,4 +1,5 @@
 import React, {useState} from 'react';
+import {useDispatch, useSelector} from "react-redux";
 import {
     Avatar,
     Button, Checkbox,
@@ -24,7 +25,6 @@ import EventTypeSelector from "../components/event-type-selector/EventTypeSelect
 import AppRegistrationIcon from '@mui/icons-material/AppRegistration';
 import {toUpperCaseCleanName} from "../utils/stringFunctionsCollection";
 import AlertWithConfirmation from "../components/alerts/AlertWithConfirmation";
-import Spinner from "../components/layouts/spinner/Spinner";
 import axios from "axios";
 import {API_URLS} from "../api/api";
 import DoneIcon from '@mui/icons-material/Done';
@@ -32,9 +32,13 @@ import Container from "@mui/material/Container";
 import {User, UserRequestDTO} from "../interfaces/User";
 import {EventDetails, EventTypes} from "../interfaces/EventDetails";
 import {EventOwner, EventOwnerRoles} from "../interfaces/EventOwner";
+import {updateIsAppLoading} from "../redux-modules/actions/appActions";
+import {StateSelectors} from "../redux-modules/selectores/stateSelectores";
 
 const Registration: React.FC = () => {
-    let navigate = useNavigate();
+    const dispatch = useDispatch();
+    const application = useSelector(StateSelectors.application);
+    const navigate = useNavigate();
     const {t} = useTranslation();
     const [firstName, setFirstName] = useState("");
     const [lastName, setLastName] = useState("");
@@ -53,7 +57,6 @@ const Registration: React.FC = () => {
         horizontal: "center",
     });
     const [openAlertConfirm, setOpenAlertConfirm] = React.useState(false);
-    const [isLoading, setIsLoading] = React.useState(false);
 
     const riseExceptionAlert = (message: string) => {
         setAlertPopup({
@@ -140,10 +143,11 @@ const Registration: React.FC = () => {
 
     const handleSubmit: any = async (event: React.MouseEvent<HTMLAnchorElement> | React.MouseEvent<HTMLButtonElement>) => {
         event.preventDefault();
-        setIsLoading(true);
+        // setIsLoading(true);
+        dispatch(updateIsAppLoading(true));
         const isValid = await validateInputsClient();
         if (!isValid) {
-            setIsLoading(false);
+            dispatch(updateIsAppLoading(false));
             return;
         }
 
@@ -159,12 +163,10 @@ const Registration: React.FC = () => {
             eventName: eventType === EventTypes.WEDDING ? `${t('registration.wedding')} ${eventOwnerOrName} & ${eventOwner2}` : eventOwnerOrName,
             eventType: eventType === EventTypes.WEDDING ? EventTypes.WEDDING: EventTypes.PRIVATE_EVENT,
             eventDate: eventDate,
-            eventLocation: {locationName: "", locationLink: ""}
         };
         let newUser: UserRequestDTO = {
             userDetails,
             eventDetails,
-            eventOwnerList: []
         };
 
         if (eventType === EventTypes.WEDDING) {
@@ -180,34 +182,27 @@ const Registration: React.FC = () => {
             };
             newUser = {
                 ...newUser,
-                eventOwnerList: [bride, groom]
+                bride,
+                groom
             };
-
         }
 
         try {
             const url = `${API_URLS.BASE_URL}/${API_URLS.USERS}`;
             const response = await axios.post(url, newUser);
             if (response.status == 201) {
-                setIsLoading(false);
+                dispatch(updateIsAppLoading(false));
                 setOpenAlertConfirm(true);
             } else {
                 throw 'In valid operation occurred while tried to signup';
             }
         } catch (error) {
-            debugger;
             console.log("Error occurred in server while try to register new user");
             riseExceptionAlert(t('registration.error_occurred'));
             console.error(error);
-            setIsLoading(false);
+            dispatch(updateIsAppLoading(false));
         }
     };
-
-    if (isLoading) {
-        return (
-            <Spinner/>
-        );
-    }
 
     return (
         <Container fixed>
@@ -236,6 +231,7 @@ const Registration: React.FC = () => {
                                 onChange={(event) => {
                                     setFirstName(event.target.value);
                                 }}
+                                disabled={application.isAppLoading}
                             />
                             <FormHelperText>{`* ${t('registration.first_name')}`}</FormHelperText>
                         </FormControl>
@@ -253,6 +249,7 @@ const Registration: React.FC = () => {
                                 onChange={(event) => {
                                     setLastName(event.target.value);
                                 }}
+                                disabled={application.isAppLoading}
                             />
                             <FormHelperText>{`* ${t('registration.last_name')}`}</FormHelperText>
                         </FormControl>
@@ -272,6 +269,7 @@ const Registration: React.FC = () => {
                                 onChange={(event) => {
                                     setEmail(event.target.value);
                                 }}
+                                disabled={application.isAppLoading}
                             />
                             <FormHelperText>{`* ${t('registration.email')}`}</FormHelperText>
                         </FormControl>
@@ -289,6 +287,7 @@ const Registration: React.FC = () => {
                                 onChange={(event) => {
                                     setPhone(event.target.value);
                                 }}
+                                disabled={application.isAppLoading}
                             />
                             <FormHelperText>{t('registration.phone')}</FormHelperText>
                         </FormControl>
@@ -308,6 +307,7 @@ const Registration: React.FC = () => {
                                 onChange={(event: any) => {
                                     setPassword(event.target.value);
                                 }}
+                                disabled={application.isAppLoading}
                             />
                             <FormHelperText>{`* ${t('registration.password')}`}</FormHelperText>
                         </FormControl>
@@ -327,6 +327,7 @@ const Registration: React.FC = () => {
                                 onChange={(event: any) => {
                                     setRepeatPassword(event.target.value);
                                 }}
+                                disabled={application.isAppLoading}
                             />
                             <FormHelperText>{`* ${t('registration.repeat_password')}`}</FormHelperText>
                         </FormControl>
@@ -349,6 +350,7 @@ const Registration: React.FC = () => {
                                     id="datetime-local"
                                     label={t('registration.date_label')}
                                     type="datetime-local"
+                                    disabled={application.isAppLoading}
                                     // defaultValue="2017-05-24T10:30"
                                     value={eventDate}
                                     sx={{width: 250}}
@@ -371,6 +373,7 @@ const Registration: React.FC = () => {
                         />}
                         label={(String)(t('registration.accept_conditions'))}
                         labelPlacement="start"
+                        disabled={application.isAppLoading}
                     />
                 </Grid>
                 <Grid>
@@ -378,7 +381,7 @@ const Registration: React.FC = () => {
                         style={{marginTop: "2vh"}}
                         type="submit"
                         variant="contained"
-                        disabled={isLoading}
+                        disabled={application.isAppLoading}
                         color="primary"
                         onClick={(event: any) => {
                             handleSubmit(event);

@@ -4,7 +4,8 @@ import {EventDetails} from "./EventDetails";
 export interface UserRequestDTO {
     userDetails: User;
     eventDetails: EventDetails;
-    eventOwnerList: EventOwner[],
+    groom?: EventOwner,
+    bride?: EventOwner
 }
 
 export interface User {
@@ -15,11 +16,6 @@ export interface User {
     password?: string,
 }
 
-
-interface UserAuth {
-    isLoggedIn: boolean,
-    token?: string
-}
 
 
 

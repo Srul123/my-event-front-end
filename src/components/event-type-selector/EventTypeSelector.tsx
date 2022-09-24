@@ -2,6 +2,8 @@ import React, {Dispatch, SetStateAction} from 'react';
 import {FormControl, FormHelperText, Grid, MenuItem, Select, SelectChangeEvent, TextField} from "@mui/material";
 import {useTranslation} from "react-i18next";
 import {EventTypes} from "../../interfaces/EventDetails";
+import {useSelector} from "react-redux";
+import {StateSelectors} from "../../redux-modules/selectores/stateSelectores";
 
 interface Props {
     eventType: string,
@@ -15,6 +17,7 @@ interface Props {
 
 const EventTypeSelector: React.FC<Props> = ({eventType, setEventType, input1, setInput1, input2, setInput2}) => {
     const {t} = useTranslation();
+    const application = useSelector(StateSelectors.application);
 
     const [textHelper1, setTextHelper1] = React.useState("");
     const [textHelper2, setTextHelper2] = React.useState("");
@@ -72,6 +75,7 @@ const EventTypeSelector: React.FC<Props> = ({eventType, setEventType, input1, se
                         value={eventType}
                         onChange={(event: SelectChangeEvent) => handleChange(event)}
                         displayEmpty
+                        disabled={application.isAppLoading}
                     >
                         <MenuItem value={EventTypes.WEDDING}>{t('registration.event_selector.type_wedding')}</MenuItem>
 
@@ -89,7 +93,7 @@ const EventTypeSelector: React.FC<Props> = ({eventType, setEventType, input1, se
                             required
                             value={input1}
                             fullWidth
-                            disabled={isDisableInput1}
+                            disabled={isDisableInput1 || application.isAppLoading}
                             id="owner_name1"
                             type="text"
                             name="owner_name1"
@@ -108,7 +112,7 @@ const EventTypeSelector: React.FC<Props> = ({eventType, setEventType, input1, se
                             value={input2}
                             fullWidth
                             id="owner_name2"
-                            disabled={isDisableInput2}
+                            disabled={isDisableInput2 || application.isAppLoading}
                             type="text"
                             name="owner_name1"
                             onChange={(event) => {
@@ -119,7 +123,6 @@ const EventTypeSelector: React.FC<Props> = ({eventType, setEventType, input1, se
                     </FormControl>
                 </Grid>
             </Grid>
-
         </Grid>
     );
 };

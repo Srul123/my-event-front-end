@@ -7,6 +7,7 @@ export interface ApplicationReducer  {
     isLoggedIn:  boolean;
     userDetails: User;
     local: Local;
+    error: any;
 }
 
 const initialState: ApplicationReducer = {
@@ -18,7 +19,8 @@ const initialState: ApplicationReducer = {
         email: "",
         phone: ""
     },
-    local: { }
+    local: { },
+    error: undefined
 };
 
 
@@ -28,21 +30,20 @@ const appReducer = (state = initialState, action: { type: any; payload: any; }) 
         case AppActionTypes.LOGIN:
             return {
                 ...state,
-                auth: {isLoggedIn: true},
-                personalDetails: action.payload
+                isLoggedIn:  true,
+                userDetails: action.payload
             };
-
         case AppActionTypes.LOGOUT:
             return initialState;
-        case AppActionTypes.SET_LOCAL_LANGUAGE:
+        case AppActionTypes.LOADING:
             return {
                 ...state,
-                ...action.payload
+                isAppLoading: action.payload
             };
-        case AppActionTypes.SET_DEVICE_MODE:
+        case AppActionTypes.LOCAL_LANGUAGE:
             return {
                 ...state,
-                device: action.payload
+                local: action.payload
             };
         case AppActionTypes.ERROR:
             console.error("Error from UserReducer: " + action.payload);

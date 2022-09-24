@@ -3,11 +3,12 @@ import {Box, CircularProgress} from "@mui/material";
 
 const Spinner = () => {
     return (
-        <Box sx={{ display: 'flex',
-            justifyContent:"center",
-            position: "relative",
+        <Box sx={{
+            position:"fixed",
             zIndex: "100",
-            top: "30vh"
+            top: "50%",
+            left: "50%",
+            transform: `translate(-50%, -50%)`,
         }}>
             <CircularProgress  size={"10em"} />
         </Box>

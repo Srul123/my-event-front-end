@@ -85,7 +85,6 @@ const AppViews: React.FC = () => {
     const location = useLocation();
     const navigate = useNavigate();
     const application = useSelector(StateSelectors.application);
-    const isLoading = true;
 
     React.useEffect(() => {
         if (!application.isLoggedIn &&
@@ -120,7 +119,7 @@ const AppViews: React.FC = () => {
             <Header/>
             <Container maxWidth="md"
                        style={{display: "flex", minHeight: "90vh", flexDirection: "column", ...offsetScreenSideStyle}}>
-                {isLoading &&
+                {application.isAppLoading &&
                 <Spinner/>
                 }
                 <Routes>
