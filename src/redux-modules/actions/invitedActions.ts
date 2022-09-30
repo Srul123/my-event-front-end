@@ -1,9 +1,9 @@
 import {InvitedActionTypes} from "../action-types/invitedActionTypes";
-import {Invited} from "../../interfaces/Invited";
+import {InvitedGuest} from "../../interfaces/InvitedGuest";
 
-export const setInvitedList = (invitedList: Invited[] | undefined) => {
+export const updateInvitedGuestList = (invitedList: InvitedGuest[] ) => {
     return {
-        type: InvitedActionTypes.SET_INVITED_LIST,
+        type: InvitedActionTypes.UPDATE_INVITED_LIST,
         payload: invitedList
     };
 };

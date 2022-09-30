@@ -5,11 +5,10 @@ import {User} from "../../interfaces/User";
 import {DeviceModes, Local} from "../../interfaces/Locales";
 
 
-
-export const loginUser = (personalDetails: User | undefined) => {
+export const loginUser = (user: User | undefined, token: string) => {
     return {
         type: AppActionTypes.LOGIN,
-        payload: personalDetails,
+        payload: {user, token}
     };
 };
 

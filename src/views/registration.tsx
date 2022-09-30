@@ -29,7 +29,7 @@ import axios from "axios";
 import {API_URLS} from "../api/api";
 import DoneIcon from '@mui/icons-material/Done';
 import Container from "@mui/material/Container";
-import {User, UserRequestDTO} from "../interfaces/User";
+import {User, UserRegistrationRequestDTO} from "../interfaces/User";
 import {EventDetails, EventTypes} from "../interfaces/EventDetails";
 import {EventOwner, EventOwnerRoles} from "../interfaces/EventOwner";
 import {updateIsAppLoading} from "../redux-modules/actions/appActions";
@@ -164,7 +164,7 @@ const Registration: React.FC = () => {
             eventType: eventType === EventTypes.WEDDING ? EventTypes.WEDDING: EventTypes.PRIVATE_EVENT,
             eventDate: eventDate,
         };
-        let newUser: UserRequestDTO = {
+        let newUser: UserRegistrationRequestDTO = {
             userDetails,
             eventDetails,
         };

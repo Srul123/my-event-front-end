@@ -2,9 +2,9 @@ import {EventDetailsActionTypes} from "../action-types/eventDetailsActionTypes";
 import {EventDetails} from "../../interfaces/EventDetails";
 
 
-export const setEventDetails = (eventDetails: EventDetails | undefined) => {
+export const updateEventDetails = (eventDetails: EventDetails) => {
     return {
-        type: EventDetailsActionTypes.SET_EVENT_DETAILS,
+        type: EventDetailsActionTypes.UPDATE_EVENT_DETAILS,
         payload: eventDetails
     };
 };

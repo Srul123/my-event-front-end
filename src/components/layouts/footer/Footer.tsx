@@ -8,6 +8,7 @@ import {Container} from "@mui/material";
 
 
 const footerStyle: React.CSSProperties = {
+    position: "fixed",
     bottom: "0",
     width: "100%",
     padding: "1vh",

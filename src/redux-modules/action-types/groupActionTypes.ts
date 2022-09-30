@@ -1,3 +1,3 @@
 export namespace GroupActionTypes {
-    export const SET_GROUP_LIST = "SET_GROUP_LIST";
+    export const UPDATE_GROUP_LIST = "UPDATE_GROUP_LIST";
 }

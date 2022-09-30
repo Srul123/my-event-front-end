@@ -11,7 +11,7 @@ const EventDetails = () => {
                 <Grid container spacing={{xs: 2, sm: 2, md: 2}} >
                     <Grid item xs={12} sm={12} md={6}>
                         <Paper>
-                            <Typography variant="h4">inbal name</Typography>
+                            <Typography variant="h4">inbal name event details</Typography>
                             <Typography variant="h6">location: location name</Typography>
                         </Paper>
                     </Grid>

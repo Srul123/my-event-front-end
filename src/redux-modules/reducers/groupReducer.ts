@@ -1,18 +1,24 @@
 import {GroupActionTypes} from "../action-types/groupActionTypes";
+import {Group} from "../../interfaces/Group";
 
-const initialState = {
+export interface GroupReducer  {
+    groupList: Group[]
+}
+
+
+const initialState: GroupReducer = {
     groupList: [],
 };
 
-const groupReducer = (state = initialState, action: { type: any; payload: any; }) => {
+const groupReducer = (state = initialState, action: { type: any; payload: any; }) : GroupReducer => {
     switch (action.type) {
-        case GroupActionTypes.SET_GROUP_LIST:
+        case GroupActionTypes.UPDATE_GROUP_LIST:
             return {
               ...state,
               groupList: action.payload
             };
         default:
-            return state;
+            return {...state};
     }
 };
 export default groupReducer;

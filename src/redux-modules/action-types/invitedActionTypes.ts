@@ -1,3 +1,3 @@
 export namespace InvitedActionTypes {
-    export const SET_INVITED_LIST = "SET_INVITED_LIST";
+    export const UPDATE_INVITED_LIST = "UPDATE_INVITED_LIST";
 }

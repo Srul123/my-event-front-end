@@ -3,7 +3,7 @@ import appReducer, {ApplicationReducer} from "./appReducer";
 import eventDetailsReducer from "./eventDetailsReducer";
 import groupReducer from "./groupReducer";
 import ownerReducer from "./ownerReducer";
-import invitedReducer from "./invitedReducer";
+import invitedGuestReducer from "./invitedReducer";
 import shuttleReducer from "./shuttleReducer";
 import tagReducer from "./tagReducer";
 import filterReducer from "./filterReducer";
@@ -12,22 +12,22 @@ import {EventDetails} from "../../interfaces/EventDetails";
 export default combineReducers({
     application: appReducer,
     eventDetails: eventDetailsReducer,
-    invited: invitedReducer,
-    group: groupReducer,
-    owner: ownerReducer,
+    invitedGuests: invitedGuestReducer,
+    groups: groupReducer,
+    eventOwners: ownerReducer,
     tags: tagReducer,
-    shuttle: shuttleReducer,
+    shuttles: shuttleReducer,
     filters: filterReducer,
 });
 
 export interface RootState {
     application: ApplicationReducer,
     eventDetails: EventDetails,
-    invited: any,
+    invitedGuests: any,
     group: any,
-    owner: any,
+    eventOwners: any,
     tags: any,
-    shuttle: any,
+    shuttles: any,
     filters: any,
 }
 

@@ -14,19 +14,18 @@ import Grid from "@mui/material/Grid";
 import LockIcon from '@mui/icons-material/Lock';
 import {useNavigate} from "react-router-dom";
 import AlertIndicator, {AlertPopup} from "../components/alerts/AlertIndicator";
-import Spinner from "../components/layouts/spinner/Spinner";
 import {isValidEmail, isValidPassword} from "../utils/validationFunctionsCollection";
 import {useTranslation} from "react-i18next";
-import {User} from "../interfaces/User";
+import { UserLoginRequestDTO, UserLoginResponseDTO} from "../interfaces/User";
 import {routes} from "./AppViews";
 import {API_URLS} from "../api/api";
-import {loginUser} from "../redux-modules/actions/appActions";
-import {setInvitedList} from "../redux-modules/actions/invitedActions";
-import {setGroupList} from "../redux-modules/actions/groupActions";
-import {setOwnerList} from "../redux-modules/actions/ownerActions";
-import {setShuttleList} from "../redux-modules/actions/shuttleActions";
-import {setTagList} from "../redux-modules/actions/tagActions";
-import {setEventDetails} from "../redux-modules/actions/eventDetailsActions";
+import {loginUser, updateIsAppLoading} from "../redux-modules/actions/appActions";
+import { updateEventDetails} from "../redux-modules/actions/eventDetailsActions";
+import {updateOwnerList} from "../redux-modules/actions/ownerActions";
+import {updateGroupList} from "../redux-modules/actions/groupActions";
+import {updateInvitedGuestList} from "../redux-modules/actions/invitedActions";
+import {updateTagList} from "../redux-modules/actions/tagActions";
+import {updateShuttleList} from "../redux-modules/actions/shuttleActions";
 
 
 export default function Login() {
@@ -58,69 +57,50 @@ export default function Login() {
         setAlertPopup({...alertPopup, open: false});
     };
 
-    const loadDataToReduxState = (userData: User) => {
-        // const personalDetails = userData.personalDetails;
-        // dispatch(loginUser(personalDetails));
-        // const eventDetails = userData.data?.eventDetails;
-        // dispatch(setEventDetails(eventDetails));
-        // const invitedList = userData.data?.invitedList;
-        // dispatch(setInvitedList(invitedList));
-        // const groupList = userData.data?.groupList;
-        // dispatch(setGroupList(groupList));
-        // const eventOwnerList = userData.data?.eventOwnerList;
-        // dispatch(setOwnerList(eventOwnerList));
-        // const shuttleList = userData.data?.shuttleList;
-        // dispatch(setShuttleList(shuttleList));
-        // const tagList = userData.data?.eventTagList;
-        // dispatch(setTagList(tagList));
+    const loadDataToReduxStore = (responseData: UserLoginResponseDTO) => {
+        dispatch(loginUser(responseData.user, responseData.token));
+        dispatch(updateEventDetails(responseData.eventDetails));
+        dispatch(updateOwnerList(responseData.eventOwners));
+        dispatch(updateGroupList(responseData.groups));
+        dispatch(updateInvitedGuestList(responseData.invitedGuests));
+        dispatch(updateTagList(responseData.tags));
+        dispatch(updateShuttleList(responseData.shuttles));
     };
 
     const handleSubmit = async (event: React.MouseEvent<HTMLAnchorElement> | React.MouseEvent<HTMLButtonElement>) => {
         event.preventDefault();
-        setLoading(true);
+        dispatch(updateIsAppLoading(true));
         if (!await isValidEmail(email)) {
             console.log("error email");
             riseExceptionAlert(t('registration.validation.email'));
-            setLoading(false);
+            dispatch(updateIsAppLoading(false));
             return;
         }
         if (!await isValidPassword(password)) {
             console.log("error password");
             riseExceptionAlert(t('registration.validation.password'));
-            setLoading(false);
+            dispatch(updateIsAppLoading(false));
             return;
         }
 
         try {
-            const url = `${API_URLS.BASE_URL}/${API_URLS.USERS}`;
-            const response = await axios.get(url);
-            const data: User[] = response.data;
-            const foundUser = data.find((user: User) => {
-                // return (
-                //     user.personalDetails?.password === password
-                //     &&
-                //     user.personalDetails.email === email
-                // );
-            });
-            if (!foundUser) {
-                console.log("error password");
-                riseExceptionAlert(t("login.valid.wrong_details"));
-                setLoading(false);
-                return;
+            const url = `${API_URLS.BASE_URL}/${API_URLS.LOGIN}`;
+            const loginRequestDTO: UserLoginRequestDTO = {email, password}
+            const response = await axios.post(url, loginRequestDTO);
+            if (response.status === 200) {
+                loadDataToReduxStore(response.data);
+                navigate(routes.myProfile, {replace: true});
+            } else {
+                throw new Error("Invalid credentials");
             }
-            loadDataToReduxState(foundUser);
-            setLoading(false);
-            navigate(routes.myProfile, {replace: true});
         } catch (error) {
-            riseExceptionAlert(t("login.valid.wrong_server"));
+            riseExceptionAlert(t("login.wrong_details"));
             console.log("Error from server while try to login");
             console.log(error);
+        } finally {
+            dispatch(updateIsAppLoading(false));
         }
     };
-
-    if (loading) {
-        return <Spinner/>;
-    }
 
     return (
         <Container maxWidth={"sm"}>

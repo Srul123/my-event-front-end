@@ -8,9 +8,9 @@ const initialState: EventDetails = {
     eventType: ""
 };
 
-const filterReducer = (state = initialState, action: { type: any; payload: EventDetails; }) => {
+const eventDetailsReducer = (state = initialState, action: { type: any; payload: EventDetails; }) : EventDetails => {
     switch (action.type) {
-        case EventDetailsActionTypes.SET_EVENT_DETAILS:
+        case EventDetailsActionTypes.UPDATE_EVENT_DETAILS:
             return {
                 ...action.payload
             };
@@ -18,4 +18,4 @@ const filterReducer = (state = initialState, action: { type: any; payload: Event
             return state;
     }
 };
-export default filterReducer;
+export default eventDetailsReducer;

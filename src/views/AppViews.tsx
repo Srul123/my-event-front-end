@@ -87,7 +87,7 @@ const AppViews: React.FC = () => {
     const application = useSelector(StateSelectors.application);
 
     React.useEffect(() => {
-        if (!application.isLoggedIn &&
+        if (!application.auth.isLoggedIn &&
             location.pathname === routes.myProfile
         ) {
             navigate(routes.login, {replace: true});
@@ -118,7 +118,7 @@ const AppViews: React.FC = () => {
             <CssBaseline/>
             <Header/>
             <Container maxWidth="md"
-                       style={{display: "flex", minHeight: "90vh", flexDirection: "column", ...offsetScreenSideStyle}}>
+                       style={{display: "flex", flexDirection: "column", ...offsetScreenSideStyle}}>
                 {application.isAppLoading &&
                 <Spinner/>
                 }
@@ -127,7 +127,7 @@ const AppViews: React.FC = () => {
                     <Route path={routes.registration} element={<Registration/>}/>
                     <Route path={routes.login} element={<Login/>}/>
                     {
-                        application.isLoggedIn &&
+                        application.auth.isLoggedIn &&
                         <>
                             <Route path={routes.myProfile} element={<MyProfile/>}/>
                             <Route path={routes.eventDetails} element={<EventDetails/>}/>

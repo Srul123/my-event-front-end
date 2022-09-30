@@ -1,10 +1,10 @@
-import { GroupInterface } from "../../interfaces/Group";
+import { Group } from "../../interfaces/Group";
 import {GroupActionTypes} from "../action-types/groupActionTypes";
 
 
-export const setGroupList = (groupList: GroupInterface[] | undefined) => {
+export const updateGroupList = (groupList: Group[] ) => {
     return {
-        type: GroupActionTypes.SET_GROUP_LIST,
+        type: GroupActionTypes.UPDATE_GROUP_LIST,
         payload: groupList
     };
 };

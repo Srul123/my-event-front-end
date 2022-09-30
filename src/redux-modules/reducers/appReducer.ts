@@ -4,16 +4,22 @@ import {User} from "../../interfaces/User";
 
 export interface ApplicationReducer  {
     isAppLoading: boolean;
-    isLoggedIn:  boolean;
-    userDetails: User;
+    auth:  {
+        isLoggedIn:  false;
+        token: string
+    };
+    user: User;
     local: Local;
     error: any;
 }
 
 const initialState: ApplicationReducer = {
     isAppLoading: false,
-    isLoggedIn:  false,
-    userDetails: {
+    auth: {
+        isLoggedIn: false,
+        token: ""
+    },
+    user: {
         firstName: "",
         lastName: "",
         email: "",
@@ -30,8 +36,11 @@ const appReducer = (state = initialState, action: { type: any; payload: any; }) 
         case AppActionTypes.LOGIN:
             return {
                 ...state,
-                isLoggedIn:  true,
-                userDetails: action.payload
+                user: action.payload.user,
+                auth: {
+                    isLoggedIn: true,
+                    token:action.payload.token
+                }
             };
         case AppActionTypes.LOGOUT:
             return initialState;

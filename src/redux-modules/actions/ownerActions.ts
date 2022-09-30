@@ -1,11 +1,11 @@
 import {OwnerActionTypes} from "../action-types/ownerActionTypes";
+import {EventOwner} from "../../interfaces/EventOwner";
 
 
 
-export const setOwnerList = (ownerList: any) => {
-    // test
+export const updateOwnerList = (ownerList: EventOwner[]) => {
     return {
-        type: OwnerActionTypes.SET_OWNER_LIST,
+        type: OwnerActionTypes.UPDATE_OWNER_LIST,
         payload: ownerList
     };
 };

@@ -1,9 +1,10 @@
 import {ShuttleActionTypes} from "../action-types/shuttleActionTypes";
+import {Shuttle} from "../../interfaces/Shuttle";
 
 
-export const setShuttleList = (shuttleList: any) => {
+export const updateShuttleList = (shuttleList: Shuttle[]) => {
     return {
-        type: ShuttleActionTypes.SET_SHUTTLE_LIST,
+        type: ShuttleActionTypes.UPDATE_SHUTTLE_LIST,
         payload: shuttleList
     };
 };

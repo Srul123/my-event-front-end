@@ -77,9 +77,9 @@ export default function AppBarDesktopLoggedIn() {
                                             <Divider/>
                                         }
                                         <ListItem button key={index}>
-                                            <Tooltip title={`${t(option.title)}`}>
-                                                <ListItemIcon className={"icon"}>{option.icon}</ListItemIcon>
-                                            </Tooltip>
+                                                <Tooltip title={`${t(option.title)}`}>
+                                                    <ListItemIcon className={"icon"}>{option.icon}</ListItemIcon>
+                                                </Tooltip>
                                         </ListItem>
                                     </NavLink>
                                 )

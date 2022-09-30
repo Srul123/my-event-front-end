@@ -12,7 +12,7 @@ const Header: React.FC = () => {
 
     return <header>
         {(() => {
-            if (!application.isLoggedIn) {
+            if (!application.auth.isLoggedIn) {
                 return (
                     <AppBarDefault/>
                 )
@@ -28,6 +28,9 @@ const Header: React.FC = () => {
                 }
             }
         })()}
+        {
+
+        }
     </header>;
 }
 

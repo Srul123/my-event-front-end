@@ -1,18 +1,24 @@
 import {InvitedActionTypes} from "../action-types/invitedActionTypes";
+import {InvitedGuest} from "../../interfaces/InvitedGuest";
 
-const initialState = {
-    invitedList: [],
+export interface InvitedReducer  {
+    invitedGuestList: InvitedGuest[]
+}
+
+
+const initialState: InvitedReducer = {
+    invitedGuestList: [],
 };
 
-const invitedReducer = (state = initialState, action: { type: any; payload: any; }) => {
+const invitedGuestReducer = (state = initialState, action: { type: any; payload: any; }) : InvitedReducer => {
     switch (action.type) {
-        case InvitedActionTypes.SET_INVITED_LIST:
+        case InvitedActionTypes.UPDATE_INVITED_LIST:
             return {
                 ...state,
-                invitedList: action.payload
+                invitedGuestList: action.payload
             };
         default:
             return state;
     }
 };
-export default invitedReducer;
+export default invitedGuestReducer;

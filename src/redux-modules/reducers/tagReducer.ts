@@ -6,13 +6,13 @@ const initialState = {
 
 const tagReducer = (state = initialState, action: { type: any; payload: any; }) => {
     switch (action.type) {
-        case TagActionTypes.SET_TAG_LIST:
+        case TagActionTypes.UPDATE_TAG_LIST:
             return {
                 ...state,
                 tagList: action.payload
             };
         default:
-            return state;
+            return {...state};
     }
 };
 export default tagReducer;

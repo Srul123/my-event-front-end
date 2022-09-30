@@ -1,9 +1,10 @@
 import {TagActionTypes} from "../action-types/tagActionTypes";
+import {Tag} from "../../interfaces/Tag";
 
 
-export const setTagList = (tagList: any) => {
+export const updateTagList = (tagList: Tag[]) => {
     return {
-        type: TagActionTypes.SET_TAG_LIST,
+        type: TagActionTypes.UPDATE_TAG_LIST,
         payload: tagList
     };
 };

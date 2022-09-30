@@ -1,3 +1,3 @@
 export namespace TagActionTypes {
-    export const SET_TAG_LIST = "SET_TAG_LIST";
+    export const UPDATE_TAG_LIST = "UPDATE_TAG_LIST";
 }

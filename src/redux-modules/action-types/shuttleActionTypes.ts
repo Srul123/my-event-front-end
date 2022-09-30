@@ -1,3 +1,3 @@
 export namespace ShuttleActionTypes {
-    export const SET_SHUTTLE_LIST = "SET_SHUTTLE_LIST";
+    export const UPDATE_SHUTTLE_LIST = "UPDATE_SHUTTLE_LIST";
 }

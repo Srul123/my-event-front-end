@@ -1,3 +1,3 @@
 export namespace OwnerActionTypes {
-    export const SET_OWNER_LIST = "SET_OWNER_LIST";
+    export const UPDATE_OWNER_LIST = "UPDATE_OWNER_LIST";
 }
