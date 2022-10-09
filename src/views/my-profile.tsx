@@ -1,64 +1,73 @@
-import React from 'react';
-import {Typography} from "@mui/material";
+import React from "react";
+import { Container, Typography } from "@mui/material";
 import Paper from "@mui/material/Paper";
 import Grid from "@mui/material/Grid";
-import Box from "@mui/material/Box";
+import { useSelector } from "react-redux";
+import { StateSelectors } from "../redux-modules/selectores/stateSelectores";
 
 const MyProfile: React.FC = () => {
-    return (
-        <div>
-            <Box sx={{flexGrow: 1}} style={{marginTop: "2em"}}>
-                <Grid container spacing={{xs: 2, sm: 2, md: 2}} >
-                    <Grid item xs={12} sm={12} md={6}>
-                        <Paper>
-                            <Typography variant="h4">inbal name</Typography>
-                            <Typography variant="h6">location: location name</Typography>
-                        </Paper>
-                    </Grid>
-                    <Grid item xs={12} sm={12} md={6}>
-                        <Paper>
-                            <Typography variant="h6">Event
-                                date: 15.09</Typography>
-                            <Typography variant="h6">Event
-                                Time: 24:00</Typography>
-                            <Typography variant="h6">{"Event start in: "}
-                                {/*<Countdown date={eventDate.getTime()}/>*/}
-                                {" days"}
-                            </Typography>
-                        </Paper>
-                    </Grid>
-                </Grid>
-            </Box>
-            <Box sx={{flexGrow: 1}} style={{marginTop: "2em"}}>
-                <Grid container spacing={{xs: 2, sm: 2, md: 2}} >
-                    <Grid item xs={6} sm={6} md={3}>
-                        <Paper>
-                            <Typography variant="h4">inbal name</Typography>
-                            <Typography variant="h6">location: location name</Typography>
-                        </Paper>
-                    </Grid>
-                    <Grid item xs={6} sm={6} md={3}>
-                        <Paper>
-                            <Typography variant="h4">inbal name</Typography>
-                            <Typography variant="h6">location: location name</Typography>
-                        </Paper>
-                    </Grid>
-                    <Grid item xs={6} sm={6} md={3}>
-                        <Paper>
-                            <Typography variant="h4">inbal name</Typography>
-                            <Typography variant="h6">location: location name</Typography>
-                        </Paper>
-                    </Grid>
-                    <Grid item xs={6} sm={6} md={3}>
-                        <Paper>
-                            <Typography variant="h4">inbal name</Typography>
-                            <Typography variant="h6">location: location name</Typography>
-                        </Paper>
-                    </Grid>
-                </Grid>
-            </Box>
+  const eventDetails = useSelector(StateSelectors.eventDetails);
+
+  return (
+    <>
+      <Paper>
+        <div
+          className="top-title-page"
+          style={{ display: "flex", justifyContent: "space-around" }}
+        >
+          <div>
+            <Typography variant="h4">{eventDetails.eventName}</Typography>
+            {eventDetails.eventLocation && (
+              <Typography variant="h6" align="center">
+                {eventDetails.eventLocation?.locationName}
+              </Typography>
+            )}
+          </div>
+          {eventDetails.eventDate !== "" && (
+            <div
+              className={"event-times"}
+              style={{
+                display: "flex",
+                flexDirection: "column",
+                justifyContent: "center",
+              }}
+            >
+              <Typography variant="h6">
+                שעת האירוע:{" "}
+                {new Date(String(eventDetails.eventDate)).toLocaleTimeString(
+                  "en-GB",
+                  {
+                    day: "2-digit",
+                    month: "2-digit",
+                    year: "numeric",
+                    hour: "2-digit",
+                    minute: "2-digit",
+                    hour12: false,
+                  }
+                )}
+              </Typography>
+            </div>
+          )}
         </div>
-    );
+      </Paper>
+      <div style={{ marginTop: "2vh" }}>
+        <Grid container spacing={1}>
+          <Grid item xs={4} className={"event-info"}>
+            <Paper>
+              <Typography variant={"h6"}>סה"כ מוזמנים: </Typography>
+            </Paper>
+          </Grid>
+          <Grid className={"event-info"} item xs={4}>
+            <Paper>
+              <Typography variant={"h6"}>אשרו הגעה: </Typography>
+              <Typography variant={"h6"}> אולי:</Typography>
+              <Typography variant={"h6"}>לא מגיעים:</Typography>
+            </Paper>
+          </Grid>
+        </Grid>
+      </div>
+    </>
+  );
 };
 
 export default MyProfile;

@@ -1,56 +1,74 @@
 export interface Local {
-    code?: string,
-    name?: string,
-    countryCode?: string,
-    dir?: string,
-    side?: Side,
-    device?: DeviceModes
+  code?: string;
+  name?: string;
+  countryCode?: string;
+  dir?: string;
+  side?: any;
+  device?: DeviceModes;
+  muiThemeLocal?: MuiThemeSupportedLocales;
 }
+
+export type MuiThemeSupportedLocales = "enUS" | "heIL";
 
 export type DeviceModes = "mobile" | "tablet" | "desktop" | undefined;
-
-export const devicesModes = {
-    mobile: "mobile",
-    tablet: "tablet",
-    desktop: "desktop"
-};
-
-export const anchorSides = {
-    left: "left",
-    right: "right",
-    bottom: "bottom",
-    top: "top"
-};
-
-export type Side = "bottom" | "left" | "right" | "top" | undefined;
-
-interface SupportedLanguages {
-    he: string,
-    en: string
-};
-
-export const supportedLanguages: SupportedLanguages = {
-    he: "he",
-    en: "en"
+export enum DeviceModesValues {
+  mobile = "mobile",
+  tablet = "tablet",
+  desktop = "mobile",
 }
 
-export const defaultLanguage: string = supportedLanguages.he;
-export const defaultDirection: string = 'rtl';
+export enum devicesModes {
+  mobile = "mobile",
+  tablet = "tablet",
+  desktop = "desktop",
+}
 
+export enum anchorSides {
+  left = "left",
+  right = "right",
+  up = "up",
+  down = "down",
+  top = "top",
+  bottom = "bottom",
+}
+
+export type Side =
+  | "right"
+  | "left"
+  | "up"
+  | "down"
+  | "top"
+  | "bottom"
+  | undefined;
+
+interface SupportedLanguages {
+  he: string;
+  en: string;
+}
+
+export enum supportedLanguages {
+  he = "he",
+  en = "en",
+}
+
+export const defaultLanguage = supportedLanguages.he;
+export const defaultDirection = "rtl";
 
 export const languages: Local[] = [
-    {
-        code: supportedLanguages.he,
-        name: 'עברית',
-        countryCode: 'il',
-        dir: 'rtl',
-        side: "right"
-    },
-    {
-        code: supportedLanguages.en,
-        name: 'English',
-        countryCode: 'gb',
-        dir: "ltr",
-        side: "left"
-    },
+  {
+    code: supportedLanguages.he,
+    name: "עברית",
+    countryCode: "il",
+    dir: "rtl",
+    side: "right",
+    muiThemeLocal: "heIL",
+  },
+  {
+    code: supportedLanguages.en,
+    name: "English",
+    countryCode: "gb",
+    dir: "ltr",
+    side: "left",
+    muiThemeLocal: "enUS",
+  },
 ];

@@ -25,6 +25,14 @@
   "footer": {
     "copyright": "Copyright"
   },
+  "speed_dial": {
+    "add_guest": "Add new invited guest",
+    "groups": "Group list",
+    "invited_guest_owner": "Invited guest owner's list",
+    "tags": "Tag list",
+    "shuttles": "Shuttle list",
+    "load_external": "Load invited guests from external"
+  },
   "page_404": {
     "not_found": "Page not found",
     "goto_home": "Go to home page"
@@ -74,7 +82,7 @@
       "event_purpose": "What is the event for?",
       "event_celebrate": "What we celebrate?",
       "type_wedding": "Wedding",
-      "private_event": "Private-Event/Conference/Company Event",
+      "private_event": "Private-Event",
       "event_type": "Event type"
     },
     "ok": "OK"
@@ -87,9 +95,53 @@
     "forgot": "Forgot password?",
     "account": "Don't have an account? Sign Up",
     "sign_in_now":"כניסה לחשבוך",
-    "valid": {
-      "wrong_details": "Your details are wrong, please provide an authorized email and password!",
-      "wrong_server": "Error occurred while try to login, please try again later"
-    }
+    "wrong_details": "Your details are wrong, please provide an authorized email and password!"
+  },
+  "my_profile": {
+    
+  },
+  "event_details": {
+    "title": "Event Details",
+    "event_name": "Event name",
+    "event_type": "Event type",
+    "wedding": "Wedding",
+    "private_event": "Private event",
+    "open_calander":"Click on the icon to open date and time picker",
+    "date_and_time":"Event time and date",
+    "name_location":"Name of the location",
+    "location_link":"Link to Waze/Google",
+    "tooltip_save":"Click to save event details",
+    "save":"Save",
+    "tooltio_demo_page":"Click to see illustration event page",
+    "event_page":"Event Page",
+    "load_image":"Drag and drop your invitation here, or click to select one",
+    "format_warning":"(Only *.jpeg and *.png images will be accepted)"
+  },
+  "invited_managment": {
+    "no_invited": "No invited to show",
+    "no_comments": "No Comments",
+    "updated": "Updated",
+    "date": "Date",
+    "selected": "selected",
+    "export": "Export list to file",
+    "export_filter_list": "Export filtered list to file",
+    "sum_of_records": "Sum of records",
+    "total_guests": "Total invited guests",
+    "found": "Found",
+    "records": "records with total",
+    "invited_guests": "invited guests",
+    "delete": "delete",
+    "sort_by": "Sort by"
+  },
+  "invited_guest": {
+    "event_owner": "Invited Guest owner's",
+    "group": "Group",
+    "shuttle": "Need a shuttle",
+    "name": "Name",
+    "total_guests": "Total guests",
+    "arrival_status": "Arrival status",
+    "phone_number": "Phone",
+    "comments": "Comments",
+    "email": "email"
   }
 }

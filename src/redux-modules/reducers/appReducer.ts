@@ -25,7 +25,7 @@ const initialState: ApplicationReducer = {
         email: "",
         phone: ""
     },
-    local: { },
+    local: {},
     error: undefined
 };
 

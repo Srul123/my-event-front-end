@@ -1,6 +1,11 @@
+import { Tag } from "../../interfaces/Tag";
 import {TagActionTypes} from "../action-types/tagActionTypes";
 
-const initialState = {
+export interface TagReducer  {
+    tagList: Tag[];
+}
+
+const initialState: TagReducer = {
     tagList: [],
 };
 

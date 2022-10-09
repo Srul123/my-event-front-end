@@ -1,11 +1,11 @@
 import {combineReducers} from 'redux';
 import appReducer, {ApplicationReducer} from "./appReducer";
 import eventDetailsReducer from "./eventDetailsReducer";
-import groupReducer from "./groupReducer";
-import ownerReducer from "./ownerReducer";
-import invitedGuestReducer from "./invitedReducer";
-import shuttleReducer from "./shuttleReducer";
-import tagReducer from "./tagReducer";
+import groupReducer, { GroupReducer } from "./groupReducer";
+import ownerReducer, { OwnerReducer } from "./ownerReducer";
+import invitedGuestReducer, { InvitedReducer } from "./invitedReducer";
+import shuttleReducer, { ShuttleReducer } from "./shuttleReducer";
+import tagReducer, { TagReducer } from "./tagReducer";
 import filterReducer from "./filterReducer";
 import {EventDetails} from "../../interfaces/EventDetails";
 
@@ -23,11 +23,11 @@ export default combineReducers({
 export interface RootState {
     application: ApplicationReducer,
     eventDetails: EventDetails,
-    invitedGuests: any,
-    group: any,
-    eventOwners: any,
-    tags: any,
-    shuttles: any,
+    invitedGuests: InvitedReducer,
+    group: GroupReducer,
+    eventOwners: OwnerReducer,
+    tags: TagReducer,
+    shuttles: ShuttleReducer,
     filters: any,
 }
 

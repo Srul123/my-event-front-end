@@ -12,8 +12,13 @@ import {FormControl} from "@mui/material";
 import ChangeLanguageSelector from "../../../change-language-selector/ChangeLanguageSelector";
 import {useTranslation} from "react-i18next";
 import AppRegistrationIcon from '@mui/icons-material/AppRegistration';
+import { MuiThemeSupportedLocales } from '../../../../interfaces/Locales';
 
-const AppBarDefault: React.FC = () => {
+interface Props {
+    setMuiThemeLocal:  React.Dispatch<React.SetStateAction<MuiThemeSupportedLocales>>
+}
+
+const AppBarDefault: React.FC<Props> = ({setMuiThemeLocal}) => {
     const {t} = useTranslation();
 
     return (
@@ -25,7 +30,7 @@ const AppBarDefault: React.FC = () => {
                     </Typography>
 
                     <FormControl sx={{m: 1, minWidth: 80}}>
-                        <ChangeLanguageSelector/>
+                        <ChangeLanguageSelector setMuiThemeLocal={setMuiThemeLocal}/>
                     </FormControl>
                     <Button>
                         <Link to={routes.registration}

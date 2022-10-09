@@ -17,13 +17,21 @@
       "rsvp": "אישורי הגעה",
       "seating_arrangement": "סידורי הושבה",
       "expenses_summary": "הוצאות/הכנסות",
-      "account_settings": "חשבון משתמש"
+      "account_settings": "הגדרות חשבון משתמש"
     },
     "logout": "התנתק",
     "select_language": "בחר שפה"
   },
   "footer": {
     "copyright": "כל הזכויות שמורות"
+  },
+  "speed_dial": {
+    "add_guest": "הוסף מוזמן חדש",
+    "groups": "רשימת הקבוצות",
+    "invited_guest_owner": "רשימת בעלי המוזמנים",
+    "tags": "רשימת התגיות",
+    "shuttles": "רשימת הסעות",
+    "load_external": "טען מוזמנים מבחוץ"
   },
   "page_404": {
     "not_found": "העמוד שחיפשת לא קיים",
@@ -73,7 +81,7 @@
       "groom_name": "שם החתן",
       "event_name": "מה שם האירוע?",
       "type_wedding": "חתונה",
-      "private_event": "אירוע פרטי/כנס/אירוע חברה",
+      "private_event": "אירוע פרטי",
       "event_type": "סוג האירוע"
     },
     "ok": "בסדר"
@@ -87,5 +95,52 @@
     "account": "יש לך כבר חשבון? כניסה",
     "sign_in_now": "כנס לחשבונך",
     "wrong_details": "אנא הזן פרטיי זיהוי חוקיים"
+  },
+  "my_profile": {
+    
+  },
+  "event_details": {
+    "title": "פרטי האירוע",
+    "event_name": "שם האירוע",
+    "event_type": "סוג האירוע",
+    "wedding": "חתונה",
+    "private_event": "אירוע פרטי",
+    "open_calander":"לחץ על האייקון בכדי לפתוח את היומן",
+    "date_and_time":"תאריך ושעת האירוע",
+    "name_location":"שם המקום",
+    "location_link":"קישור למיקום Google/Waze",
+    "tooltip_save":"לחץ לשמירת פרטי האירוע",
+    "save":"שמור",
+    "tooltio_demo_page":"לחץ לצפייה בהמחשה של דף האירוע",
+    "event_page":"צפה בדף האירוע",
+    "load_image":"העלה תמונה של הזמנת האירוע",
+    "format_warning":"(פורמט jpeg, png בלבד)"
+  },
+  "invited_managment": {
+    "no_invited": "אין מוזמנים להצגה",
+    "no_comments": "ללא הערות",
+    "updated": "עודכן",
+    "date": "תאריך",
+    "selected": "נבחרו",
+    "export": "ייצא את הרשימה לקובץ",
+    "export_filter_list": "ייצא את הרשימה המסוננת לקובץ",
+    "sum_of_records": "סך הכל רשומות",
+    "total_guests": "סך הכל מוזמנים",
+    "found": "נמצאו",
+    "records": "רשומות עם",
+    "invited_guests": "מוזמנים",
+    "delete": "מחיקה",
+    "sort_by": "מיין לפי"
+  },
+  "invited_guest": {
+    "event_owner": "בעל המוזמן",
+    "group": "קבוצה",
+    "shuttle": "זקוק להסעה",
+    "name": "שם המוזמן",
+    "total_guests": "כמות מוזמנים",
+    "arrival_status": "מצב הגעה",
+    "phone_number": "טלפון נייד",
+    "comments": "הערות למוזמן",
+    "email": "אימייל"
   }
 }

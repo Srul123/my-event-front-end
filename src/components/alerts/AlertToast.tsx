@@ -6,7 +6,7 @@ export interface AlertPopup {
     open: boolean,
     vertical: "top" | "bottom",
     horizontal: "left" | "center" | "right",
-    severityInfo?: AlertColor | undefined,
+    severityInfo?:  'success' | 'info' | 'warning' | 'error' | undefined,
     messageInfo?: string
     time?: number
 }
@@ -17,10 +17,9 @@ interface Props {
 }
 
 
-const AlertIndicator: React.FC<Props> = ({alertPopup, closeAlert}) => {
+const AlertToast: React.FC<Props> = ({alertPopup, closeAlert}) => {
 
     const {open, vertical, horizontal, severityInfo, messageInfo, time} = alertPopup;
-
 
     return (
         <Snackbar
@@ -35,6 +34,6 @@ const AlertIndicator: React.FC<Props> = ({alertPopup, closeAlert}) => {
             </Alert>
         </Snackbar>
     );
-}
+};
 
-export default AlertIndicator;
+export default AlertToast;

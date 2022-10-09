@@ -2,20 +2,39 @@ import axios from "axios";
 import {AppActionTypes} from "../action-types/appActionTypes";
 import {API_URLS} from "../../api/api";
 import {User} from "../../interfaces/User";
-import {DeviceModes, Local} from "../../interfaces/Locales";
+import { Local} from "../../interfaces/Locales";
 
 
-export const loginUser = (user: User | undefined, token: string) => {
+export const loginUser = (user: User, token: string) => {
     return {
         type: AppActionTypes.LOGIN,
         payload: {user, token}
     };
 };
 
-export const logoutUser = () => {
-    return {
-        type: AppActionTypes.LOGOUT
-    };
+
+export const logoutUser = (userToken: string) => async (dispatch: (arg0: { type: any, payload: any}) => void) => {
+    const headers = {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${userToken}`
+    }
+    try {
+        const url = `${API_URLS.BASE_URL}/${API_URLS.LOGOUT}`;
+        const response = await axios.post(url, {}, {headers});
+        if (response.status===200) {
+            dispatch({
+                type: AppActionTypes.LOGOUT,
+                payload: null
+            });
+        }
+
+    } catch (e) {
+        console.log("Error Occurred while tried to logout");
+        dispatch({
+            type: AppActionTypes.ERROR,
+            payload: "Can't logout user",
+        });
+    }
 };
 
 export const updateIsAppLoading = (value: boolean) => {

@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {useSelector} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import Button from '@mui/material/Button';
 import MenuIcon from '@mui/icons-material/Menu';
 import {FormControl, Tooltip, Typography} from "@mui/material";
@@ -8,12 +8,22 @@ import Toolbar from "@mui/material/Toolbar";
 import IconButton from "@mui/material/IconButton";
 import ChangeLanguageSelector from "../../../change-language-selector/ChangeLanguageSelector";
 import LogoutIcon from '@mui/icons-material/Logout';
-import { Side} from "../../../../interfaces/Locales";
+import { MuiThemeSupportedLocales, Side} from "../../../../interfaces/Locales";
 import TemporaryDrawer from "./temporary-drawer/TemporaryDrawer";
 import {useTranslation} from "react-i18next";
 import {StateSelectors} from "../../../../redux-modules/selectores/stateSelectores";
+import {logoutUser, updateIsAppLoading} from "../../../../redux-modules/actions/appActions";
+import {useNavigate} from "react-router-dom";
 
-export default function AppBarMobileLoggedIn() {
+interface Props {
+    setMuiThemeLocal:  React.Dispatch<React.SetStateAction<MuiThemeSupportedLocales>>
+}
+
+const AppBarMobileLoggedIn: React.FC<Props> = ({setMuiThemeLocal}) => {
+
+
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
     const {t} = useTranslation();
     const application = useSelector(StateSelectors.application);
     const [openDrawer, setOpenDrawer] = React.useState(false);
@@ -23,6 +33,18 @@ export default function AppBarMobileLoggedIn() {
             return;
         }
         setOpenDrawer(open);
+    };
+
+    const handleLogout = async () => {
+        dispatch(updateIsAppLoading(true));
+        try {
+            await dispatch(logoutUser(application.auth.token));
+            navigate("/", {replace: true});
+        }catch (e) {
+            console.error("Can't logout user");
+        } finally {
+            dispatch(updateIsAppLoading(false));
+        }
     };
 
     return (
@@ -46,10 +68,9 @@ export default function AppBarMobileLoggedIn() {
                     <div>
                         <div>
                             <FormControl sx={{m: 1, minWidth: 50}}>
-                                <ChangeLanguageSelector/>
+                                <ChangeLanguageSelector setMuiThemeLocal={setMuiThemeLocal}/>
                             </FormControl>
-
-                            <Button color="inherit">
+                            <Button color="inherit" onClick={() => handleLogout()}>
                                 {t('header.logout')}
                                 <LogoutIcon/>
                             </Button>
@@ -71,3 +92,4 @@ export default function AppBarMobileLoggedIn() {
 
 
 
+export default  AppBarMobileLoggedIn;
