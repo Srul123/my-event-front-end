@@ -17,7 +17,7 @@ import { anchorSides, DeviceModesValues } from "../../interfaces/Locales";
 interface Props {
   setOpenInviterDialog: Dispatch<SetStateAction<boolean>>;
   setOpenGroupsDialog: Dispatch<SetStateAction<boolean>>;
-  setOpenInvitedOwner: Dispatch<SetStateAction<boolean>>;
+  setOpenEventInvitedGuestsOwnerModal: Dispatch<SetStateAction<boolean>>;
   setOpenShuttleList: Dispatch<SetStateAction<boolean>>;
   setLoadContactsDialog: Dispatch<SetStateAction<boolean>>;
 }
@@ -25,7 +25,7 @@ interface Props {
 const SpeedDialsInvitedGuestManagement: React.FC<Props> = ({
   setOpenInviterDialog,
   setOpenGroupsDialog,
-  setOpenInvitedOwner,
+  setOpenEventInvitedGuestsOwnerModal,
   setOpenShuttleList,
   setLoadContactsDialog,
 }) => {
@@ -76,7 +76,7 @@ const SpeedDialsInvitedGuestManagement: React.FC<Props> = ({
       setOpenGroupsDialog(true);
     }
     if (action === "openInvitedOwner") {
-      setOpenInvitedOwner(true);
+        setOpenEventInvitedGuestsOwnerModal(true);
     }
     if (action === "openShuttleList") {
       setOpenShuttleList(true);
@@ -97,6 +97,7 @@ const SpeedDialsInvitedGuestManagement: React.FC<Props> = ({
         hidden={false}
         icon={<SpeedDialIcon />}
         onClick={() => setSpeedDials(!openSpeedDials)}
+        onOpen={handleOpen}
         open={openSpeedDials}
         direction={
           application.local.device === DeviceModesValues.mobile

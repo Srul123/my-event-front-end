@@ -32,10 +32,9 @@ import AlertWithConfirmation from "../components/alerts/AlertWithConfirmation";
 import axios from "axios";
 import { API_URLS } from "../api/api";
 import DoneIcon from "@mui/icons-material/Done";
-import Container from "@mui/material/Container";
 import { User, UserRegistrationRequestDTO } from "../interfaces/User";
 import { EventDetails, EventTypes } from "../interfaces/EventDetails";
-import { EventOwner, EventOwnerRoles } from "../interfaces/EventOwner";
+import { EventOwner } from "../interfaces/EventOwner";
 import { updateIsAppLoading } from "../redux-modules/actions/appActions";
 import { StateSelectors } from "../redux-modules/selectores/stateSelectores";
 import commonStyle from "../styles/commonStyles.module.scss";
@@ -188,12 +187,10 @@ const Registration: React.FC = () => {
       const bride: EventOwner = {
         isAdmin: true,
         name: eventOwnerOrName,
-        role: EventOwnerRoles.BRIDE,
       };
       const groom: EventOwner = {
         isAdmin: true,
         name: eventOwner2,
-        role: EventOwnerRoles.GROOM,
       };
       newUser = {
         ...newUser,

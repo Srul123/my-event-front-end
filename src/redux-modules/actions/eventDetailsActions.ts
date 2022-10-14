@@ -17,7 +17,6 @@ export const updateEventDetails = (eventDetails: EventDetails) => {
 export const putEventDetails =
   (eventDetails: EventDetails, token: String) =>
   async (dispatch: (arg0: { type: any; payload: any }) => any) => {
-    debugger;
     try {
       const headers = {
         "Content-Type": "application/json",
@@ -40,5 +39,6 @@ export const putEventDetails =
         type: EventDetailsActionTypes.ERROR,
         payload: "Can't update Event details",
       });
+      throw new Error("Can't update event details");
     }
   };

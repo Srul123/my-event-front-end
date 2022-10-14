@@ -1,23 +1,30 @@
-import {OwnerActionTypes} from "../action-types/ownerActionTypes";
-import {EventOwner} from "../../interfaces/EventOwner";
+import { OwnerActionTypes } from "../action-types/ownerActionTypes";
+import { EventOwner } from "../../interfaces/EventOwner";
 
-export interface OwnerReducer  {
-    eventOwnerList: EventOwner[];
+export interface OwnerReducer {
+  eventOwnerList: EventOwner[];
 }
 
-
 const initialState: OwnerReducer = {
-    eventOwnerList: [],
+  eventOwnerList: [],
 };
 
-const ownerReducer = (state = initialState, action: { type: string; payload: any; }) : OwnerReducer => {
-    switch (action.type) {
-        case OwnerActionTypes.UPDATE_OWNER_LIST:
-            return {
-                eventOwnerList: action.payload,
-            };
-        default:
-            return {...state};
-    }
+const ownerReducer = (
+  state = initialState,
+  action: { type: string; payload: any }
+): OwnerReducer => {
+  switch (action.type) {
+    case OwnerActionTypes.UPDATE_OWNER_LIST:
+      return {
+        eventOwnerList: action.payload,
+      };
+    case OwnerActionTypes.ADD_OWNER:
+      return {
+        ...state,
+        eventOwnerList: [...state.eventOwnerList, action.payload],
+      };
+    default:
+      return { ...state };
+  }
 };
 export default ownerReducer;
