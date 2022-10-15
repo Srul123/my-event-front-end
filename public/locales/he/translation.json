@@ -141,6 +141,23 @@
     "arrival_status": "מצב הגעה",
     "phone_number": "טלפון נייד",
     "comments": "הערות למוזמן",
-    "email": "אימייל"
+    "email": "אימייל",
+    "guests_owner_modal": {
+      "title": "רשימת בעלי המוזמנים",
+      "valid_name": "אנא הכנס שם חוקי",
+      "delete_owner": "האם אתה בטוח כי ברצונך למחוק את ",
+      "edit_success": "הפעולה הצליחה",
+      "edit_error": "הפעולה נכשלה",
+      "delete_success": "נמחק בהצלחה",
+      "delete_error": "פעולת המחיקה לא הצליחה",
+      "success": "הפעולה בוצעה בהצלחה",
+      "failure": "הפעולה נכשלה",
+      "add_name": "הכנס שם של בעל/ת המוזמנים",
+      "click_save": "לחץ להוספה",
+      "click_edit": "לחץ בכדי לערוך",
+      "delete": "מחק",
+      "save": "שמור",
+      "label_owner": "בעל/ת המוזמנים"
+    }
   }
 }

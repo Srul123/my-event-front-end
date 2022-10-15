@@ -142,6 +142,23 @@
     "arrival_status": "Arrival status",
     "phone_number": "Phone",
     "comments": "Comments",
-    "email": "email"
+    "email": "email",
+    "guests_owner_modal": {
+      "title": "Invited guests owner's list",
+      "valid_name": "Please insert valid name",
+      "delete_owner": "Are you sure you to delete",
+      "edit_success": "Edit operation succeeded",
+      "edit_error": "Edit operation failed",
+      "delete_success": "Delete operation succeeded",
+      "delete_error": "Delete operation failed",
+      "success": "Operation Succeeded",
+      "failure": "Operation failed",
+      "add_name": "Add guests owner name",
+      "click_save": "Click to add",
+      "click_edit": "Click to edit",
+      "delete": "Delete",
+      "save": "Save",
+      "label_owner": "Guests owner"
+    }
   }
 }
