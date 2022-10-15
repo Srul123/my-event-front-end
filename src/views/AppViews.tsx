@@ -113,7 +113,7 @@ const AppViews: React.FC<Props> = ({setMuiThemeLocal}) => {
           <Route path={routes.login} element={<Login />} />
           {application.auth.isLoggedIn && (
             <>
-              <Route path={routes.myProfile} element={<MyProfile />} />
+              <Route path={routes.myProfile} element={<GuestManagement />} />
               <Route path={routes.eventDetails} element={<EventDetails />} />
               <Route path={routes.guestManagement} element={<GuestManagement />} />
             </>

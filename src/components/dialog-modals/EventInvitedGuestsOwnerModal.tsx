@@ -9,6 +9,7 @@ import DialogContent from "@mui/material/DialogContent";
 import AlertToast, { AlertPopup } from "../alerts/AlertToast";
 import DialogTitle from "@mui/material/DialogTitle";
 import EventInvitedGuestsOwnerControl from "../event-invited-guests-owner-control/EventInvitedGuestsOwnerControl";
+import { useTranslation } from "react-i18next";
 
 export interface EventInvitedGuestsOwnerModalProps {
   openInvitedGuestOwnerModal: boolean;
@@ -20,6 +21,7 @@ export interface EventInvitedGuestsOwnerModalProps {
 const EventInvitedGuestsOwnerModal: React.FC<
   EventInvitedGuestsOwnerModalProps
 > = ({ openInvitedGuestOwnerModal, setOpenEventInvitedGuestsOwnerModal }) => {
+  const { t } = useTranslation();
   const [alertPopup, setAlertPopup] = React.useState<AlertPopup>({
     open: false,
     vertical: "top",
@@ -33,7 +35,6 @@ const EventInvitedGuestsOwnerModal: React.FC<
   const handleClose = () => {
     setOpenEventInvitedGuestsOwnerModal(false);
   };
-  
 
   return (
     <div>
@@ -45,11 +46,15 @@ const EventInvitedGuestsOwnerModal: React.FC<
       >
         <DialogTitle>
           <div style={{ display: "flex", justifyContent: "space-between" }}>
-            <Typography style={{ padding: "1vw" }} variant="h6">
-              <PermContactCalendarIcon />{" "}
-              <span style={{ position: "relative", bottom: "0.5vh" }}>
-                Invited owners
-              </span>
+            <Typography variant="h4" align="center">
+              <PermContactCalendarIcon
+                style={{
+                  position: "relative",
+                  top: "0.5vh",
+                  fontSize: "1em",
+                }}
+              />{" "}
+              {t("invited_guest.guests_owner_modal.title")}
             </Typography>
             <IconButton aria-label="close" onClick={handleClose}>
               <CloseIcon />
@@ -58,7 +63,7 @@ const EventInvitedGuestsOwnerModal: React.FC<
         </DialogTitle>
 
         <DialogContent dividers>
-          <EventInvitedGuestsOwnerControl setAlertPopup={setAlertPopup}/>
+          <EventInvitedGuestsOwnerControl setAlertPopup={setAlertPopup} />
         </DialogContent>
 
         <AlertToast alertPopup={alertPopup} closeAlert={closeAlert} />

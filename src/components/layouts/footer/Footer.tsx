@@ -23,7 +23,7 @@ const Footer: React.FC = () => {
     return (
         <footer style={footerStyle}>
             <Container maxWidth="md">
-                <Typography variant="body2" align="center">
+                <Typography variant="body1" align="center">
                     {`${t('footer.copyright')} © `}
                     <Link color="inherit" to={routes.home} style={{color: colors.textWhite}}>
                         My-Event

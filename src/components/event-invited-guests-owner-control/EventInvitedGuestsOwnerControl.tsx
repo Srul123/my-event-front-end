@@ -19,7 +19,13 @@ import FormHelperText from "@mui/material/FormHelperText";
 import { StateSelectors } from "../../redux-modules/selectores/stateSelectores";
 import { EventOwner } from "../../interfaces/EventOwner";
 import { AlertPopup } from "../alerts/AlertToast";
-import { addEventInvitedGuestsOwner } from "../../redux-modules/actions/ownerActions";
+import {
+  addEventInvitedGuestsOwner,
+  deleteEventInvitedGuestsOwner,
+  editEventInvitedGuestsOwner,
+} from "../../redux-modules/actions/ownerActions";
+import { Typography } from "@mui/material";
+import { useTranslation } from "react-i18next";
 
 interface Props {
   setAlertPopup: Dispatch<SetStateAction<AlertPopup>>;
@@ -27,9 +33,11 @@ interface Props {
 
 const EventInvitedGuestsOwnerControl: React.FC<Props> = ({ setAlertPopup }) => {
   const dispatch = useDispatch();
+  const { t } = useTranslation();
   const app = useSelector(StateSelectors.application);
-  const eventInvitedOwnerList = 
-    useSelector(StateSelectors.eventOwners).eventOwnerList;
+  const eventInvitedOwnerList = useSelector(
+    StateSelectors.eventOwners
+  ).eventOwnerList;
   const [newOwnerName, setNewOwnerName] = React.useState("");
   const [editedEventOwnerName, setEditedEventOwnerName] = React.useState("");
 
@@ -37,18 +45,15 @@ const EventInvitedGuestsOwnerControl: React.FC<Props> = ({ setAlertPopup }) => {
     event: React.KeyboardEvent<HTMLDivElement>
   ) => {
     if (event.key === "Enter" && newOwnerName !== "") {
-      console.log("key enter pressed");
       handleOnClickAddNewEventOwner();
     }
   };
 
   const handleOnClickAddNewEventOwner = async () => {
     if (newOwnerName.length > 20 || newOwnerName.length < 2) {
-      riseExceptionAlert("Please insert valid name");
+      riseExceptionAlert(t("invited_guest.guests_owner_modal.valid_name"));
       return;
     }
-
-    console.log(newOwnerName);
 
     const newOwnerToAdd: EventOwner = {
       name: newOwnerName,
@@ -65,16 +70,39 @@ const EventInvitedGuestsOwnerControl: React.FC<Props> = ({ setAlertPopup }) => {
 
   const handleEditEventOwner = async (ownerToEdit: EventOwner) => {
     if (editedEventOwnerName.length > 20 || editedEventOwnerName.length < 2) {
-      riseExceptionAlert("Please edit to a valid name and type");
+      riseExceptionAlert(t("invited_guest.guests_owner_modal.valid_name"));
       return;
     }
-
-    riseSuccessAlert("");
-    setEditedEventOwnerName("");
+    const invitedOwner: EventOwner = {
+      ...ownerToEdit,
+      name: editedEventOwnerName,
+    };
+    try {
+      await dispatch(editEventInvitedGuestsOwner(invitedOwner, app.auth.token));
+      riseSuccessAlert(t("invited_guest.guests_owner_modal.edit_success"));
+      setEditedEventOwnerName("");
+    } catch (e) {
+      riseExceptionAlert(t("invited_guest.guests_owner_modal.edit_error"));
+    }
   };
 
   const handleDelete = async (eventOwnerToDelete: EventOwner) => {
-    riseSuccessAlert("");
+    if (
+      window.confirm(
+        `${t("invited_guest.guests_owner_modal.delete_owner")} ${
+          eventOwnerToDelete.name
+        }?`
+      ) === true
+    ) {
+      try {
+        await dispatch(
+          deleteEventInvitedGuestsOwner(eventOwnerToDelete._id, app.auth.token)
+        );
+        riseSuccessAlert(t("invited_guest.guests_owner_modal.delete_success"));
+      } catch (e) {
+        riseExceptionAlert(t("invited_guest.guests_owner_modal.delete_error"));
+      }
+    }
   };
 
   const riseSuccessAlert = (message: string) => {
@@ -83,7 +111,10 @@ const EventInvitedGuestsOwnerControl: React.FC<Props> = ({ setAlertPopup }) => {
       vertical: "top",
       horizontal: "center",
       severityInfo: "success",
-      messageInfo: message !== "" ? message : `success`,
+      messageInfo:
+        message !== ""
+          ? message
+          : `${t("invited_guest.guests_owner_modal.success")}`,
       time: 6000,
     });
   };
@@ -94,7 +125,10 @@ const EventInvitedGuestsOwnerControl: React.FC<Props> = ({ setAlertPopup }) => {
       vertical: "top",
       horizontal: "center",
       severityInfo: "error",
-      messageInfo: message !== "" ? message : `error`,
+      messageInfo:
+        message !== ""
+          ? message
+          : `${t("invited_guest.guests_owner_modal.failure")}`,
       time: 6000,
     });
   };
@@ -107,7 +141,7 @@ const EventInvitedGuestsOwnerControl: React.FC<Props> = ({ setAlertPopup }) => {
             fullWidth
             id="standard-required"
             style={{ marginBottom: "1vh" }}
-            label="* Add event owner name"
+            label={`* ${t("invited_guest.guests_owner_modal.add_name")}`}
             value={newOwnerName}
             onChange={(event) => {
               setNewOwnerName(event.target.value);
@@ -118,14 +152,13 @@ const EventInvitedGuestsOwnerControl: React.FC<Props> = ({ setAlertPopup }) => {
         <div style={{ display: "flex" }}></div>
       </div>
       <div style={{ marginTop: "1vh" }}>
-        <Tooltip title="Click to add">
+        <Tooltip title={`${t("invited_guest.guests_owner_modal.click_save")}`}>
           <Button
             variant="contained"
             color="primary"
             onClick={handleOnClickAddNewEventOwner}
           >
-            Add
-            <AddIcon />
+            {t("invited_guest.guests_owner_modal.save")}
           </Button>
         </Tooltip>
       </div>
@@ -138,13 +171,23 @@ const EventInvitedGuestsOwnerControl: React.FC<Props> = ({ setAlertPopup }) => {
                   <div>
                     <ListItem button {...bindTrigger(popupState)}>
                       <ListItemIcon style={{ minWidth: "1vw" }}>
-                        <Tooltip title="Click to edit">
-                          <span>{`${index + 1}. ${owner.name} `}</span>
+                        <Tooltip
+                          title={`${t(
+                            "invited_guest.guests_owner_modal.click_edit"
+                          )}`}
+                        >
+                          <Typography variant="body1" align="center">
+                            {`${index + 1}. ${owner.name} `}
+                          </Typography>
                         </Tooltip>
                       </ListItemIcon>
                       {!owner.isAdmin && (
                         <ListItemSecondaryAction>
-                          <Tooltip title="Delete">
+                          <Tooltip
+                            title={`${t(
+                              "invited_guest.guests_owner_modal.delete"
+                            )}`}
+                          >
                             <IconButton
                               aria-label="delete"
                               onClick={() => handleDelete(owner)}
@@ -179,7 +222,9 @@ const EventInvitedGuestsOwnerControl: React.FC<Props> = ({ setAlertPopup }) => {
                             style={{ marginBottom: "1.5vh" }}
                             defaultValue={owner.name}
                             type={"text"}
-                            label="Owner name"
+                            label={`${t(
+                              "invited_guest.guests_owner_modal.label_owner"
+                            )}`}
                             variant="outlined"
                             onChange={(event) => {
                               setEditedEventOwnerName(event.target.value);
@@ -192,12 +237,16 @@ const EventInvitedGuestsOwnerControl: React.FC<Props> = ({ setAlertPopup }) => {
                             justifyContent: "flex-end",
                           }}
                         >
-                          <Tooltip title={"Click to save"}>
+                          <Tooltip
+                            title={`${t(
+                              "invited_guest.guests_owner_modal.click_save"
+                            )}`}
+                          >
                             <Button
                               color="primary"
                               onClick={() => handleEditEventOwner(owner)}
                             >
-                              Save
+                              {t("invited_guest.guests_owner_modal.save")}
                               <SaveIcon />
                             </Button>
                           </Tooltip>

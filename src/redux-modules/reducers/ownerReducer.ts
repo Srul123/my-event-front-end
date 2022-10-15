@@ -23,8 +23,28 @@ const ownerReducer = (
         ...state,
         eventOwnerList: [...state.eventOwnerList, action.payload],
       };
+    case OwnerActionTypes.EDIT_OWNER:
+      const eventOwnerListUpdated = state.eventOwnerList.map((invitedOwner) => {
+        if (invitedOwner._id === action.payload._id) {
+          invitedOwner = action.payload;
+        }
+        return invitedOwner;
+      });
+      return {
+        ...state,
+        eventOwnerList: eventOwnerListUpdated,
+      };
+    case OwnerActionTypes.DELETE_OWNER:
+      const eventOwnerListDeleted = state.eventOwnerList.filter((invitedOwner) => {
+        return invitedOwner._id !== action.payload._id;
+      });
+      return {
+        ...state,
+        eventOwnerList: eventOwnerListDeleted,
+      };
     default:
       return { ...state };
   }
 };
+
 export default ownerReducer;
