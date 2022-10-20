@@ -16,51 +16,69 @@ import { StateSelectors } from "../../redux-modules/selectores/stateSelectores";
 import { EventOwner } from "../../interfaces/EventOwner";
 import AlertToast, { AlertPopup } from "../alerts/AlertToast";
 import {
-  addEventInvitedGuestsOwner,
-  deleteEventInvitedGuestsOwner,
-  editEventInvitedGuestsOwner,
-} from "../../redux-modules/actions/ownerActions";
-import { Typography } from "@mui/material";
+  FormControl,
+  Grid,
+  InputLabel,
+  NativeSelect,
+  Typography,
+} from "@mui/material";
 import { useTranslation } from "react-i18next";
 import { updateIsAppLoading } from "../../redux-modules/actions/appActions";
+import { Group } from "../../interfaces/Group";
+import EventGuestsOwnerSelector from "../event-guests-owner-selector/EventGuestsOwnerSelector";
+import {
+  addGroup,
+  deleteGroup,
+  editGroup,
+} from "../../redux-modules/actions/groupActions";
+import Spinner from "../layouts/spinner/Spinner";
 
-const EventInvitedGuestsOwnerControl: React.FC = () => {
+const GroupsControl: React.FC = () => {
   const dispatch = useDispatch();
   const { t } = useTranslation();
   const app = useSelector(StateSelectors.application);
-  const eventInvitedOwnerList = useSelector(
-    StateSelectors.eventOwners
-  ).eventOwnerList;
-  const [newOwnerName, setNewOwnerName] = React.useState("");
-  const [editedEventOwnerName, setEditedEventOwnerName] = React.useState("");
+  const eventOwnerList = useSelector(StateSelectors.eventOwners).eventOwnerList;
+  const groupList = useSelector(StateSelectors.groups).groupList;
+  const [groupName, setGroupName] = React.useState("");
+  const [owner, setOwner] = React.useState<EventOwner>({ _id: "0", name: "" });
+
+  const [editedGroupName, setEditedGroupName] = React.useState("");
+  const [editedOwner, setEditedOwner] = React.useState<EventOwner>({
+    _id: "0",
+    name: "",
+  });
+
   const [alertPopup, setAlertPopup] = React.useState<AlertPopup>({
     open: false,
     vertical: "top",
     horizontal: "center",
   });
 
-  const onPressEnterAddEventOwner = (
-    event: React.KeyboardEvent<HTMLDivElement>
-  ) => {
-    if (event.key === "Enter" && newOwnerName !== "") {
-      handleOnClickAddNewEventOwner();
+  const onPressEnter = (event: React.KeyboardEvent<HTMLDivElement>) => {
+    if (event.key === "Enter" && groupName !== "") {
+      handleAdd();
     }
   };
 
-  const handleOnClickAddNewEventOwner = async () => {
-
-    if (newOwnerName.length > 20 || newOwnerName.length < 2) {
+  const handleAdd = async () => {
+    if (groupName.length > 20 || groupName.length < 2) {
       riseExceptionAlert(t("invited_guest.guests_owner_modal.valid_name"));
       return;
     }
     dispatch(updateIsAppLoading(true));
-    const newOwnerToAdd: EventOwner = {
-      name: newOwnerName,
-      isAdmin: false,
-    };
+    const newGroup: Group =
+      owner && owner.name !== ""
+        ? {
+            name: groupName,
+            eventOwner: owner._id,
+          }
+        : {
+            name: groupName,
+          };
     try {
-      await dispatch(addEventInvitedGuestsOwner(newOwnerToAdd, app.auth.token));
-      setNewOwnerName("");
+      await dispatch(addGroup(newGroup, app.auth.token));
+      setGroupName("");
+      setOwner({ _id: "0", name: "" });
       riseSuccessAlert("");
     } catch (e) {
       riseExceptionAlert("");
@@ -69,20 +87,32 @@ const EventInvitedGuestsOwnerControl: React.FC = () => {
     }
   };
 
-  const handleEditEventOwner = async (ownerToEdit: EventOwner) => {
-    if (editedEventOwnerName.length > 20 || editedEventOwnerName.length < 2) {
+  const handleEdit = async (group: Group) => {
+    if ( // to do align validation
+      (editedGroupName === "" && editedOwner._id === "0") ||
+      editedGroupName.length > 20 ||
+      editedGroupName.length < 2
+    ) {
       riseExceptionAlert(t("invited_guest.guests_owner_modal.valid_name"));
       return;
     }
     dispatch(updateIsAppLoading(true));
-    const invitedOwner: EventOwner = {
-      ...ownerToEdit,
-      name: editedEventOwnerName,
-    };
+    const editedGroup: Group =
+      editedOwner._id === "0"
+        ? {
+            _id: group._id,
+            name: editedGroupName,
+          }
+        : {
+            _id: group._id,
+            name: editedGroupName !== "" ? editedGroupName : group.name,
+            eventOwner: editedOwner._id,
+          };
     try {
-      await dispatch(editEventInvitedGuestsOwner(invitedOwner, app.auth.token));
+      await dispatch(editGroup(editedGroup, app.auth.token));
+      setEditedGroupName("");
+      setEditedOwner({ name: "", _id: "0" });
       riseSuccessAlert(t("invited_guest.guests_owner_modal.edit_success"));
-      setEditedEventOwnerName("");
     } catch (e) {
       riseExceptionAlert(t("invited_guest.guests_owner_modal.edit_error"));
     } finally {
@@ -90,19 +120,18 @@ const EventInvitedGuestsOwnerControl: React.FC = () => {
     }
   };
 
-  const handleDelete = async (eventOwnerToDelete: EventOwner) => {
+  const handleDelete = async (groupToDelete: Group) => {
     if (
       window.confirm(
         `${t("invited_guest.guests_owner_modal.delete_owner")} ${
-          eventOwnerToDelete.name
+          groupToDelete.name
         }?`
       ) === true
     ) {
+      debugger;
       dispatch(updateIsAppLoading(true));
       try {
-        await dispatch(
-          deleteEventInvitedGuestsOwner(eventOwnerToDelete._id, app.auth.token)
-        );
+        await dispatch(deleteGroup(groupToDelete._id, app.auth.token));
         riseSuccessAlert(t("invited_guest.guests_owner_modal.delete_success"));
       } catch (e) {
         riseExceptionAlert(t("invited_guest.guests_owner_modal.delete_error"));
@@ -140,39 +169,50 @@ const EventInvitedGuestsOwnerControl: React.FC = () => {
     });
   };
 
+  const findGroupOwner = (group: Group) => {
+    for (const owner of eventOwnerList) {
+      if (group.eventOwner === owner._id) return owner;
+    }
+    return { name: "", _id: "0" };
+  };
+
   return (
     <>
-      <div>
-        <div>
+      {app.isAppLoading && <Spinner />}
+      <Grid container>
+        <Grid item xs={12}>
           <TextField
             fullWidth
             id="standard-required"
             style={{ marginBottom: "1vh" }}
             label={`* ${t("invited_guest.guests_owner_modal.add_name")}`}
-            value={newOwnerName}
+            value={groupName}
             onChange={(event) => {
-              setNewOwnerName(event.target.value);
+              setGroupName(event.target.value);
             }}
-            onKeyPress={(event) => onPressEnterAddEventOwner(event)}
+            onKeyPress={(event) => onPressEnter(event)}
           />
-        </div>
-        <div style={{ display: "flex" }}></div>
-      </div>
+        </Grid>
+        <Grid item xs={12}>
+          <EventGuestsOwnerSelector
+            eventOwnerList={eventOwnerList}
+            setOwner={setOwner}
+            owner={owner}
+          />
+        </Grid>
+      </Grid>
       <div style={{ marginTop: "1vh" }}>
         <Tooltip title={`${t("invited_guest.guests_owner_modal.click_save")}`}>
-          <Button
-            variant="contained"
-            color="primary"
-            onClick={handleOnClickAddNewEventOwner}
-          >
+          <Button variant="contained" color="primary" onClick={handleAdd}>
             {t("invited_guest.guests_owner_modal.save")}
           </Button>
         </Tooltip>
       </div>
       <List component="nav" aria-label="contacts">
-        {eventInvitedOwnerList.sort((a, b) => a.name > b.name ? 1 : -1).map((owner, index) => {
+        {groupList.map((group, index) => {
+          const curOwner = findGroupOwner(group);
           return (
-            <div key={owner._id}>
+            <div key={group._id}>
               <PopupState variant="popover" popupId="demo-popup-popover">
                 {(popupState) => (
                   <div>
@@ -184,27 +224,24 @@ const EventInvitedGuestsOwnerControl: React.FC = () => {
                           )}`}
                         >
                           <Typography variant="body1" align="center">
-                            {`${index + 1}. ${owner.name}`}
-                            {owner.isAdmin && ` (admin)`}
+                            {`${index + 1}. ${group.name} `}
                           </Typography>
                         </Tooltip>
                       </ListItemIcon>
-                      {!owner.isAdmin && (
-                        <ListItemSecondaryAction>
-                          <Tooltip
-                            title={`${t(
-                              "invited_guest.guests_owner_modal.delete"
-                            )}`}
+                      <ListItemSecondaryAction>
+                        <Tooltip
+                          title={`${t(
+                            "invited_guest.guests_owner_modal.delete"
+                          )}`}
+                        >
+                          <IconButton
+                            aria-label="delete"
+                            onClick={() => handleDelete(group)}
                           >
-                            <IconButton
-                              aria-label="delete"
-                              onClick={() => handleDelete(owner)}
-                            >
-                              <DeleteIcon />
-                            </IconButton>
-                          </Tooltip>
-                        </ListItemSecondaryAction>
-                      )}
+                            <DeleteIcon />
+                          </IconButton>
+                        </Tooltip>
+                      </ListItemSecondaryAction>
                     </ListItem>
                     <Popover
                       {...bindPopover(popupState)}
@@ -228,16 +265,56 @@ const EventInvitedGuestsOwnerControl: React.FC = () => {
                         >
                           <TextField
                             style={{ marginBottom: "1.5vh" }}
-                            defaultValue={owner.name}
+                            defaultValue={group.name}
                             type={"text"}
                             label={`${t(
                               "invited_guest.guests_owner_modal.label_owner"
                             )}`}
                             variant="outlined"
                             onChange={(event) => {
-                              setEditedEventOwnerName(event.target.value);
+                              setEditedGroupName(event.target.value);
                             }}
                           />
+                          <FormControl fullWidth>
+                            <InputLabel
+                              variant="standard"
+                              htmlFor="uncontrolled-native"
+                            >
+                              Owner
+                            </InputLabel>
+                            <NativeSelect
+                              defaultValue={
+                                curOwner._id !== "0" ? curOwner._id : "0"
+                              }
+                              inputProps={{
+                                name: "age",
+                                id: "uncontrolled-native",
+                              }}
+                              onChange={(event: {
+                                target: { value: string };
+                              }) => {
+                                const selectedOwnerId = event.target.value;
+                                const selectedOwner = eventOwnerList.find(
+                                  (owner) => owner._id === selectedOwnerId
+                                );
+                                console.log(selectedOwner);
+                                setEditedOwner(
+                                  selectedOwner
+                                    ? selectedOwner
+                                    : { name: "", _id: "0" }
+                                );
+                              }}
+                            >
+                              <option value={"0"}>No owner</option>
+                              {eventOwnerList.map((owner) => {
+                                return (
+                                  <option key={owner._id} value={owner._id}>
+                                    {owner.name}
+                                  </option>
+                                );
+                              })}
+                            </NativeSelect>
+                          </FormControl>
                         </div>
                         <div
                           style={{
@@ -252,7 +329,7 @@ const EventInvitedGuestsOwnerControl: React.FC = () => {
                           >
                             <Button
                               color="primary"
-                              onClick={() => handleEditEventOwner(owner)}
+                              onClick={() => handleEdit(group)}
                             >
                               {t("invited_guest.guests_owner_modal.save")}
                               <SaveIcon />
@@ -276,4 +353,4 @@ const EventInvitedGuestsOwnerControl: React.FC = () => {
   );
 };
 
-export default EventInvitedGuestsOwnerControl;
+export default GroupsControl;

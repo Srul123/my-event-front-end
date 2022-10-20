@@ -24,7 +24,7 @@ export interface RootState {
     application: ApplicationReducer,
     eventDetails: EventDetails,
     invitedGuests: InvitedReducer,
-    group: GroupReducer,
+    groups: GroupReducer,
     eventOwners: OwnerReducer,
     tags: TagReducer,
     shuttles: ShuttleReducer,

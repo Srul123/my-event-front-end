@@ -7,4 +7,5 @@ export enum API_URLS {
   LOGOUT = "users/logout",
   EVENT_DETAILS = "event-details",
   EVENT_GUESTS_OWNER = "event-guests-owner",
+  GROUPS = "groups",
 }

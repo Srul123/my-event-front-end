@@ -5,7 +5,7 @@ const Spinner = () => {
     return (
         <Box sx={{
             position:"fixed",
-            zIndex: "100",
+            zIndex: "1",
             top: "50%",
             left: "50%",
             transform: `translate(-50%, -50%)`,

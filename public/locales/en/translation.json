@@ -118,7 +118,7 @@
     "format_warning":"(Only *.jpeg and *.png images will be accepted)"
   },
   "invited_managment": {
-    "no_invited": "No invited to show",
+    "no_invited": "No invited guests records to show",
     "no_comments": "No Comments",
     "updated": "Updated",
     "date": "Date",
@@ -142,7 +142,7 @@
     "arrival_status": "Arrival status",
     "phone_number": "Phone",
     "comments": "Comments",
-    "email": "email",
+    "email": "Email",
     "guests_owner_modal": {
       "title": "Invited guests owner's list",
       "valid_name": "Please insert valid name",
@@ -154,11 +154,30 @@
       "success": "Operation Succeeded",
       "failure": "Operation failed",
       "add_name": "Add guests owner name",
-      "click_save": "Click to add",
+      "click_save": "Click to save",
       "click_edit": "Click to edit",
       "delete": "Delete",
       "save": "Save",
+      "admin": "admin",
       "label_owner": "Guests owner"
+    },
+    "groups_modal": {
+      "title": "Gropus list",
+      "valid_name": "Please insert valid group name",
+      "delete_group": "Are you sure you to delete",
+      "edit_success": "Edit operation succeeded",
+      "edit_error": "Edit operation failed",
+      "delete_success": "Delete operation succeeded",
+      "delete_error": "Delete operation failed",
+      "success": "Operation Succeeded",
+      "failure": "Operation failed",
+      "add_name": "Add group name",
+      "select_owner": "Select an owner (optional)",
+      "click_save": "Click to save",
+      "click_edit": "Click to edit",
+      "delete": "Delete",
+      "save": "Save",
+      "label_group": "Group"
     }
   }
 }

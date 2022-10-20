@@ -80,12 +80,13 @@ export const optionRoutes = [
   },
 ];
 
-
 interface Props {
-  setMuiThemeLocal:  React.Dispatch<React.SetStateAction<MuiThemeSupportedLocales>>
+  setMuiThemeLocal: React.Dispatch<
+    React.SetStateAction<MuiThemeSupportedLocales>
+  >;
 }
 
-const AppViews: React.FC<Props> = ({setMuiThemeLocal}) => {
+const AppViews: React.FC<Props> = ({ setMuiThemeLocal }) => {
   const location = useLocation();
   const navigate = useNavigate();
   const application = useSelector(StateSelectors.application);
@@ -99,14 +100,19 @@ const AppViews: React.FC<Props> = ({setMuiThemeLocal}) => {
       navigate(routes.login, { replace: true });
     }
   }, []);
-  
 
   return (
     <>
       <CssBaseline />
       <Header application={application} setMuiThemeLocal={setMuiThemeLocal} />
-      <Container fixed style={{marginTop: "20px", padding: "0 5vw"}}>
-        {application.isAppLoading && <Spinner />}
+      <Container
+        fixed
+        style={{
+          top: "20px",
+          padding: "0 5vw",
+          position: "relative",
+        }}
+      >
         <Routes>
           <Route path={routes.home} element={<Home />} />
           <Route path={routes.registration} element={<Registration />} />
@@ -115,7 +121,10 @@ const AppViews: React.FC<Props> = ({setMuiThemeLocal}) => {
             <>
               <Route path={routes.myProfile} element={<GuestManagement />} />
               <Route path={routes.eventDetails} element={<EventDetails />} />
-              <Route path={routes.guestManagement} element={<GuestManagement />} />
+              <Route
+                path={routes.guestManagement}
+                element={<GuestManagement />}
+              />
             </>
           )}
           <Route path="*" element={<NotFound_404 />} />

@@ -29,6 +29,7 @@ import commonStyles from "../../styles/commonStyles.module.scss";
 import { updateIsAppLoading } from "../../redux-modules/actions/appActions";
 import ImageInvitation from "../../components/image-invitation/ImageInvitation";
 import { useTranslation } from "react-i18next";
+import Spinner from "../../components/layouts/spinner/Spinner";
 
 const EventDetails: React.FC = () => {
   const dispatch = useDispatch();
@@ -98,115 +99,123 @@ const EventDetails: React.FC = () => {
   };
 
   return (
-    <Container fixed>
-      <div id={"event-details"}>
-        <Typography variant="h3" component="h3" align="center">
-          {t("event_details.title")}
-        </Typography>
-        <Paper>
-          <form noValidate autoComplete="off" className={"event-form"}>
-            <div>
-              <TextField
-                fullWidth
-                id="eventName"
-                label={t("event_details.event_name")}
-                variant="outlined"
-                value={eventName}
-                onChange={(event) => setEventName(event.target.value)}
-              />
-            </div>
-            <div>
-              <FormControl variant="outlined" fullWidth>
-                <InputLabel id="demo-simple-select-outlined-label">
-                  {t("event_details.event_type")}
-                </InputLabel>
-                <Select
-                  labelId="select-outlined-label"
-                  id="select-outlined"
-                  value={eventType}
-                  onChange={(event) => setEventType(String(event.target.value))}
-                  label="Event type"
-                >
-                  <MenuItem value={EventTypes.WEDDING}>
-                    {t("event_details.wedding")}
-                  </MenuItem>
-                  <MenuItem value={EventTypes.PRIVATE_EVENT}>
-                    {t("event_details.private_event")}
-                  </MenuItem>
-                </Select>
-              </FormControl>
-            </div>
-            <div>
-              <Tooltip title={`${t("event_details.open_calander")}`}>
+    <>
+      {application.isAppLoading && <Spinner />}
+      <Container fixed>
+        <div id={"event-details"}>
+          <Typography variant="h3" component="h3" align="center">
+            {t("event_details.title")}
+          </Typography>
+          <Paper>
+            <form noValidate autoComplete="off" className={"event-form"}>
+              <div>
                 <TextField
                   fullWidth
-                  label={`${t("event_details.date_and_time")}`}
-                  type="datetime-local"
-                  value={eventTimeAndDate}
-                  InputLabelProps={{
-                    shrink: true,
-                  }}
-                  onChange={(event) => setEventTimeAndDate(event.target.value)}
+                  id="eventName"
+                  label={t("event_details.event_name")}
+                  variant="outlined"
+                  value={eventName}
+                  onChange={(event) => setEventName(event.target.value)}
                 />
-              </Tooltip>
-            </div>
-            <div>
-              <TextField
-                fullWidth
-                label={`${t("event_details.name_location")}`}
-                variant="filled"
-                value={locationName}
-                onChange={(event) => setLocationName(event.target.value)}
-              />
-              <TextField
-                fullWidth
-                label={`${t("event_details.location_link")}`}
-                variant="filled"
-                value={locationLink}
-                onChange={(event) => setLocationLink(event.target.value)}
-              />
-            </div>
-            <div
-              style={{
-                display: "flex",
-                justifyContent: "space-evenly",
-              }}
-            >
+              </div>
               <div>
-                <Tooltip title={`${t("event_details.tooltip_save")}`}>
-                  <Button
-                    className={commonStyles.button}
-                    variant="contained"
-                    color="primary"
-                    onClick={(event) => handleSubmit(event)}
+                <FormControl variant="outlined" fullWidth>
+                  <InputLabel id="demo-simple-select-outlined-label">
+                    {t("event_details.event_type")}
+                  </InputLabel>
+                  <Select
+                    labelId="select-outlined-label"
+                    id="select-outlined"
+                    value={eventType}
+                    onChange={(event) =>
+                      setEventType(String(event.target.value))
+                    }
+                    label="Event type"
                   >
-                    {`${t("event_details.save")}`} <SaveIcon style={{ margin: "0 1vw" }} />
-                  </Button>
+                    <MenuItem value={EventTypes.WEDDING}>
+                      {t("event_details.wedding")}
+                    </MenuItem>
+                    <MenuItem value={EventTypes.PRIVATE_EVENT}>
+                      {t("event_details.private_event")}
+                    </MenuItem>
+                  </Select>
+                </FormControl>
+              </div>
+              <div>
+                <Tooltip title={`${t("event_details.open_calander")}`}>
+                  <TextField
+                    fullWidth
+                    label={`${t("event_details.date_and_time")}`}
+                    type="datetime-local"
+                    value={eventTimeAndDate}
+                    InputLabelProps={{
+                      shrink: true,
+                    }}
+                    onChange={(event) =>
+                      setEventTimeAndDate(event.target.value)
+                    }
+                  />
                 </Tooltip>
               </div>
               <div>
-                <Tooltip title={`${t("event_details.tooltio_demo_page")}`}>
-                  <Button
-                    className={commonStyles.button}
-                    color="primary"
-                    onClick={() => setOpenMyEventPageModal(true)}
-                  >
-                    {`${t("event_details.event_page")}`}
-                    <EventAvailableIcon style={{ margin: "0 1vw" }} />
-                  </Button>
-                </Tooltip>
+                <TextField
+                  fullWidth
+                  label={`${t("event_details.name_location")}`}
+                  variant="filled"
+                  value={locationName}
+                  onChange={(event) => setLocationName(event.target.value)}
+                />
+                <TextField
+                  fullWidth
+                  label={`${t("event_details.location_link")}`}
+                  variant="filled"
+                  value={locationLink}
+                  onChange={(event) => setLocationLink(event.target.value)}
+                />
               </div>
-            </div>
-            <div style={{ display: "flex", flexDirection: "column" }}>
-              <ImageInvitation />
-            </div>
-          </form>
-        </Paper>
-      </div>
-      {/*<EventDetailsPageModal openMyEventPageModal={openMyEventPageModal}*/}
-      {/*                       setOpenMyEventPageModal={setOpenMyEventPageModal}/>*/}
-      <AlertToast alertPopup={alertPopup} closeAlert={closeAlert} />
-    </Container>
+              <div
+                style={{
+                  display: "flex",
+                  justifyContent: "space-evenly",
+                }}
+              >
+                <div>
+                  <Tooltip title={`${t("event_details.tooltip_save")}`}>
+                    <Button
+                      className={commonStyles.button}
+                      variant="contained"
+                      color="primary"
+                      onClick={(event) => handleSubmit(event)}
+                    >
+                      {`${t("event_details.save")}`}{" "}
+                      <SaveIcon style={{ margin: "0 1vw" }} />
+                    </Button>
+                  </Tooltip>
+                </div>
+                <div>
+                  <Tooltip title={`${t("event_details.tooltio_demo_page")}`}>
+                    <Button
+                      className={commonStyles.button}
+                      color="primary"
+                      onClick={() => setOpenMyEventPageModal(true)}
+                    >
+                      {`${t("event_details.event_page")}`}
+                      <EventAvailableIcon style={{ margin: "0 1vw" }} />
+                    </Button>
+                  </Tooltip>
+                </div>
+              </div>
+              <div style={{ display: "flex", flexDirection: "column" }}>
+                <ImageInvitation />
+              </div>
+            </form>
+          </Paper>
+        </div>
+        {/*<EventDetailsPageModal openMyEventPageModal={openMyEventPageModal}*/}
+        {/*                       setOpenMyEventPageModal={setOpenMyEventPageModal}/>*/}
+        <AlertToast alertPopup={alertPopup} closeAlert={closeAlert} />
+      </Container>
+    </>
   );
 };
 

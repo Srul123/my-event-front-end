@@ -1,8 +1,8 @@
 export interface Group {
   _id?: string;
-  user: string;
-  eventOwner: string;
-  name: string;
+  user?: string;
+  eventOwner?: string;
+  name?: string;
 }
 
 export enum GroupFields {

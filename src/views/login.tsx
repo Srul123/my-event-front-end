@@ -31,6 +31,7 @@ import { updateInvitedGuestList } from "../redux-modules/actions/invitedActions"
 import { updateTagList } from "../redux-modules/actions/tagActions";
 import { updateShuttleList } from "../redux-modules/actions/shuttleActions";
 import { StateSelectors } from "../redux-modules/selectores/stateSelectores";
+import Spinner from "../components/layouts/spinner/Spinner";
 
 const Login: React.FC = () => {
   const { isAppLoading } = useSelector(StateSelectors.application);
@@ -115,6 +116,7 @@ const Login: React.FC = () => {
 
   return (
     <>
+      {isAppLoading && <Spinner />}
       <div style={{ position: "relative"}}>
         <div style={{ display: "flex", justifyContent: "center" }}>
           <Avatar>

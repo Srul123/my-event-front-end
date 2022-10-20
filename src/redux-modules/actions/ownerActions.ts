@@ -85,7 +85,6 @@ export const deleteEventInvitedGuestsOwner =
     };
     try {
       const url = `${API_URLS.BASE_URL}/${API_URLS.EVENT_GUESTS_OWNER}/${id}`;
-      debugger;
       const response = await axios.delete(url, { headers });
       if (response.status === 200) {
         dispatch({

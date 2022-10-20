@@ -117,7 +117,7 @@
     "format_warning":"(פורמט jpeg, png בלבד)"
   },
   "invited_managment": {
-    "no_invited": "אין מוזמנים להצגה",
+    "no_invited": "אין רשומות להצגה",
     "no_comments": "ללא הערות",
     "updated": "עודכן",
     "date": "תאריך",
@@ -153,10 +153,11 @@
       "success": "הפעולה בוצעה בהצלחה",
       "failure": "הפעולה נכשלה",
       "add_name": "הכנס שם של בעל/ת המוזמנים",
-      "click_save": "לחץ להוספה",
+      "click_save": "לחץ לשמירה",
       "click_edit": "לחץ בכדי לערוך",
       "delete": "מחק",
       "save": "שמור",
+      "admin": "מנהל",
       "label_owner": "בעל/ת המוזמנים"
     }
   }

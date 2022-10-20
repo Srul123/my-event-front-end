@@ -1,7 +1,7 @@
 export interface EventOwner {
     _id?: string;
     name: string;
-    isAdmin: boolean;
+    isAdmin?: boolean;
 }
 
 export enum EventOwnerFields {

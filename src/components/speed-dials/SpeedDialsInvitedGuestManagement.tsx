@@ -15,19 +15,21 @@ import { CssBaseline } from "@mui/material";
 import { anchorSides, DeviceModesValues } from "../../interfaces/Locales";
 
 interface Props {
-  setOpenInviterDialog: Dispatch<SetStateAction<boolean>>;
-  setOpenGroupsDialog: Dispatch<SetStateAction<boolean>>;
+  setOpenInvitedGuestDialogModal: Dispatch<SetStateAction<boolean>>;
+  setOpenGroupsDialogModal: Dispatch<SetStateAction<boolean>>;
   setOpenEventInvitedGuestsOwnerModal: Dispatch<SetStateAction<boolean>>;
-  setOpenShuttleList: Dispatch<SetStateAction<boolean>>;
-  setLoadContactsDialog: Dispatch<SetStateAction<boolean>>;
+  setOpenTagsDialogModal: Dispatch<SetStateAction<boolean>>;
+  setOpenShuttleListDialogModal: Dispatch<SetStateAction<boolean>>;
+  setLoadGuestsContactsDialogModal: Dispatch<SetStateAction<boolean>>;
 }
 
 const SpeedDialsInvitedGuestManagement: React.FC<Props> = ({
-  setOpenInviterDialog,
-  setOpenGroupsDialog,
+  setOpenInvitedGuestDialogModal,
+  setOpenGroupsDialogModal,
   setOpenEventInvitedGuestsOwnerModal,
-  setOpenShuttleList,
-  setLoadContactsDialog,
+  setOpenTagsDialogModal,
+  setOpenShuttleListDialogModal,
+  setLoadGuestsContactsDialogModal,
 }) => {
   const { t } = useTranslation();
   const application = useSelector(StateSelectors.application);
@@ -64,25 +66,28 @@ const SpeedDialsInvitedGuestManagement: React.FC<Props> = ({
       action: "openLoadContacts",
     },
   ];
-  const handleClose = (
+  const handleOnClick = (
     event: React.MouseEvent<HTMLDivElement, MouseEvent>,
     action: string
   ) => {
     setSpeedDials(false);
     if (action === "addInvited") {
-      setOpenInviterDialog(true);
+      setOpenInvitedGuestDialogModal(true);
     }
     if (action === "openGroups") {
-      setOpenGroupsDialog(true);
+      setOpenGroupsDialogModal(true);
     }
     if (action === "openInvitedOwner") {
         setOpenEventInvitedGuestsOwnerModal(true);
     }
+    if (action === "openTags") {
+      setOpenTagsDialogModal(true);
+  }
     if (action === "openShuttleList") {
-      setOpenShuttleList(true);
+      setOpenShuttleListDialogModal(true);
     }
     if (action === "openLoadContacts") {
-      setLoadContactsDialog(true);
+      setLoadGuestsContactsDialogModal(true);
     }
   };
 
@@ -111,7 +116,7 @@ const SpeedDialsInvitedGuestManagement: React.FC<Props> = ({
             icon={action.icon}
             tooltipTitle={action.name}
             onClick={(event) => {
-              handleClose(event, action.action);
+              handleOnClick(event, action.action);
             }}
           />
         ))}

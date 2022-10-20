@@ -38,6 +38,7 @@ import { EventOwner } from "../interfaces/EventOwner";
 import { updateIsAppLoading } from "../redux-modules/actions/appActions";
 import { StateSelectors } from "../redux-modules/selectores/stateSelectores";
 import commonStyle from "../styles/commonStyles.module.scss";
+import Spinner from "../components/layouts/spinner/Spinner";
 
 const Registration: React.FC = () => {
   const dispatch = useDispatch();
@@ -217,230 +218,237 @@ const Registration: React.FC = () => {
   };
 
   return (
-    <div style={{ marginBottom: "4em" }}>
-      <form onSubmit={handleSubmit}>
-        <Grid style={{ display: "flex", justifyContent: "center" }}>
-          <Avatar style={{ fontSize: "5em" }}>
-            <AppRegistrationIcon />
-          </Avatar>
-        </Grid>
-        <Grid
-          style={{
-            display: "flex",
-            justifyContent: "center",
-            marginBottom: "1vh",
-          }}
-        >
-          <Typography component="h1" variant="h5">
-            {t("registration.register")}
-          </Typography>
-        </Grid>
-        <Grid container spacing={2}>
-          <Grid item xs={12} sm={6}>
-            <FormControl fullWidth>
-              <TextField
-                required
-                value={firstName}
-                name="firstName"
-                variant="standard"
-                fullWidth
-                id="firstName"
-                placeholder={`${t("registration.first_name")}`}
-                onChange={(event) => {
-                  setFirstName(event.target.value);
-                }}
-                disabled={application.isAppLoading}
-              />
-              <FormHelperText>{`* ${t(
-                "registration.first_name"
-              )}`}</FormHelperText>
-            </FormControl>
+    <>
+      {application.isAppLoading && <Spinner />}
+      <div style={{ marginBottom: "4em" }}>
+        <form onSubmit={handleSubmit}>
+          <Grid style={{ display: "flex", justifyContent: "center" }}>
+            <Avatar style={{ fontSize: "5em" }}>
+              <AppRegistrationIcon />
+            </Avatar>
           </Grid>
-          <Grid item xs={12} sm={6}>
-            <FormControl fullWidth>
-              <TextField
-                required
-                variant="standard"
-                value={lastName}
-                fullWidth
-                id="lastName"
-                placeholder={t("registration.last_name")}
-                name="lastName"
-                onChange={(event) => {
-                  setLastName(event.target.value);
-                }}
-                disabled={application.isAppLoading}
-              />
-              <FormHelperText>{`* ${t(
-                "registration.last_name"
-              )}`}</FormHelperText>
-            </FormControl>
-          </Grid>
-
-          <Grid item xs={12} sm={6}>
-            <FormControl fullWidth>
-              <TextField
-                variant="standard"
-                required
-                value={email}
-                fullWidth
-                id="email"
-                placeholder={t("registration.email")}
-                type="email"
-                name="email"
-                onChange={(event) => {
-                  setEmail(event.target.value);
-                }}
-                disabled={application.isAppLoading}
-              />
-              <FormHelperText>{`* ${t("registration.email")}`}</FormHelperText>
-            </FormControl>
-          </Grid>
-          <Grid item xs={12} sm={6}>
-            <FormControl fullWidth>
-              <TextField
-                variant="standard"
-                value={phone}
-                fullWidth
-                id="phone"
-                placeholder={t("registration.phone")}
-                type="text"
-                name="phone"
-                onChange={(event) => {
-                  setPhone(event.target.value);
-                }}
-                disabled={application.isAppLoading}
-              />
-              <FormHelperText>{t("registration.phone")}</FormHelperText>
-            </FormControl>
-          </Grid>
-          <Grid item xs={12} sm={6}>
-            <FormControl fullWidth>
-              <TextField
-                variant="standard"
-                required
-                value={password}
-                fullWidth
-                name="password"
-                placeholder={`* ${t("registration.password")}`}
-                type="password"
-                id="password"
-                autoComplete="current-password"
-                onChange={(event: any) => {
-                  setPassword(event.target.value);
-                }}
-                disabled={application.isAppLoading}
-              />
-              <FormHelperText>{`* ${t(
-                "registration.password"
-              )}`}</FormHelperText>
-            </FormControl>
-          </Grid>
-          <Grid item xs={12} sm={6}>
-            <FormControl fullWidth>
-              <TextField
-                variant="standard"
-                required
-                value={repeatPassword}
-                fullWidth
-                name="repeat-password"
-                placeholder={t("registration.repeat_password")}
-                type="password"
-                id="repeat-password"
-                autoComplete="current-password"
-                onChange={(event: any) => {
-                  setRepeatPassword(event.target.value);
-                }}
-                disabled={application.isAppLoading}
-              />
-              <FormHelperText>{`* ${t(
-                "registration.repeat_password"
-              )}`}</FormHelperText>
-            </FormControl>
-          </Grid>
-          <Grid item xs={12}>
-            <EventTypeSelector
-              eventType={eventType}
-              setEventType={setEventType}
-              input1={eventOwnerOrName}
-              setInput1={setEventOwnerOrName}
-              input2={eventOwner2}
-              setInput2={setEventOwner2}
-            />
-          </Grid>
-          <Grid item xs={12} md={6}>
-            <FormControl fullWidth>
-              <Tooltip title={`${t("registration.date_explain")}`}>
-                <TextField
-                  fullWidth
-                  id="datetime-local"
-                  label={t("registration.date_label")}
-                  type="datetime-local"
-                  disabled={application.isAppLoading}
-                  value={eventDate}
-                  onChange={(event: any) => {
-                    setEventDate(event.target.value);
-                  }}
-                  InputLabelProps={{
-                    shrink: true,
-                  }}
-                />
-              </Tooltip>
-            </FormControl>
-          </Grid>
-          <Grid item xs={12} md={6}>
-            <FormControlLabel
-              value={termAndConditions}
-              control={
-                <Checkbox
-                  checked={termAndConditions}
-                  onChange={() => setTermAndConditions(!termAndConditions)}
-                />
-              }
-              label={String(t("registration.accept_conditions"))}
-              labelPlacement="start"
-              disabled={application.isAppLoading}
-            />
-          </Grid>
-         
-        </Grid>
-
-        <Grid>
-          <Button
-            className={commonStyle.button}
-            style={{ marginTop: "2vh" }}
-            type="submit"
-            variant="contained"
-            disabled={application.isAppLoading}
-            color="primary"
-            onClick={(event: any) => {
-              handleSubmit(event);
+          <Grid
+            style={{
+              display: "flex",
+              justifyContent: "center",
+              marginBottom: "1vh",
             }}
           >
-            {t("registration.signup")}
-            <ExitToAppIcon style={{ margin: "0 0.5vw" }} />
-          </Button>
-        </Grid>
+            <Typography component="h1" variant="h5">
+              {t("registration.register")}
+            </Typography>
+          </Grid>
+          <Grid container spacing={2}>
+            <Grid item xs={12} sm={6}>
+              <FormControl fullWidth>
+                <TextField
+                  required
+                  value={firstName}
+                  name="firstName"
+                  variant="standard"
+                  fullWidth
+                  id="firstName"
+                  placeholder={`${t("registration.first_name")}`}
+                  onChange={(event) => {
+                    setFirstName(event.target.value);
+                  }}
+                  disabled={application.isAppLoading}
+                />
+                <FormHelperText>{`* ${t(
+                  "registration.first_name"
+                )}`}</FormHelperText>
+              </FormControl>
+            </Grid>
+            <Grid item xs={12} sm={6}>
+              <FormControl fullWidth>
+                <TextField
+                  required
+                  variant="standard"
+                  value={lastName}
+                  fullWidth
+                  id="lastName"
+                  placeholder={t("registration.last_name")}
+                  name="lastName"
+                  onChange={(event) => {
+                    setLastName(event.target.value);
+                  }}
+                  disabled={application.isAppLoading}
+                />
+                <FormHelperText>{`* ${t(
+                  "registration.last_name"
+                )}`}</FormHelperText>
+              </FormControl>
+            </Grid>
 
-        <Grid item style={{ marginTop: "2vh" }}>
-          <Link
-            to={routes.login}
-            style={{ textDecoration: "underline", color: colors.textSecondary }}
-          >
-            {t("registration.already_registered")}
-          </Link>
-        </Grid>
-      </form>
-      <AlertWithConfirmation
-        title={t("registration.registration_completed")}
-        message={t("registration.redirect_login")}
-        open={openAlertConfirm}
-        setOpen={setOpenAlertConfirm}
-        action={redirectToLogin}
-        icon={<DoneIcon />}
-      />
-      <AlertToast alertPopup={alertPopup} closeAlert={closeAlert} />
-    </div>
+            <Grid item xs={12} sm={6}>
+              <FormControl fullWidth>
+                <TextField
+                  variant="standard"
+                  required
+                  value={email}
+                  fullWidth
+                  id="email"
+                  placeholder={t("registration.email")}
+                  type="email"
+                  name="email"
+                  onChange={(event) => {
+                    setEmail(event.target.value);
+                  }}
+                  disabled={application.isAppLoading}
+                />
+                <FormHelperText>{`* ${t(
+                  "registration.email"
+                )}`}</FormHelperText>
+              </FormControl>
+            </Grid>
+            <Grid item xs={12} sm={6}>
+              <FormControl fullWidth>
+                <TextField
+                  variant="standard"
+                  value={phone}
+                  fullWidth
+                  id="phone"
+                  placeholder={t("registration.phone")}
+                  type="text"
+                  name="phone"
+                  onChange={(event) => {
+                    setPhone(event.target.value);
+                  }}
+                  disabled={application.isAppLoading}
+                />
+                <FormHelperText>{t("registration.phone")}</FormHelperText>
+              </FormControl>
+            </Grid>
+            <Grid item xs={12} sm={6}>
+              <FormControl fullWidth>
+                <TextField
+                  variant="standard"
+                  required
+                  value={password}
+                  fullWidth
+                  name="password"
+                  placeholder={`* ${t("registration.password")}`}
+                  type="password"
+                  id="password"
+                  autoComplete="current-password"
+                  onChange={(event: any) => {
+                    setPassword(event.target.value);
+                  }}
+                  disabled={application.isAppLoading}
+                />
+                <FormHelperText>{`* ${t(
+                  "registration.password"
+                )}`}</FormHelperText>
+              </FormControl>
+            </Grid>
+            <Grid item xs={12} sm={6}>
+              <FormControl fullWidth>
+                <TextField
+                  variant="standard"
+                  required
+                  value={repeatPassword}
+                  fullWidth
+                  name="repeat-password"
+                  placeholder={t("registration.repeat_password")}
+                  type="password"
+                  id="repeat-password"
+                  autoComplete="current-password"
+                  onChange={(event: any) => {
+                    setRepeatPassword(event.target.value);
+                  }}
+                  disabled={application.isAppLoading}
+                />
+                <FormHelperText>{`* ${t(
+                  "registration.repeat_password"
+                )}`}</FormHelperText>
+              </FormControl>
+            </Grid>
+            <Grid item xs={12}>
+              <EventTypeSelector
+                eventType={eventType}
+                setEventType={setEventType}
+                input1={eventOwnerOrName}
+                setInput1={setEventOwnerOrName}
+                input2={eventOwner2}
+                setInput2={setEventOwner2}
+              />
+            </Grid>
+            <Grid item xs={12} md={6}>
+              <FormControl fullWidth>
+                <Tooltip title={`${t("registration.date_explain")}`}>
+                  <TextField
+                    fullWidth
+                    id="datetime-local"
+                    label={t("registration.date_label")}
+                    type="datetime-local"
+                    disabled={application.isAppLoading}
+                    value={eventDate}
+                    onChange={(event: any) => {
+                      setEventDate(event.target.value);
+                    }}
+                    InputLabelProps={{
+                      shrink: true,
+                    }}
+                  />
+                </Tooltip>
+              </FormControl>
+            </Grid>
+            <Grid item xs={12} md={6}>
+              <FormControlLabel
+                value={termAndConditions}
+                control={
+                  <Checkbox
+                    checked={termAndConditions}
+                    onChange={() => setTermAndConditions(!termAndConditions)}
+                  />
+                }
+                label={String(t("registration.accept_conditions"))}
+                labelPlacement="start"
+                disabled={application.isAppLoading}
+              />
+            </Grid>
+          </Grid>
+
+          <Grid>
+            <Button
+              className={commonStyle.button}
+              style={{ marginTop: "2vh" }}
+              type="submit"
+              variant="contained"
+              disabled={application.isAppLoading}
+              color="primary"
+              onClick={(event: any) => {
+                handleSubmit(event);
+              }}
+            >
+              {t("registration.signup")}
+              <ExitToAppIcon style={{ margin: "0 0.5vw" }} />
+            </Button>
+          </Grid>
+
+          <Grid item style={{ marginTop: "2vh" }}>
+            <Link
+              to={routes.login}
+              style={{
+                textDecoration: "underline",
+                color: colors.textSecondary,
+              }}
+            >
+              {t("registration.already_registered")}
+            </Link>
+          </Grid>
+        </form>
+        <AlertWithConfirmation
+          title={t("registration.registration_completed")}
+          message={t("registration.redirect_login")}
+          open={openAlertConfirm}
+          setOpen={setOpenAlertConfirm}
+          action={redirectToLogin}
+          icon={<DoneIcon />}
+        />
+        <AlertToast alertPopup={alertPopup} closeAlert={closeAlert} />
+      </div>
+    </>
   );
 };
 
